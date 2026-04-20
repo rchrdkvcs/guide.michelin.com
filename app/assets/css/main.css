@@ -1,18 +1,24 @@
+@import url(https://fonts.bunny.net/css?family=figtree:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i);
+
 @import "tailwindcss";
 @import "@nuxt/ui";
 
 @theme static {
-  --font-sans: 'Public Sans', sans-serif;
+  --font-sans: 'Figtree', sans-serif;
 
-  --color-green-50: #EFFDF5;
-  --color-green-100: #D9FBE8;
-  --color-green-200: #B3F5D1;
-  --color-green-300: #75EDAE;
-  --color-green-400: #00DC82;
-  --color-green-500: #00C16A;
-  --color-green-600: #00A155;
-  --color-green-700: #007F45;
-  --color-green-800: #016538;
-  --color-green-900: #0A5331;
-  --color-green-950: #052E16;
+  --color-red-50: #FFF0F2;
+  --color-red-100: #FFE2E6;
+  --color-red-200: #FFCACE;
+  --color-red-300: #FFA3AC;
+  --color-red-400: #FF6F7E;
+  --color-red-500: #D3072B;
+  --color-red-600: #B30422;
+  --color-red-700: #900118;
+  --color-red-800: #780618;
+  --color-red-900: #650918;
+  --color-red-950: #37020A;
+}
+
+:root {
+  --ui-bg: var(--color-stone-100);
 }
