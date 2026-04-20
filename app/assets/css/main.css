@@ -21,5 +21,5 @@
 
 :root {
   --ui-bg: var(--color-stone-100);
-  --ui-radius: 0.25rem;
+  --ui-radius: 0rem;
 }
