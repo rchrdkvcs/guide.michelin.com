@@ -4,21 +4,22 @@
 @import "@nuxt/ui";
 
 @theme static {
-  --font-sans: 'Figtree', sans-serif;
+  --font-sans: "Figtree", sans-serif;
 
-  --color-red-50: #FFF0F2;
-  --color-red-100: #FFE2E6;
-  --color-red-200: #FFCACE;
-  --color-red-300: #FFA3AC;
-  --color-red-400: #FF6F7E;
-  --color-red-500: #D3072B;
-  --color-red-600: #B30422;
+  --color-red-50: #fff0f2;
+  --color-red-100: #ffe2e6;
+  --color-red-200: #ffcace;
+  --color-red-300: #ffa3ac;
+  --color-red-400: #ff6f7e;
+  --color-red-500: #d3072b;
+  --color-red-600: #b30422;
   --color-red-700: #900118;
   --color-red-800: #780618;
   --color-red-900: #650918;
-  --color-red-950: #37020A;
+  --color-red-950: #37020a;
 }
 
 :root {
   --ui-bg: var(--color-stone-100);
+  --ui-radius: 0.25rem;
 }

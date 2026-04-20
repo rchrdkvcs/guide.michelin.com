@@ -1,20 +1,67 @@
-<script lang="ts"></script>
+<script setup lang="ts">
+import type { NavigationMenuItem } from "@nuxt/ui";
+
+const items = ref<NavigationMenuItem[]>([
+  {
+    label: "Restaurants",
+    to: "#",
+  },
+  {
+    label: "Hébergements",
+    to: "#",
+  },
+  {
+    label: "Guides de voyage",
+    to: "#",
+  },
+  {
+    label: "Magazine",
+    to: "#",
+  },
+]);
+</script>
 
 <template>
-  <UHeader
-    :ui="{
-      root: 'bg-transparent border-none backdrop-blur-none!',
-    }"
-  >
-    <template #left>
-      <NuxtLink to="/">
-        <NuxtImg src="/images/etoile_michelin.png" class="size-8" />
-        <div class=""></div>
-      </NuxtLink>
+  <UHeader :ui="{ root: 'bg-transparent border-none backdrop-blur-none! fixed top-0 w-full z-50' }">
+    <template #title>
+      <NuxtImg src="/images/logo.png" class="size-8" />
     </template>
 
-    <template #right> </template>
-  </UHeader>
+    <UNavigationMenu
+      :ui="{
+        link: 'text-white/75 hover:text-white font-medium before:bg-transparent! border border-transparent hover:border-muted/50',
+      }"
+      :items="items"
+    />
 
-  <div class="absolute top-0 left-0 w-full bg-linear-to-b from-black/25 to-transparent h-32"></div>
+    <template #right>
+      <UButton
+        color="neutral"
+        variant="link"
+        :ui="{
+          base: 'text-white/75 hover:text-white border border-transparent hover:border-muted/50',
+        }"
+        to="#"
+        icon="lucide:search"
+      />
+      <UButton
+        color="neutral"
+        variant="link"
+        :ui="{
+          base: 'text-white/75 hover:text-white border border-transparent hover:border-muted/50',
+        }"
+        to="#"
+        icon="lucide:heart"
+      />
+      <UButton
+        color="neutral"
+        variant="link"
+        :ui="{
+          base: 'text-white/75 hover:text-white border border-transparent hover:border-muted/50',
+        }"
+        to="#"
+        icon="lucide:user"
+      />
+    </template>
+  </UHeader>
 </template>

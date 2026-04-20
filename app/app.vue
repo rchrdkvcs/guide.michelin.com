@@ -4,7 +4,9 @@
   <UApp>
     <Header />
 
-    <NuxtPage />
+    <UMain>
+      <NuxtPage />
+    </UMain>
 
     <UFooter>
       <template #left>
