@@ -47,5 +47,65 @@ export const adventures: Record<string, Adventure> = {
     "hotels": [
       { "id": "h2", "name": "Hôtel du Palais", "description": "Le luxe impérial face à la mer.", "image": "https://images.unsplash.com/photo-1582719478250-c89cae4df85b" }
     ]
+  },
+  "qatar": {
+    "image": {
+      "src": "https://images.unsplash.com/photo-1575998980440-6757c0cae57b?q=80&w=2070",
+      "alt": "Doha, Qatar"
+    },
+    "discover": {
+      "title": "Doha, Qatar",
+      "content": "Avec 44 nouveaux restaurants étoilés, Doha s'impose comme la nouvelle capitale gastronomique du Moyen-Orient."
+    },
+    "attractions": {
+      "title": "La scène culinaire qatarienne",
+      "content": "Des tables étoilées entre modernité et traditions arabes."
+    },
+    "restaurants": [
+      { "id": "q1", "name": "Sintoho", "description": "Cuisine japonaise contemporaine au cœur de Doha. ★", "image": "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?q=80&w=2070", "link": "#" },
+      { "id": "q2", "name": "Tahya Masr", "description": "L'excellence de la gastronomie égyptienne revisitée. ★", "image": "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=2070", "link": "#" },
+      { "id": "q3", "name": "Jiwan", "description": "Fine dining qatarien au Musée d'Art Islamique. ★", "image": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=2070", "link": "#" }
+    ],
+    "hotels": []
+  },
+  "arabie-saoudite": {
+    "image": {
+      "src": "https://images.unsplash.com/photo-1586724237569-f3d0c1dee8c6?q=80&w=2070",
+      "alt": "Riyad, Arabie Saoudite"
+    },
+    "discover": {
+      "title": "Riyad, Arabie Saoudite",
+      "content": "Riyad révèle une scène gastronomique en pleine explosion, portée par une nouvelle génération de chefs audacieux."
+    },
+    "attractions": {
+      "title": "La révolution culinaire saoudienne",
+      "content": "Entre héritage bédouin et influences mondiales, Riyad redéfinit la haute cuisine."
+    },
+    "restaurants": [
+      { "id": "sa1", "name": "Tétro", "description": "Fusion méditerranéenne et influences levantines. ★", "image": "https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=2070", "link": "#" },
+      { "id": "sa2", "name": "Alma", "description": "Cuisine française avec une touche saoudienne raffinée. ★", "image": "https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?q=80&w=2070", "link": "#" },
+      { "id": "sa3", "name": "Mera", "description": "Produits locaux sublimés par une technique impeccable. ★", "image": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?q=80&w=2070", "link": "#" }
+    ],
+    "hotels": []
+  },
+  "philippines": {
+    "image": {
+      "src": "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?q=80&w=2070",
+      "alt": "Manila, Philippines"
+    },
+    "discover": {
+      "title": "Manila, Philippines",
+      "content": "Premier guide Michelin aux Philippines, Manila dévoile une gastronomie vibrante mêlant influences espagnoles, chinoises et locales."
+    },
+    "attractions": {
+      "title": "La gastronomie philippine",
+      "content": "Une cuisine insulaire riche, audacieuse et profondément ancrée dans son territoire."
+    },
+    "restaurants": [
+      { "id": "ph1", "name": "Gallery by Chele", "description": "Une exploration sensorielle des ingrédients philippins. ★★", "image": "https://images.unsplash.com/photo-1551218808-94e220e084d2?q=80&w=2070", "link": "#" },
+      { "id": "ph2", "name": "Metronome", "description": "Cuisine franco-philippine d'une précision remarquable. ★", "image": "https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=2070", "link": "#" },
+      { "id": "ph3", "name": "Toyo Eatery", "description": "Les saveurs authentiques des archipels revisitées. ★", "image": "https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=2070", "link": "#" }
+    ],
+    "hotels": []
   }
 }

@@ -1,50 +1,5 @@
 <script lang="ts" setup>
-const navItems = ref([
-  {
-    label: "Accueil",
-    to: "/",
-  },
-  {
-    label: "Restaurants",
-    to: "#",
-  },
-  {
-    label: "Hébergements",
-    to: "#",
-  },
-  {
-    label: "Guide MICHELIN Plus",
-    to: "#",
-  },
-  {
-    label: "Guides de voyage",
-    to: "#",
-  },
-  {
-    label: "Guides Best-of",
-    to: "#",
-  },
-  {
-    label: "Magazine",
-    to: "#",
-  },
-  {
-    label: "Nous contacter",
-    to: "#",
-  },
-  {
-    label: "S'inscrire à la newsletter",
-    to: "#",
-  },
-  {
-    label: "Partenariat privilégié TheFork",
-    to: "#",
-  },
-  {
-    label: "Restaurants partenaires TheFork",
-    to: "#",
-  },
-]);
+const { menuItems } = useNavigation();
 </script>
 
 <template>
@@ -52,7 +7,7 @@ const navItems = ref([
     <template #title>
       <div class="flex items-center justify-center gap-2">
         <NuxtImg src="/images/logo.png" class="size-6" />
-        <NuxtImg src="/images/logo_michelin.png" class="h-3" />
+        <NuxtImg src="/images/logo_horizontal.png" class="h-3" />
       </div>
     </template>
 
@@ -62,7 +17,7 @@ const navItems = ref([
           link: 'text-lg font-medium text-elevated hover:text-primary hover:translate-x-1 transition-transform duration-300',
         }"
         orientation="vertical"
-        :items="navItems"
+        :items="menuItems"
         variant="link"
       />
     </template>

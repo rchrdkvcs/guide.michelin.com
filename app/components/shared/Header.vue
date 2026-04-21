@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import type { NavigationMenuItem } from "@nuxt/ui";
 import { NavigationMenu } from "#components";
 import { useWindowScroll } from "@vueuse/core";
 
@@ -7,31 +6,13 @@ const overlay = useOverlay();
 const navigationMenu = overlay.create(NavigationMenu);
 
 const { y } = useWindowScroll();
-const headerHeight = 64;
-const isScrolled = computed(() => y.value > headerHeight / 2);
+const isScrolled = computed(() => y.value > 64 / 2);
 
 const route = useRoute();
 const isHome = computed(() => route.path === "/");
 const useCustomStyle = computed(() => isHome.value && !isScrolled.value);
 
-const items = ref<NavigationMenuItem[]>([
-  {
-    label: "Restaurants",
-    to: "#",
-  },
-  {
-    label: "Hébergements",
-    to: "#",
-  },
-  {
-    label: "Guides de voyage",
-    to: "#",
-  },
-  {
-    label: "Magazine",
-    to: "#",
-  },
-]);
+const { headerItems } = useNavigation();
 </script>
 
 <template>
@@ -46,25 +27,15 @@ const items = ref<NavigationMenuItem[]>([
     </template>
 
     <UNavigationMenu
-      :ui="{
-        link: useCustomStyle
-          ? 'text-white/75 hover:text-white font-medium before:bg-transparent!'
-          : 'text-elevated',
+      :ui="useCustomStyle ? {
+        root: 'group/nav',
+        link: 'text-white! group-hover/nav:text-white/50! hover:text-white! font-medium before:bg-transparent! text-md',
+      } : {
+        link: 'text-elevated text-md',
       }"
-      :items="items"
+      :items="headerItems"
       variant="link"
     />
-
-    <template #body>
-      <UNavigationMenu
-        :ui="{
-          link: 'text-lg font-medium text-elevated hover:text-primary hover:translate-x-1 transition-transform duration-300',
-        }"
-        orientation="vertical"
-        :items="navItems"
-        variant="link"
-      />
-    </template>
 
     <template #right>
       <UButton

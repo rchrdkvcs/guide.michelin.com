@@ -5,11 +5,7 @@ export default defineNuxtConfig({
 
   srcDir: "app",
 
-  modules: [
-    "@nuxt/eslint",
-    "@nuxt/ui",
-    "@nuxt/image",
-  ],
+  modules: ["@nuxt/eslint", "@nuxt/ui", "@nuxt/image"],
 
   devtools: {
     enabled: true,
@@ -41,8 +37,10 @@ export default defineNuxtConfig({
     },
   ],
 
-  image: {
-    domains: ["images.unsplash.com"],
+  vite: {
+    optimizeDeps: {
+      include: ["@vueuse/core"],
+    },
   },
 
   eslint: false,
