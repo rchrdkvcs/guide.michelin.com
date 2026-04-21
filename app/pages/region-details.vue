@@ -14,7 +14,7 @@ const carouselRestaurants = ref([
   { id: 2, name: 'Restaurant B', description: 'Brief description of B' },
   { id: 3, name: 'Restaurant C', description: 'Brief description of C' },
   { id: 4, name: 'Restaurant D', description: 'Brief description of D' },
-  { id: 5, name: 'Restaurant E', description: 'Brief description of E' },
+  { id: 5, name: 'Restaurant E', description: 'Brief description of E' }
 ])
 
 const textAttraction = ref({
@@ -31,12 +31,10 @@ const carouselHotels = ref([
 
 <template>
   <main style="width: 100%; overflow-x: hidden;">
-
     <div
       class="container"
       style="width: 80%; margin: 0 auto; display: flex; flex-direction: column; align-items: center; padding: 40px 0; box-sizing: border-box;"
     >
-
       <section
         id="region-hero"
         style="height: 600px; width: 100%; display: flex; justify-content: center; align-items: center; overflow: hidden; margin-bottom: 40px;"
@@ -53,7 +51,9 @@ const carouselHotels = ref([
         style="min-height: 400px; width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 40px; box-sizing: border-box; text-align: center;"
       >
         <h1>{{ textDiscover.title }}</h1>
-        <p style="max-width: 800px;">{{ textDiscover.content }}</p>
+        <p style="max-width: 800px;">
+          {{ textDiscover.content }}
+        </p>
       </section>
 
       <RegionCarousel

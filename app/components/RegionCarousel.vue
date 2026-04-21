@@ -10,8 +10,8 @@ interface CarouselItem {
 }
 
 const props = defineProps<{
-    items: CarouselItem[]
-    id?: string
+  items: CarouselItem[]
+  id?: string
 }>()
 
 const currentIndex = ref(0)
@@ -35,22 +35,40 @@ const activeItem = computed(() => {
     class="carousel-container"
     style="position: relative; height: 500px; width: 100%; display: flex; align-items: center; justify-content: center; overflow: hidden; border: 2px solid brown; background: #000; border-radius: 12px;"
   >
-    <transition name="fade" mode="out-in">
+    <transition
+      name="fade"
+      mode="out-in"
+    >
       <img
         :key="activeItem.image"
         :src="activeItem.image || 'https://via.placeholder.com/800x500?text=No+Image'"
         :alt="activeItem.name"
         style="position: absolute; width: 100%; height: 100%; object-fit: cover; opacity: 0.6;"
-      />
+      >
     </transition>
 
-    <button @click="prev" class="nav-btn prev-btn">&#10094;</button>
+    <button
+      class="nav-btn prev-btn"
+      @click="prev"
+    >
+      &#10094;
+    </button>
 
-    <div class="carousel-content" style="position: relative; z-index: 5; text-align: center; color: white; padding: 20px; text-shadow: 0 2px 10px rgba(0,0,0,0.8);">
-      <transition name="slide-up" mode="out-in">
+    <div
+      class="carousel-content"
+      style="position: relative; z-index: 5; text-align: center; color: white; padding: 20px; text-shadow: 0 2px 10px rgba(0,0,0,0.8);"
+    >
+      <transition
+        name="slide-up"
+        mode="out-in"
+      >
         <div :key="activeItem.id">
-          <h2 style="font-size: 2.5rem; margin-bottom: 10px;">{{ activeItem.name }}</h2>
-          <p style="font-size: 1.1rem; margin-bottom: 25px; max-width: 600px;">{{ activeItem.description }}</p>
+          <h2 style="font-size: 2.5rem; margin-bottom: 10px;">
+            {{ activeItem.name }}
+          </h2>
+          <p style="font-size: 1.1rem; margin-bottom: 25px; max-width: 600px;">
+            {{ activeItem.description }}
+          </p>
 
           <a
             v-if="activeItem.link"
@@ -63,7 +81,12 @@ const activeItem = computed(() => {
       </transition>
     </div>
 
-    <button @click="next" class="nav-btn next-btn">&#10095;</button>
+    <button
+      class="nav-btn next-btn"
+      @click="next"
+    >
+      &#10095;
+    </button>
 
     <div class="dots-container">
       <span
@@ -71,13 +94,12 @@ const activeItem = computed(() => {
         :key="index"
         :class="['dot', { active: index === currentIndex }]"
         @click="currentIndex = index"
-      ></span>
+      />
     </div>
   </section>
 </template>
 
 <style scoped>
-/* Boutons de navigation */
 .nav-btn {
   position: absolute;
   top: 50%;
@@ -102,7 +124,6 @@ const activeItem = computed(() => {
 .prev-btn { left: 20px; }
 .next-btn { right: 20px; }
 
-/* Lien de détails */
 .details-link {
   display: inline-block;
   padding: 12px 30px;
@@ -119,7 +140,6 @@ const activeItem = computed(() => {
   transform: translateY(-3px);
 }
 
-/* Dots */
 .dots-container {
   position: absolute;
   bottom: 20px;
@@ -136,7 +156,6 @@ const activeItem = computed(() => {
 }
 .dot.active { background: brown; width: 25px; border-radius: 10px; }
 
-/* Animations */
 .fade-enter-active, .fade-leave-active { transition: opacity 0.8s ease; }
 .fade-enter-from, .fade-leave-to { opacity: 0; }
 
