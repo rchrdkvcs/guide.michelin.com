@@ -1,5 +1,14 @@
 <script setup lang="ts">
 import type { NavigationMenuItem } from "@nuxt/ui";
+import { useWindowScroll } from "@vueuse/core";
+
+const { y } = useWindowScroll();
+const headerHeight = 128;
+const isScrolled = computed(() => y.value > headerHeight / 2);
+
+const route = useRoute();
+const isHome = computed(() => route.path === "/");
+const useCustomStyle = computed(() => isHome.value && !isScrolled.value);
 
 const items = ref<NavigationMenuItem[]>([
   {
@@ -22,14 +31,18 @@ const items = ref<NavigationMenuItem[]>([
 </script>
 
 <template>
-  <UHeader :ui="{ root: 'bg-transparent border-none backdrop-blur-none! fixed top-0 w-full z-50' }">
+  <UHeader
+    :ui="{
+      root: `${isScrolled ? 'bg-muted' : 'bg-transparent'} border-none backdrop-blur-none! fixed top-0 w-full z-50 transition-colors duration-300`,
+    }"
+  >
     <template #title>
       <NuxtImg src="/images/logo.png" class="size-8" />
     </template>
 
     <UNavigationMenu
       :ui="{
-        link: 'text-white/75 hover:text-white font-medium before:bg-transparent! border border-transparent hover:border-muted/50',
+        link: useCustomStyle ? 'text-white/75 hover:text-white font-medium before:bg-transparent!' : '',
       }"
       :items="items"
     />
@@ -39,7 +52,7 @@ const items = ref<NavigationMenuItem[]>([
         color="neutral"
         variant="link"
         :ui="{
-          base: 'text-white/75 hover:text-white border border-transparent hover:border-muted/50',
+          base: useCustomStyle ? 'text-white/75 hover:text-white' : '',
         }"
         to="#"
         icon="lucide:search"
@@ -48,7 +61,7 @@ const items = ref<NavigationMenuItem[]>([
         color="neutral"
         variant="link"
         :ui="{
-          base: 'text-white/75 hover:text-white border border-transparent hover:border-muted/50',
+          base: useCustomStyle ? 'text-white/75 hover:text-white' : '',
         }"
         to="#"
         icon="lucide:heart"
@@ -57,7 +70,7 @@ const items = ref<NavigationMenuItem[]>([
         color="neutral"
         variant="link"
         :ui="{
-          base: 'text-white/75 hover:text-white border border-transparent hover:border-muted/50',
+          base: useCustomStyle ? 'text-white/75 hover:text-white' : '',
         }"
         to="#"
         icon="lucide:user"

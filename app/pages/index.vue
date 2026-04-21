@@ -3,22 +3,21 @@
 <template>
   <div class="relative h-screen">
     <div
-      class="bg-linear-to-b from-black/50 to-black/25 absolute top-0 size-full z-1 pointer-events-none"
+      class="bg-linear-to-b from-black/50 via-transparent to-black/50 absolute top-0 size-full z-1 pointer-events-none"
     ></div>
-    <NuxtImg
-      src="/images/landing_background.png"
-      class="size-full object-cover absolute inset-0 z-0"
-    />
-    <UPageHero
-      :ui="{
-        title: 'text-white font-light',
-      }"
-      title="Découvrez et réservez les hôtels et les restaurants du Guide MICHELIN "
-      class="relative h-full z-10 bg-transparent"
+    <NuxtImg src="/images/hero.png" class="size-full object-cover absolute inset-0 z-0" />
+
+    <div
+      class="flex flex-col gap-6 absolute bottom-12 left-1/2 -translate-x-1/2 items-center z-20 w-full max-w-2xl px-4 text-center"
     >
-      <template #headline>
-        <NuxtImg src="/images/logo_michelin.png" class="h-8 object-contain mx-auto" />
-      </template>
-    </UPageHero>
+      <NuxtImg src="/images/logo_michelin.png" class="h-12 w-auto object-contain" />
+      <h1
+        class="text-white text-2xl md:text-4xl font-semibold leading-snug tracking-wide drop-shadow-md"
+      >
+        Découvrez et réservez les hôtels et les restaurants du Guide MICHELIN
+      </h1>
+    </div>
   </div>
+
+  <section class="h-screen">hello</section>
 </template>

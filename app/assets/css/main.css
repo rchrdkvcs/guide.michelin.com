@@ -6,20 +6,44 @@
 @theme static {
   --font-sans: "Figtree", sans-serif;
 
-  --color-red-50: #fff0f2;
-  --color-red-100: #ffe2e6;
-  --color-red-200: #ffcace;
-  --color-red-300: #ffa3ac;
-  --color-red-400: #ff6f7e;
-  --color-red-500: #d3072b;
-  --color-red-600: #b30422;
-  --color-red-700: #900118;
-  --color-red-800: #780618;
-  --color-red-900: #650918;
-  --color-red-950: #37020a;
+  --color-brand-50: #fff0f2;
+  --color-brand-100: #ffe2e6;
+  --color-brand-200: #ffcace;
+  --color-brand-300: #ffa3ac;
+  --color-brand-400: #ff6f7e;
+  --color-brand-500: #d3072b;
+  --color-brand-600: #b30422;
+  --color-brand-700: #900118;
+  --color-brand-800: #780618;
+  --color-brand-900: #650918;
+  --color-brand-950: #37020a;
+
+  --color-gold-50: #fdfcef;
+  --color-gold-100: #fbf7d5;
+  --color-gold-200: #f5edaa;
+  --color-gold-300: #eedd75;
+  --color-gold-400: #e6c844;
+  --color-gold-500: #d8af24;
+  --color-gold-600: #bb8c1a;
+  --color-gold-700: #956518;
+  --color-gold-800: #7c511b;
+  --color-gold-900: #68421d;
+  --color-gold-950: #3d220e;
+
+  --color-linen-50: #fafafa;
+  --color-linen-100: #f4f3ef;
+  --color-linen-200: #e6e4dc;
+  --color-linen-300: #d3cfc3;
+  --color-linen-400: #bdb7a6;
+  --color-linen-500: #a8a08c;
+  --color-linen-600: #938a75;
+  --color-linen-700: #7a7260;
+  --color-linen-800: #655e50;
+  --color-linen-900: #544f43;
+  --color-linen-950: #2d2a23;
 }
 
 :root {
-  --ui-bg: var(--color-stone-100);
+  --ui-bg: var(--color-linen-100);
   --ui-radius: 0rem;
 }
