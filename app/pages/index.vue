@@ -1,19 +1,26 @@
 <script lang="ts" setup>
-const { data: adventuresList } = await useFetch<any[]>('/api/adventures')
-const activeAdventureIndex = ref(0)
+const { data: adventuresList } = await useFetch<any[]>("/api/adventures");
+const activeAdventureIndex = ref(0);
 
 const currentAdventure = computed(() => {
-  if (!adventuresList.value) return null
-  return adventuresList.value[activeAdventureIndex.value]
-})
+  if (!adventuresList.value) return null;
+  return adventuresList.value[activeAdventureIndex.value];
+});
+
+const { heroStyle } = useHeroScroll();
 </script>
 
 <template>
   <div class="relative h-screen">
     <div
-      class="bg-linear-to-b from-black/50 via-transparent to-black/50 absolute top-0 size-full z-10 pointer-events-none"
+      :style="heroStyle"
+      class="bg-linear-to-b from-black/75 via-transparent to-black/75 absolute top-0 size-full z-10 pointer-events-none transition-[transform,border-radius] duration-100 ease-out"
     ></div>
-    <NuxtImg src="/images/hero.png" class="size-full object-cover absolute inset-0 z-0" />
+    <NuxtImg
+      src="/images/hero.png"
+      :style="heroStyle"
+      class="size-full object-cover absolute inset-0 z-0 transition-[transform,border-radius] duration-100 ease-out"
+    />
 
     <div
       class="flex flex-col gap-6 absolute bottom-12 left-1/2 -translate-x-1/2 items-center z-20 w-full max-w-2xl px-4 text-center"
@@ -27,12 +34,10 @@ const currentAdventure = computed(() => {
     </div>
   </div>
 
-  <section class="min-h-screen bg-linen-50 py-24 flex flex-col items-center justify-center space-y-12 px-6">
-    <div class="text-center space-y-4 max-w-2xl">
-      <h2 class="text-4xl md:text-5xl font-bold text-linen-950 tracking-tight">Choisissez votre destination</h2>
-      <p class="text-lg text-linen-700">Explorez les régions les plus emblématiques à travers leurs joyaux culinaires et hôteliers.</p>
-    </div>
-
+  <UPageSection
+    title="Choisissez votre destination"
+    description="Explorez les régions les plus emblématiques à travers leurs joyaux culinaires et hôteliers."
+  >
     <div class="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
       <!-- Interactive Map -->
       <div class="order-2 lg:order-1 flex justify-center">
@@ -49,5 +54,5 @@ const currentAdventure = computed(() => {
         />
       </div>
     </div>
-  </section>
+  </UPageSection>
 </template>
