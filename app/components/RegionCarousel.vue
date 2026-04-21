@@ -7,6 +7,7 @@ interface CarouselItem {
   description: string
   image?: string
   link?: string
+  svgPath?: string
 }
 
 const props = defineProps<{
@@ -14,7 +15,7 @@ const props = defineProps<{
   id?: string
 }>()
 
-const currentIndex = ref(0)
+const currentIndex = defineModel<number>({ default: 0 })
 
 const next = () => {
   currentIndex.value = (currentIndex.value + 1) % props.items.length
@@ -54,9 +55,18 @@ const activeItem = computed(() => {
     </button>
 
     <div class="relative z-20 w-full max-w-2xl px-12 py-10 text-center text-white space-y-6">
-      <h3 class="text-4xl md:text-5xl font-bold tracking-tight drop-shadow-lg">
-        {{ activeItem.name }}
-      </h3>
+      <div :key="activeItem.id" class="space-y-6 flex flex-col items-center">
+        <!-- Regional SVG Icon -->
+        <div v-if="activeItem.svgPath" class="mb-4 group-hover:scale-110 transition-transform duration-500">
+          <svg viewBox="0 0 100 100" class="w-24 h-24 text-red-500 drop-shadow-lg fill-current">
+            <path :d="activeItem.svgPath" />
+          </svg>
+        </div>
+
+        <h3 class="text-4xl md:text-5xl font-bold text-white tracking-tight drop-shadow-lg">
+          {{ activeItem.name }}
+        </h3>
+      </div>
       <p class="text-lg md:text-xl text-white/90 max-w-lg mx-auto leading-relaxed drop-shadow-md">
         {{ activeItem.description }}
       </p>

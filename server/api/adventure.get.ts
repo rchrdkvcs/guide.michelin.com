@@ -12,6 +12,6 @@ export default defineCachedEventHandler((event) => {
   name: 'adventure-data',
   getKey: (event) => {
     const query = getQuery(event)
-    return query.id || 'bretagne'
+    return String(query.id || 'bretagne')
   }
 })

@@ -1,9 +1,17 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+const { data: adventuresList } = await useFetch<any[]>('/api/adventures')
+const activeAdventureIndex = ref(0)
+
+const currentAdventure = computed(() => {
+  if (!adventuresList.value) return null
+  return adventuresList.value[activeAdventureIndex.value]
+})
+</script>
 
 <template>
   <div class="relative h-screen">
     <div
-      class="bg-linear-to-b from-black/75 via-transparent to-black/75 absolute top-0 size-full z-1 pointer-events-none"
+      class="bg-linear-to-b from-black/50 via-transparent to-black/50 absolute top-0 size-full z-10 pointer-events-none"
     ></div>
     <NuxtImg src="/images/hero.png" class="size-full object-cover absolute inset-0 z-0" />
 
@@ -19,7 +27,27 @@
     </div>
   </div>
 
-  <SearchSection />
+  <section class="min-h-screen bg-linen-50 py-24 flex flex-col items-center justify-center space-y-12 px-6">
+    <div class="text-center space-y-4 max-w-2xl">
+      <h2 class="text-4xl md:text-5xl font-bold text-linen-950 tracking-tight">Choisissez votre destination</h2>
+      <p class="text-lg text-linen-700">Explorez les régions les plus emblématiques à travers leurs joyaux culinaires et hôteliers.</p>
+    </div>
 
-  <section class="h-screen">hello</section>
+    <div class="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <!-- Interactive Map -->
+      <div class="order-2 lg:order-1 flex justify-center">
+        <FranceMap :active-region-id="currentAdventure?.id" />
+      </div>
+
+      <!-- Adventure Carousel -->
+      <div class="order-1 lg:order-2">
+        <RegionCarousel
+          v-if="adventuresList"
+          v-model="activeAdventureIndex"
+          :items="adventuresList"
+          id="main-adventures"
+        />
+      </div>
+    </div>
+  </section>
 </template>
