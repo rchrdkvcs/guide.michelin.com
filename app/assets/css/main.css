@@ -21,3 +21,8 @@ body {
   background-color: #FAF9F6;
   color: #1a1a1a;
 }
+
+main {
+  font-family: var(--font-sans);
+  width: 100%;
+}
