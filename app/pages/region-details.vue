@@ -4,23 +4,23 @@ const regionImage = ref({
   alt: 'Region representation'
 })
 
-const textSectionOne = ref({
+const textDiscover = ref({
   title: 'Discover the Region',
   content: 'This section contains introductory text about the selected region, its history, and its unique characteristics.'
 })
 
-const carouselOneItems = ref([
+const carouselRestaurants = ref([
   { id: 1, name: 'Hotel/Restaurant A', description: 'Brief description of A' },
   { id: 2, name: 'Hotel/Restaurant B', description: 'Brief description of B' },
   { id: 3, name: 'Hotel/Restaurant C', description: 'Brief description of C' }
 ])
 
-const textSectionTwo = ref({
+const textAttraction = ref({
   title: 'Local Attractions',
   content: 'More text content about local spots, activities, or specific highlights of the area.'
 })
 
-const carouselTwoItems = ref([
+const carouselHotels = ref([
   { id: 4, name: 'Specialty 1', description: 'Description of specialty 1' },
   { id: 5, name: 'Specialty 2', description: 'Description of specialty 2' },
   { id: 6, name: 'Specialty 3', description: 'Description of specialty 3' }
@@ -41,29 +41,29 @@ const carouselTwoItems = ref([
     </section>
 
     <section
-      id="intro-text"
+      id="text-discover"
       style="height: 800px; width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 40px; box-sizing: border-box; text-align: center;"
     >
-      <h1>{{ textSectionOne.title }}</h1>
-      <p>{{ textSectionOne.content }}</p>
+      <h1>{{ textDiscover.title }}</h1>
+      <p>{{ textDiscover.content }}</p>
     </section>
 
     <RegionCarousel
-      id="first-carousel"
-      :items="carouselOneItems"
+      id="carousel-restaurants"
+      :items="carouselRestaurants"
     />
 
     <section
-      id="secondary-text"
+      id="text-attraction"
       style="height: 800px; width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 40px; box-sizing: border-box; text-align: center;"
     >
-      <h2>{{ textSectionTwo.title }}</h2>
-      <p>{{ textSectionTwo.content }}</p>
+      <h2>{{ textAttraction.title }}</h2>
+      <p>{{ textAttraction.content }}</p>
     </section>
 
     <RegionCarousel
-      id="second-carousel"
-      :items="carouselTwoItems"
+      id="carousel-hotels"
+      :items="carouselHotels"
     />
   </main>
 </template>
