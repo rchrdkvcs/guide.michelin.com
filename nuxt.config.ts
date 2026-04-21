@@ -1,4 +1,10 @@
 export default defineNuxtConfig({
+  future: {
+    compatibilityVersion: 4,
+  },
+
+  srcDir: "app",
+
   modules: [
     "@nuxt/eslint",
     "@nuxt/ui",
@@ -24,12 +30,20 @@ export default defineNuxtConfig({
     },
   },
 
+  nitro: {
+    scanDirs: ["../server"],
+  },
+
   components: [
     {
       path: "~/components",
       pathPrefix: false,
     },
   ],
+
+  image: {
+    domains: ["images.unsplash.com"],
+  },
 
   eslint: false,
 });

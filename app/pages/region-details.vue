@@ -1,79 +1,98 @@
 <script setup lang="ts">
-const regionImage = ref({
-  src: 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=2073&auto=format&fit=crop',
-  alt: 'Region representation'
+interface AdventureData {
+  image: { src: string; alt: string };
+  discover: { title: string; content: string };
+  attractions: { title: string; content: string };
+  restaurants: any[];
+  hotels: any[];
+}
+
+const route = useRoute()
+
+// On change 'region' par 'id' pour correspondre à ton souhait d'URL
+const adventureId = computed(() => (route.query.id as string) || 'bretagne')
+
+const { data: adventure, pending, error } = await useFetch<AdventureData>('/api/adventure', {
+  query: { id: adventureId },
+  watch: [adventureId],
+  lazy: true,
+  server: true
 })
 
-const textDiscover = ref({
-  title: 'Discover the Region',
-  content: 'This section contains introductory text about the selected region, its history, and its unique characteristics.'
-})
-
-const carouselRestaurants = ref([
-  { id: 1, name: 'Restaurant A', description: 'Brief description of A' },
-  { id: 2, name: 'Restaurant B', description: 'Brief description of B' },
-  { id: 3, name: 'Restaurant C', description: 'Brief description of C' },
-  { id: 4, name: 'Restaurant D', description: 'Brief description of D' },
-  { id: 5, name: 'Restaurant E', description: 'Brief description of E' }
-])
-
-const textAttraction = ref({
-  title: 'Local Attractions',
-  content: 'More text content about local spots, activities, or specific highlights of the area.'
-})
-
-const carouselHotels = ref([
-  { id: 4, name: 'Hotel 1', description: 'Description of hotel 1' },
-  { id: 5, name: 'Hotel 2', description: 'Description of hotel 2' },
-  { id: 6, name: 'Hotel 3', description: 'Description of hotel 3' }
-])
+const regionImage = computed(() => adventure.value?.image)
+const textDiscover = computed(() => adventure.value?.discover)
+const textAttraction = computed(() => adventure.value?.attractions)
+const restaurants = computed(() => adventure.value?.restaurants || [])
+const hotels = computed(() => adventure.value?.hotels || [])
 </script>
 
 <template>
-  <main style="width: 100%; overflow-x: hidden;">
-    <div
-      class="container"
-      style="width: 80%; margin: 0 auto; display: flex; flex-direction: column; align-items: center; padding: 40px 0; box-sizing: border-box;"
-    >
-      <section
-        id="region-hero"
-        style="height: 600px; width: 100%; display: flex; justify-content: center; align-items: center; overflow: hidden; margin-bottom: 40px;"
-      >
-        <img
-          :src="regionImage.src"
-          :alt="regionImage.alt"
-          style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"
-        >
-      </section>
+  <main v-if="adventure" class="w-full overflow-x-hidden bg-linen-50/30 min-h-screen">
+    <!-- Hero Section -->
+    <section id="region-hero" class="relative h-[70vh] w-full overflow-hidden">
+      <div class="absolute inset-0 bg-linear-to-b from-black/60 via-transparent to-black/30 z-10" />
+      <NuxtImg
+        :src="regionImage?.src"
+        :alt="regionImage?.alt"
+        class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-1000"
+      />
+      <div class="absolute bottom-20 left-0 w-full z-20 text-center px-4">
+        <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight drop-shadow-2xl">
+          {{ textDiscover?.title }}
+        </h1>
+        <div class="w-24 h-1 bg-brand-500 mx-auto rounded-full shadow-lg" />
+      </div>
+    </section>
 
-      <section
-        id="text-discover"
-        style="min-height: 400px; width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 40px; box-sizing: border-box; text-align: center;"
-      >
-        <h1>{{ textDiscover.title }}</h1>
-        <p style="max-width: 800px;">
-          {{ textDiscover.content }}
+    <div class="max-w-6xl mx-auto px-6 py-20 space-y-32">
+      <!-- Discover Section -->
+      <section class="text-center max-w-3xl mx-auto space-y-6 reveal">
+        <p class="text-xl md:text-2xl text-linen-700 leading-relaxed font-light italic">
+          "{{ textDiscover?.content }}"
         </p>
       </section>
 
-      <RegionCarousel
-        id="carousel-restaurants"
-        :items="carouselRestaurants"
-        style="width: 100%; margin-bottom: 60px;"
-      />
-
-      <section
-        id="text-attraction"
-        style="height: 800px; width: 80%; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 40px; box-sizing: border-box; text-align: center;"
-      >
-        <h2>{{ textAttraction.title }}</h2>
-        <p>{{ textAttraction.content }}</p>
+      <!-- Restaurants Carousel -->
+      <section v-if="restaurants.length" class="space-y-10">
+        <div class="flex items-center gap-4">
+          <h2 class="text-3xl font-bold text-linen-900 shrink-0">Gastronomie</h2>
+          <div class="h-px bg-linen-200 w-full" />
+        </div>
+        <RegionCarousel :items="restaurants" id="restaurants-carousel" class="shadow-2xl" />
       </section>
 
-      <RegionCarousel
-        id="carousel-hotels"
-        :items="carouselHotels"
-      />
+      <!-- Attractions Section -->
+      <section class="text-center max-w-4xl mx-auto space-y-8 py-10">
+        <h2 class="text-4xl font-bold text-linen-900">{{ textAttraction?.title }}</h2>
+        <p class="text-lg text-linen-600 max-w-2xl mx-auto leading-relaxed">
+          {{ textAttraction?.content }}
+        </p>
+      </section>
+
+      <!-- Hotels Carousel -->
+      <section v-if="hotels.length" class="space-y-10">
+        <div class="flex items-center gap-4 justify-end">
+          <div class="h-px bg-linen-200 w-full" />
+          <h2 class="text-3xl font-bold text-linen-900 shrink-0">Hébergements d'Exception</h2>
+        </div>
+        <RegionCarousel :items="hotels" id="hotels-carousel" class="shadow-2xl" />
+      </section>
     </div>
   </main>
+
+  <div v-else-if="pending" class="min-h-screen flex items-center justify-center bg-linen-50">
+    <div class="animate-pulse flex flex-col items-center space-y-4">
+      <div class="w-16 h-16 border-4 border-brand-500 border-t-transparent rounded-full animate-spin" />
+      <p class="text-brand-700 font-medium tracking-widest">CHARGEMENT</p>
+    </div>
+  </div>
+
+  <div v-else-if="error" class="min-h-screen flex items-center justify-center bg-linen-50 px-4">
+    <div class="max-w-md w-full bg-white p-10 rounded-2xl shadow-xl text-center space-y-6">
+      <div class="text-brand-500 text-6xl">⚠️</div>
+      <h2 class="text-2xl font-bold text-linen-900">Oups !</h2>
+      <p class="text-linen-600">Impossible de charger la région "{{ adventureId }}".</p>
+      <UButton to="/" color="brand" variant="solid" size="lg" block>Retour à l'accueil</UButton>
+    </div>
+  </div>
 </template>

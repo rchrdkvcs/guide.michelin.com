@@ -32,67 +32,60 @@ const activeItem = computed(() => {
 <template>
   <section
     :id="id"
-    class="carousel-container"
-    style="position: relative; height: 500px; width: 100%; display: flex; align-items: center; justify-content: center; overflow: hidden; border: 2px solid brown; background: #000; border-radius: 12px;"
+    class="relative group h-[550px] w-full flex items-center justify-center overflow-hidden rounded-3xl shadow-2xl bg-slate-900"
   >
-    <transition
-      name="fade"
-      mode="out-in"
-    >
-      <img
-        :key="activeItem.image"
-        :src="activeItem.image || 'https://via.placeholder.com/800x500?text=No+Image'"
-        :alt="activeItem.name"
-        style="position: absolute; width: 100%; height: 100%; object-fit: cover; opacity: 0.6;"
-      >
-    </transition>
+    <!-- Background Image -->
+    <NuxtImg
+      :key="activeItem.image"
+      :src="activeItem.image || 'https://via.placeholder.com/1200x800?text=No+Image'"
+      :alt="activeItem.name"
+      class="absolute inset-0 w-full h-full object-cover opacity-60 transition-opacity duration-700"
+    />
 
+    <!-- Overlay -->
+    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
+
+    <!-- Navigation -->
     <button
-      class="nav-btn prev-btn"
+      class="absolute left-6 z-30 p-4 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-red-600 transition-all opacity-0 group-hover:opacity-100"
       @click="prev"
     >
-      &#10094;
+      <span class="iconify i-lucide:chevron-left size-8"></span>
     </button>
 
-    <div
-      class="carousel-content"
-      style="position: relative; z-index: 5; text-align: center; color: white; padding: 20px; text-shadow: 0 2px 10px rgba(0,0,0,0.8);"
-    >
-      <transition
-        name="slide-up"
-        mode="out-in"
-      >
-        <div :key="activeItem.id">
-          <h2 style="font-size: 2.5rem; margin-bottom: 10px;">
-            {{ activeItem.name }}
-          </h2>
-          <p style="font-size: 1.1rem; margin-bottom: 25px; max-width: 600px;">
-            {{ activeItem.description }}
-          </p>
-
-          <a
-            v-if="activeItem.link"
-            :href="activeItem.link"
-            class="details-link"
-          >
-            Voir le restaurant
-          </a>
-        </div>
-      </transition>
+    <div class="relative z-20 w-full max-w-2xl px-12 py-10 text-center text-white space-y-6">
+      <h3 class="text-4xl md:text-5xl font-bold tracking-tight drop-shadow-lg">
+        {{ activeItem.name }}
+      </h3>
+      <p class="text-lg md:text-xl text-white/90 max-w-lg mx-auto leading-relaxed drop-shadow-md">
+        {{ activeItem.description }}
+      </p>
+      <div class="pt-4">
+        <NuxtLink
+          v-if="activeItem.link"
+          :to="activeItem.link"
+          class="inline-flex items-center gap-2 px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-bold rounded-full transition-all hover:scale-105 hover:shadow-xl active:scale-95 group/btn"
+        >
+          <span>Découvrir</span>
+          <span class="iconify i-lucide:arrow-right size-5 transition-transform group-hover/btn:translate-x-1"></span>
+        </NuxtLink>
+      </div>
     </div>
 
     <button
-      class="nav-btn next-btn"
+      class="absolute right-6 z-30 p-4 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-red-600 transition-all opacity-0 group-hover:opacity-100 active:scale-90"
       @click="next"
     >
-      &#10095;
+      <span class="iconify i-lucide:chevron-right size-8"></span>
     </button>
 
-    <div class="dots-container">
-      <span
+    <!-- Progress Indicators -->
+    <div class="absolute bottom-8 left-0 w-full flex justify-center gap-3 z-30">
+      <button
         v-for="(_, index) in items"
         :key="index"
-        :class="['dot', { active: index === currentIndex }]"
+        class="h-1.5 transition-all duration-300 rounded-full"
+        :class="index === currentIndex ? 'w-10 bg-red-600' : 'w-4 bg-white/30 hover:bg-white/50'"
         @click="currentIndex = index"
       />
     </div>
@@ -100,66 +93,5 @@ const activeItem = computed(() => {
 </template>
 
 <style scoped>
-.nav-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(5px);
-  color: white;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  padding: 15px;
-  cursor: pointer;
-  font-size: 24px;
-  border-radius: 50%;
-  z-index: 10;
-  transition: all 0.3s ease;
-}
-
-.nav-btn:hover {
-  background: brown;
-  transform: translateY(-50%) scale(1.1);
-}
-
-.prev-btn { left: 20px; }
-.next-btn { right: 20px; }
-
-.details-link {
-  display: inline-block;
-  padding: 12px 30px;
-  background-color: brown;
-  color: white;
-  text-decoration: none;
-  border-radius: 25px;
-  font-weight: bold;
-  transition: transform 0.2s, background-color 0.2s;
-}
-
-.details-link:hover {
-  background-color: #8b4513;
-  transform: translateY(-3px);
-}
-
-.dots-container {
-  position: absolute;
-  bottom: 20px;
-  display: flex;
-  gap: 8px;
-  z-index: 10;
-}
-.dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.5);
-  cursor: pointer;
-}
-.dot.active { background: brown; width: 25px; border-radius: 10px; }
-
-.fade-enter-active, .fade-leave-active { transition: opacity 0.8s ease; }
-.fade-enter-from, .fade-leave-to { opacity: 0; }
-
-.slide-up-enter-active, .slide-up-leave-active { transition: all 0.5s ease-out; }
-.slide-up-enter-from { opacity: 0; transform: translateY(20px); }
-.slide-up-leave-to { opacity: 0; transform: translateY(-20px); }
+/* Clean styles */
 </style>
