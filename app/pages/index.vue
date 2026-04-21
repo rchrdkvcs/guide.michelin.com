@@ -3,7 +3,7 @@
 <template>
   <div class="relative h-screen">
     <div
-      class="bg-linear-to-b from-black/50 via-transparent to-black/50 absolute top-0 size-full z-1 pointer-events-none"
+      class="bg-linear-to-b from-black/75 via-transparent to-black/75 absolute top-0 size-full z-1 pointer-events-none"
     ></div>
     <NuxtImg src="/images/hero.png" class="size-full object-cover absolute inset-0 z-0" />
 
@@ -18,6 +18,8 @@
       </h1>
     </div>
   </div>
+
+  <SearchSection />
 
   <section class="h-screen">hello</section>
 </template>
