@@ -33,7 +33,7 @@ const items = ref<NavigationMenuItem[]>([
 <template>
   <UHeader
     :ui="{
-      root: `${isScrolled ? 'bg-muted' : 'bg-transparent'} border-none backdrop-blur-none! fixed top-0 w-full z-50 transition-colors duration-300`,
+      root: `${isScrolled ? '' : 'bg-transparent border-none backdrop-blur-none!'} fixed top-0 w-full z-50 transition-colors duration-300`,
     }"
   >
     <template #title>
@@ -42,9 +42,12 @@ const items = ref<NavigationMenuItem[]>([
 
     <UNavigationMenu
       :ui="{
-        link: useCustomStyle ? 'text-white/75 hover:text-white font-medium before:bg-transparent!' : '',
+        link: useCustomStyle
+          ? 'text-white/75 hover:text-white font-medium before:bg-transparent!'
+          : 'text-elevated',
       }"
       :items="items"
+      variant="link"
     />
 
     <template #right>

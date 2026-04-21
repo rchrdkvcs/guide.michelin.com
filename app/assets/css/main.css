@@ -30,20 +30,20 @@
   --color-gold-900: #68421d;
   --color-gold-950: #3d220e;
 
-  --color-linen-50: #fafafa;
-  --color-linen-100: #f4f3ef;
-  --color-linen-200: #e6e4dc;
-  --color-linen-300: #d3cfc3;
-  --color-linen-400: #bdb7a6;
-  --color-linen-500: #a8a08c;
-  --color-linen-600: #938a75;
-  --color-linen-700: #7a7260;
-  --color-linen-800: #655e50;
-  --color-linen-900: #544f43;
-  --color-linen-950: #2d2a23;
+  --color-linen-50: #f3efe9;
+  --color-linen-100: #e8e1d7;
+  --color-linen-200: #d8cebe;
+  --color-linen-300: #c7b7a2;
+  --color-linen-400: #b59f86;
+  --color-linen-500: #a3886b;
+  --color-linen-600: #8e7358;
+  --color-linen-700: #76604b;
+  --color-linen-800: #614f3f;
+  --color-linen-900: #4e4034;
+  --color-linen-950: #2a221c;
 }
 
 :root {
   --ui-bg: var(--color-linen-100);
-  --ui-radius: 0rem;
+  --ui-radius: 0.25rem;
 }
