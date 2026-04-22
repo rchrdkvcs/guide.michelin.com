@@ -24,3 +24,7 @@ logs
 !.env.example
 /.claude/
 /.agents/
+
+# Large dataset files (served server-side, not committed)
+server/data/*.jsonl
+server/data/*.json
