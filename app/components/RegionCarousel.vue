@@ -1,33 +1,35 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed } from "vue";
 
 interface CarouselItem {
-  id: number | string
-  name: string
-  description: string
-  image?: string
-  link?: string
-  svgPath?: string
+  id: number | string;
+  name: string;
+  description: string;
+  image?: string;
+  link?: string;
+  svgPath?: string;
 }
 
 const props = defineProps<{
-  items: CarouselItem[]
-  id?: string
-}>()
+  items: CarouselItem[];
+  id?: string;
+}>();
 
-const currentIndex = defineModel<number>({ default: 0 })
+const currentIndex = defineModel<number>({ default: 0 });
 
 const next = () => {
-  currentIndex.value = (currentIndex.value + 1) % props.items.length
-}
+  currentIndex.value = (currentIndex.value + 1) % props.items.length;
+};
 
 const prev = () => {
-  currentIndex.value = (currentIndex.value - 1 + props.items.length) % props.items.length
-}
+  currentIndex.value = (currentIndex.value - 1 + props.items.length) % props.items.length;
+};
 
 const activeItem = computed(() => {
-  return props.items[currentIndex.value] || { id: 0, name: '', description: '', image: '', link: '#' }
-})
+  return (
+    props.items[currentIndex.value] || { id: 0, name: "", description: "", image: "", link: "#" }
+  );
+});
 </script>
 
 <template>
@@ -44,7 +46,9 @@ const activeItem = computed(() => {
     />
 
     <!-- Overlay -->
-    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
+    <div
+      class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none"
+    />
 
     <!-- Navigation -->
     <button
@@ -57,7 +61,10 @@ const activeItem = computed(() => {
     <div class="relative z-20 w-full max-w-2xl px-12 py-10 text-center text-white space-y-6">
       <div :key="activeItem.id" class="space-y-6 flex flex-col items-center">
         <!-- Regional SVG Icon -->
-        <div v-if="activeItem.svgPath" class="mb-4 group-hover:scale-110 transition-transform duration-500">
+        <div
+          v-if="activeItem.svgPath"
+          class="mb-4 group-hover:scale-110 transition-transform duration-500"
+        >
           <svg viewBox="0 0 100 100" class="w-24 h-24 text-red-500 drop-shadow-lg fill-current">
             <path :d="activeItem.svgPath" />
           </svg>
@@ -77,7 +84,9 @@ const activeItem = computed(() => {
           class="inline-flex items-center gap-2 px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-bold rounded-full transition-all hover:scale-105 hover:shadow-xl active:scale-95 group/btn"
         >
           <span>Découvrir</span>
-          <span class="iconify i-lucide:arrow-right size-5 transition-transform group-hover/btn:translate-x-1"></span>
+          <span
+            class="iconify i-lucide:arrow-right size-5 transition-transform group-hover/btn:translate-x-1"
+          ></span>
         </NuxtLink>
       </div>
     </div>

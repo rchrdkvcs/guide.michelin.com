@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-const { hotelName } = useRoute().params
-const { data: hotel, error } = await useFetch('/api/hotel', {
+const { hotelName } = useRoute().params;
+const { data: hotel, error } = await useFetch("/api/hotel", {
   query: { slug: hotelName },
-})
+});
 </script>
 
 <template>
@@ -73,7 +73,9 @@ const { data: hotel, error } = await useFetch('/api/hotel', {
 
             <div class="flex items-center gap-2 text-sm">
               <UIcon name="lucide:globe" class="size-4 shrink-0 text-muted" />
-              <a :href="hotel.website" target="_blank" class="hover:underline truncate">{{ hotel.website }}</a>
+              <a :href="hotel.website" target="_blank" class="hover:underline truncate">{{
+                hotel.website
+              }}</a>
             </div>
 
             <div class="flex items-center gap-2 text-sm">

@@ -28,8 +28,14 @@ const translateY = rand(-3, 3);
 
 const cardStyle = computed(() =>
   isHovered.value
-    ? { transform: 'rotate(0deg) translate(0px, 0px)', transition: 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)' }
-    : { transform: `rotate(${rotateDeg}deg) translate(${translateX}px, ${translateY}px)`, transition: 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)' }
+    ? {
+        transform: "rotate(0deg) translate(0px, 0px)",
+        transition: "transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)",
+      }
+    : {
+        transform: `rotate(${rotateDeg}deg) translate(${translateX}px, ${translateY}px)`,
+        transition: "transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)",
+      },
 );
 </script>
 

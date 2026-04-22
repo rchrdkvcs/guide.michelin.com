@@ -1,4 +1,4 @@
-import { regionSvgs } from '../utils/region-svgs'
+import { regionSvgs } from "../utils/region-svgs";
 
 export default defineEventHandler(() => {
   // Return basic info for each adventure to display on the home page
@@ -8,6 +8,6 @@ export default defineEventHandler(() => {
     description: data.discover.content,
     image: data.image.src,
     link: `/regions/${id}`,
-    svgPath: regionSvgs[id] || ''
-  }))
-})
+    svgPath: regionSvgs[id] || "",
+  }));
+});

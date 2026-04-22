@@ -7,23 +7,27 @@ interface AdventureData {
   hotels: any[];
 }
 
-const route = useRoute()
+const route = useRoute();
 
 // On change 'region' par 'id' pour correspondre à ton souhait d'URL
-const adventureId = computed(() => (route.query.id as string) || 'bretagne')
+const adventureId = computed(() => (route.query.id as string) || "bretagne");
 
-const { data: adventure, pending, error } = await useFetch<AdventureData>('/api/adventure', {
+const {
+  data: adventure,
+  pending,
+  error,
+} = await useFetch<AdventureData>("/api/adventure", {
   query: { id: adventureId },
   watch: [adventureId],
   lazy: true,
-  server: true
-})
+  server: true,
+});
 
-const regionImage = computed(() => adventure.value?.image)
-const textDiscover = computed(() => adventure.value?.discover)
-const textAttraction = computed(() => adventure.value?.attractions)
-const restaurants = computed(() => adventure.value?.restaurants || [])
-const hotels = computed(() => adventure.value?.hotels || [])
+const regionImage = computed(() => adventure.value?.image);
+const textDiscover = computed(() => adventure.value?.discover);
+const textAttraction = computed(() => adventure.value?.attractions);
+const restaurants = computed(() => adventure.value?.restaurants || []);
+const hotels = computed(() => adventure.value?.hotels || []);
 </script>
 
 <template>
@@ -82,7 +86,9 @@ const hotels = computed(() => adventure.value?.hotels || [])
 
   <div v-else-if="pending" class="min-h-screen flex items-center justify-center bg-linen-50">
     <div class="animate-pulse flex flex-col items-center space-y-4">
-      <div class="w-16 h-16 border-4 border-brand-500 border-t-transparent rounded-full animate-spin" />
+      <div
+        class="w-16 h-16 border-4 border-brand-500 border-t-transparent rounded-full animate-spin"
+      />
       <p class="text-brand-700 font-medium tracking-widest">CHARGEMENT</p>
     </div>
   </div>
