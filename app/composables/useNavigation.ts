@@ -11,8 +11,8 @@ export function useNavigation() {
       to: "/hotels",
     },
     {
-      label: "Guides de voyage",
-      to: "/regions",
+      label: "Aventures",
+      to: "/adventures",
     },
     {
       label: "Magazine",
@@ -38,8 +38,12 @@ export function useNavigation() {
       to: "#",
     },
     {
+      label: "Aventures",
+      to: "/adventures",
+    },
+    {
       label: "Guides de voyage",
-      to: "/regions",
+      to: "/#",
     },
     {
       label: "Guides Best-of",

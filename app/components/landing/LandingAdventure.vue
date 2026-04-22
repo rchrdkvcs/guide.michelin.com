@@ -12,7 +12,7 @@ const { data: adventures } = await useFetch("/api/adventures");
       <div
         class="no-scrollbar flex h-[50vh] w-full snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-4 py-4 md:px-8 lg:px-12"
       >
-        <RegionPostcard
+        <AdventurePostcard
           v-for="adventure in adventures"
           :key="adventure.id"
           :adventure="adventure"
@@ -22,7 +22,7 @@ const { data: adventures } = await useFetch("/api/adventures");
       </div>
 
       <div class="mt-8 flex w-full justify-center">
-        <UButton label="Voir toutes les regions" color="neutral" variant="subtle" to="/regions" />
+        <UButton label="Voir toutes les regions" color="neutral" variant="subtle" to="/adventures" />
       </div>
     </div>
   </UPageSection>

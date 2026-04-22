@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-const { regionName } = useRoute().params;
+const { adventureName } = useRoute().params;
 const { data: adventure } = await useFetch("/api/adventure", {
-  query: { id: regionName },
+  query: { id: adventureName },
 });
 </script>
 
@@ -9,7 +9,7 @@ const { data: adventure } = await useFetch("/api/adventure", {
   <UContainer class="space-y-8 py-8">
     <div class="flex flex-col gap-2">
       <div class="flex w-full items-center justify-between">
-        <h2 class="text-elevated text-2xl leading-snug font-medium">Les Hotels</h2>
+        <h2 class="text-elevated text-2xl leading-snug font-medium">Les restaurants</h2>
         <UButton icon="lucide:filter" color="neutral" variant="ghost" />
       </div>
       <p class="text-sm leading-relaxed text-muted">
@@ -19,18 +19,17 @@ const { data: adventure } = await useFetch("/api/adventure", {
       </p>
     </div>
 
-    <div class="-mx-4 flex snap-x snap-mandatory flex-row gap-4 overflow-x-auto px-4 pb-2">
-      <HotelCard
-        v-for="hotel in adventure?.hotels"
-        :key="hotel.id"
-        class="w-120 shrink-0 snap-start"
-        :name="hotel.name"
-        :description="hotel.description"
-        :city="hotel.city"
-        :stars="hotel.stars"
-        :image="hotel.image"
-        :tags="hotel.tags"
-        :slug="hotel.slug"
+    <div class="flex h-96 flex-row gap-4 overflow-x-auto pb-2">
+      <RestaurantCard
+        class="h-full w-[85vw] shrink-0 sm:w-80 lg:w-96"
+        v-for="restaurant in adventure?.restaurants"
+        :key="restaurant.id"
+        :name="restaurant.name"
+        :description="restaurant.description"
+        :city="restaurant.city"
+        :stars="restaurant.stars"
+        :image="restaurant.image"
+        :tags="restaurant.tags"
       />
     </div>
 
@@ -38,7 +37,7 @@ const { data: adventure } = await useFetch("/api/adventure", {
       <UButton
         color="neutral"
         variant="ghost"
-        label="Voir plus d'hotels"
+        label="Voir plus de restaurants"
         trailing-icon="lucide:arrow-right"
       />
     </div>

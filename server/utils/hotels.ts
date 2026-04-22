@@ -7,7 +7,7 @@ export interface Hotel {
   image: string;
   gallery: string[];
   city: string;
-  region: string;
+  adventure: string;
   stars: number;
   tags: string[];
   priceRange: string;
@@ -32,7 +32,7 @@ export const hotels: Hotel[] = [
       "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?q=80&w=2070",
     ],
     city: "Dinard",
-    region: "bretagne",
+    adventure: "bretagne",
     stars: 2,
     tags: ["Vue mer", "Spa", "Gastronomie"],
     priceRange: "€€€€",
@@ -56,7 +56,7 @@ export const hotels: Hotel[] = [
       "https://images.unsplash.com/photo-1445019980597-93fa8acb246c?q=80&w=2070",
     ],
     city: "Biarritz",
-    region: "pays-basque",
+    adventure: "pays-basque",
     stars: 2,
     tags: ["Palace", "Vue océan", "Thalasso"],
     priceRange: "€€€€",
@@ -86,7 +86,7 @@ export const hotels: Hotel[] = [
       "https://images.unsplash.com/photo-1445019980597-93fa8acb246c?q=80&w=2070",
     ],
     city: "Pfulgriesheim",
-    region: "alsace",
+    adventure: "alsace",
     stars: 1,
     tags: ["Vignoble", "Gastronomie", "Nature"],
     priceRange: "€€€",
@@ -109,7 +109,7 @@ export const hotels: Hotel[] = [
       "https://images.unsplash.com/photo-1582719478250-c89cae4df85b?q=80&w=2070",
     ],
     city: "Martillac",
-    region: "bordeaux",
+    adventure: "bordeaux",
     stars: 2,
     tags: ["Vignoble", "Vinothérapie", "Spa"],
     priceRange: "€€€€",
@@ -139,7 +139,7 @@ export const hotels: Hotel[] = [
       "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2070",
     ],
     city: "Le Sambuc",
-    region: "provence",
+    adventure: "provence",
     stars: 1,
     tags: ["Camargue", "Nature", "Équitation"],
     priceRange: "€€€",
@@ -161,7 +161,7 @@ export const hotels: Hotel[] = [
       "https://images.unsplash.com/photo-1445019980597-93fa8acb246c?q=80&w=2070",
     ],
     city: "Gordes",
-    region: "provence",
+    adventure: "provence",
     stars: 2,
     tags: ["Provence", "Vue panoramique", "Spa Sisley"],
     priceRange: "€€€€",

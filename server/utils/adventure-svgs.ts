@@ -1,4 +1,4 @@
-export const regionSvgs: Record<string, string> = {
+export const adventureSvgs: Record<string, string> = {
   bretagne:
     "M 8 36 L 12 34 L 18 34 L 22 32 L 26 32 L 30 30 L 35 30 L 40 32 L 45 32 L 48 35 L 50 40 L 48 45 L 45 48 L 40 50 L 35 52 L 30 52 L 25 50 L 20 48 L 15 45 L 10 40 Z",
   "pays-basque":

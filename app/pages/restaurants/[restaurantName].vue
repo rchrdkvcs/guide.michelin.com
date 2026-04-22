@@ -4,4 +4,6 @@ const { restaurantName } = useRoute().params;
 
 <template>
   <RestaurantDetails />
+  <RestaurantSuggestions />
+  <HotelSuggestions />
 </template>
