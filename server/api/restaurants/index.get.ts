@@ -6,6 +6,7 @@ export default defineEventHandler((event) => {
   const { page, limit } = parsePagination(query);
 
   const filtered = filterRestaurants({
+    name: query.name as string | undefined,
     country: query.country as string | undefined,
     city: query.city as string | undefined,
     region: query.region as string | undefined,

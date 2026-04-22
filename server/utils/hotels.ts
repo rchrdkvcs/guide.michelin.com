@@ -85,6 +85,7 @@ export interface Hotel {
   id: string;
   name: string;
   roomCount: number;
+  previewImage: string | null;
   rooms: RoomStatic[];
 }
 
@@ -93,9 +94,23 @@ let _hotelMap: Map<string, Hotel> | null = null;
 let _roomsLive: RoomLive[] | null = null;
 let _liveByHotelId: Map<string, RoomLive[]> | null = null;
 
+function normalizeImageUrl(url: string | null | undefined): string | null {
+  if (!url) return null;
+  if (url.startsWith("http://") || url.startsWith("https://")) return url;
+  return `https://${url}`;
+}
+
 export function getRoomsStatic(): RoomStatic[] {
   if (!_roomsStatic) {
-    _roomsStatic = loadJsonl<RoomStatic>("all_rooms_static.jsonl");
+    const raw = loadJsonl<RoomStatic>("all_rooms_static.jsonl");
+    // Normalize image URLs that lack protocol prefix
+    _roomsStatic = raw.map((r) => ({
+      ...r,
+      room: {
+        ...r.room,
+        images: (r.room.images ?? []).map((img) => normalizeImageUrl(img) as string),
+      },
+    }));
   }
   return _roomsStatic;
 }
@@ -113,6 +128,7 @@ export function getHotels(): Hotel[] {
           id: room.hotel_id,
           name: room.hotel_name,
           roomCount: 1,
+          previewImage: room.room.images?.[0] ?? null,
           rooms: [room],
         });
       }

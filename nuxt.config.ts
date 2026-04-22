@@ -37,6 +37,10 @@ export default defineNuxtConfig({
     },
   ],
 
+  image: {
+    domains: ["static.prod.r53.tablethotels.com"],
+  },
+
   vite: {
     optimizeDeps: {
       include: ["@vueuse/core"],

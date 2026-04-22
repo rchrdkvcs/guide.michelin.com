@@ -1,8 +1,31 @@
 <script lang="ts" setup>
-const { adventureName } = useRoute().params;
-const { data: adventure } = await useFetch("/api/adventure", {
-  query: { id: adventureName },
-});
+interface Restaurant {
+  id: string;
+  name: string;
+  slug: string;
+  main_desc: string | null;
+  michelin_star: string | null;
+  city: { name: string } | null;
+  cuisines: { label: string }[];
+  image: string;
+}
+
+interface Meta {
+  page: number;
+  limit: number;
+  total: number;
+  totalPages: number;
+}
+
+defineProps<{
+  restaurants: Restaurant[];
+  meta: Meta;
+  adventureSlug: string;
+}>();
+
+const emit = defineEmits<{
+  "page-change": [page: number];
+}>();
 </script>
 
 <template>
@@ -10,37 +33,51 @@ const { data: adventure } = await useFetch("/api/adventure", {
     <div class="flex flex-col gap-2">
       <div class="flex w-full items-center justify-between">
         <h2 class="text-elevated text-2xl leading-snug font-medium">
-          Nos suggestion de Restaurants
+          Nos suggestions de Restaurants
         </h2>
-        <UButton icon="lucide:filter" color="neutral" variant="ghost" />
+        <UBadge :label="`${meta.total} restaurants`" color="neutral" variant="subtle" />
       </div>
-      <p class="text-sm leading-relaxed text-muted">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, aperiam aspernatur
-        blanditiis deserunt dignissimos ea esse est facere fuga illo ipsum laborum minima natus
-        quibusdam quidem quis quo sapiente. Minima.
-      </p>
     </div>
 
-    <div class="flex h-96 flex-row gap-4 overflow-x-auto pb-2">
+    <div
+      v-if="restaurants.length"
+      class="flex h-96 flex-row gap-4 overflow-x-auto pb-2"
+    >
       <RestaurantCard
-        class="h-full w-[85vw] shrink-0 sm:w-80 lg:w-96"
-        v-for="restaurant in adventure?.restaurants"
+        v-for="restaurant in restaurants"
         :key="restaurant.id"
+        class="h-full w-[85vw] shrink-0 sm:w-80 lg:w-96"
+        :slug="restaurant.slug"
         :name="restaurant.name"
-        :description="restaurant.description"
-        :city="restaurant.city"
-        :stars="restaurant.stars"
-        :image="restaurant.image"
-        :tags="restaurant.tags"
+        :description="restaurant.main_desc ?? ''"
+        :city="restaurant.city?.name ?? ''"
+        :stars="starCount(restaurant.michelin_star)"
+        :image="restaurant.image ?? ''"
+        :tags="restaurant.cuisines.slice(0, 2).map((c) => c.label)"
       />
     </div>
 
-    <div class="flex w-full items-center justify-center">
+    <div v-else class="py-12 text-center text-muted">
+      Aucun restaurant disponible pour cette destination.
+    </div>
+
+    <div v-if="meta.totalPages > 1" class="flex w-full items-center justify-center gap-4">
       <UButton
+        :disabled="meta.page <= 1"
         color="neutral"
         variant="ghost"
-        label="Voir plus de restaurants"
+        icon="lucide:arrow-left"
+        label="Précédent"
+        @click="emit('page-change', meta.page - 1)"
+      />
+      <span class="text-sm text-muted">{{ meta.page }} / {{ meta.totalPages }}</span>
+      <UButton
+        :disabled="meta.page >= meta.totalPages"
+        color="neutral"
+        variant="ghost"
+        label="Suivant"
         trailing-icon="lucide:arrow-right"
+        @click="emit('page-change', meta.page + 1)"
       />
     </div>
   </UContainer>

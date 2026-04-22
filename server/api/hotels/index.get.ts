@@ -11,10 +11,11 @@ export default defineEventHandler((event) => {
   });
 
   // Return hotels without the full rooms list for the index
-  const lightweight = filtered.map(({ id, name, roomCount }) => ({
+  const lightweight = filtered.map(({ id, name, roomCount, previewImage }) => ({
     id,
     name,
     roomCount,
+    previewImage,
   }));
 
   return paginate(lightweight, page, limit);

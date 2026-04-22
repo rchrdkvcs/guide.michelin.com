@@ -1,44 +1,41 @@
 <script lang="ts" setup>
-const { adventureName } = useRoute().params;
-const { data: adventure } = await useFetch("/api/adventure", {
-  query: { id: adventureName },
-});
+interface Restaurant {
+  objectID: string;
+  slug: string;
+  name: string;
+  main_desc: string;
+  image: string;
+  michelin_star: string | null;
+  cuisines: { code: string; label: string; slug: string }[];
+  city: { name: string; slug: string };
+}
+
+const props = defineProps<{
+  restaurants: Restaurant[];
+  currentSlug?: string;
+}>();
+
+const suggestions = computed(() =>
+  props.restaurants.filter((r) => r.slug !== props.currentSlug).slice(0, 6),
+);
 </script>
 
 <template>
-  <UContainer class="space-y-8 py-8">
-    <div class="flex flex-col gap-2">
-      <div class="flex w-full items-center justify-between">
-        <h2 class="text-elevated text-2xl leading-snug font-medium">Les restaurants</h2>
-        <UButton icon="lucide:filter" color="neutral" variant="ghost" />
-      </div>
-      <p class="text-sm leading-relaxed text-muted">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, aperiam aspernatur
-        blanditiis deserunt dignissimos ea esse est facere fuga illo ipsum laborum minima natus
-        quibusdam quidem quis quo sapiente. Minima.
-      </p>
-    </div>
+  <UContainer v-if="suggestions.length" class="space-y-6 py-8">
+    <h2 class="text-2xl font-semibold">Restaurants similaires</h2>
 
     <div class="flex h-96 flex-row gap-4 overflow-x-auto pb-2">
       <RestaurantCard
-        class="h-full w-[85vw] shrink-0 sm:w-80 lg:w-96"
-        v-for="restaurant in adventure?.restaurants"
-        :key="restaurant.id"
-        :name="restaurant.name"
-        :description="restaurant.description"
-        :city="restaurant.city"
-        :stars="restaurant.stars"
-        :image="restaurant.image"
-        :tags="restaurant.tags"
-      />
-    </div>
-
-    <div class="flex w-full items-center justify-center">
-      <UButton
-        color="neutral"
-        variant="ghost"
-        label="Voir plus de restaurants"
-        trailing-icon="lucide:arrow-right"
+        v-for="r in suggestions"
+        :key="r.objectID"
+        class="h-full w-[85vw] shrink-0 sm:w-72 lg:w-80"
+        :name="r.name"
+        :description="r.main_desc"
+        :city="r.city?.name ?? ''"
+        :stars="starCount(r.michelin_star)"
+        :image="r.image"
+        :tags="r.cuisines?.slice(0, 2).map((c) => c.label)"
+        :slug="r.slug"
       />
     </div>
   </UContainer>

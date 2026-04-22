@@ -159,6 +159,7 @@ export function getRestaurantBySlug(slug: string): Restaurant | undefined {
 }
 
 export interface RestaurantFilters {
+  name?: string;
   country?: string;
   city?: string;
   region?: string;
@@ -176,6 +177,10 @@ const STAR_MAP: Record<string, string> = { "1": "ONE", "2": "TWO", "3": "THREE" 
 export function filterRestaurants(filters: RestaurantFilters): Restaurant[] {
   let results = getRestaurants();
 
+  if (filters.name) {
+    const needle = filters.name.toLowerCase();
+    results = results.filter((r) => r.name.toLowerCase().includes(needle));
+  }
   if (filters.country)
     results = results.filter((r) => r.country?.slug === filters.country);
   if (filters.city)

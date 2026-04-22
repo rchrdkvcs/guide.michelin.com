@@ -1,28 +1,77 @@
 <script lang="ts" setup>
-type Tab = "etablissement" | "personnelles";
+interface RestaurantHours {
+  closed: boolean;
+  opens: string;
+  closes: string;
+}
+
+interface Restaurant {
+  slug: string;
+  name: string;
+  main_desc: string;
+  image: string;
+  michelin_star: string | null;
+  distinction: { label: string; slug: string } | null;
+  cuisines: { code: string; label: string; slug: string }[];
+  city: { name: string; slug: string };
+  region: { name: string; slug: string };
+  street: string;
+  postcode: string;
+  phone: string;
+  website: string;
+  chef: string;
+  price: { high: number | null; low: number | null };
+  currency_symbol: string;
+  hours_of_operation: Record<string, RestaurantHours[]>;
+  days_open: string[];
+  meal_times: string[];
+  online_booking: number;
+  booking_url: string;
+}
+
+const props = defineProps<{ restaurant: Restaurant }>();
+
+type Tab = "etablissement" | "details";
 const activeTab = ref<Tab>("etablissement");
 
-const restaurant = {
-  name: "Le Bernardin",
-  stars: 2,
-  description:
-    "Une cuisine française d'exception au cœur de Paris, sublimant les produits de la mer avec une précision et une sensibilité remarquables.",
-  address: "18 Rue Troyon, 75017 Paris",
-  phone: "+33 1 40 68 22 22",
-  hours: [
-    { day: "Lun – Ven", time: "12h00 – 14h30 · 19h30 – 22h30" },
-    { day: "Samedi", time: "19h30 – 22h30" },
-    { day: "Dimanche", time: "Fermé" },
-  ],
-  chef: {
-    name: "Éric Ripert",
-    title: "Chef Exécutif & Co-Propriétaire",
-    avatar: "https://i.pravatar.cc/150?img=68",
-    bio: "Né à Antibes, Éric Ripert débute sa formation à l'École Hôtelière de Perpignan avant de rejoindre les cuisines de La Tour d'Argent à Paris. Passionné par les produits de la mer, il a développé un style unique alliant rigueur technique et sensibilité artistique, faisant du Bernardin une référence mondiale.",
-    quote:
-      "La cuisine est un langage universel. Chaque assiette raconte une histoire, celle d'un territoire, d'une saison, d'une rencontre.",
-  },
+const stars = computed(() => starCount(props.restaurant.michelin_star));
+
+const priceRange = computed(() => {
+  const { low, high } = props.restaurant.price ?? {};
+  const sym = props.restaurant.currency_symbol ?? "€";
+  if (low && high) return `${sym}${low} – ${sym}${high}`;
+  if (low) return `À partir de ${sym}${low}`;
+  return null;
+});
+
+const address = computed(() => {
+  const parts = [
+    props.restaurant.street,
+    props.restaurant.postcode,
+    props.restaurant.city?.name,
+  ].filter(Boolean);
+  return parts.join(", ");
+});
+
+const DAY_LABELS: Record<string, string> = {
+  MONDAY: "Lundi",
+  TUESDAY: "Mardi",
+  WEDNESDAY: "Mercredi",
+  THURSDAY: "Jeudi",
+  FRIDAY: "Vendredi",
+  SATURDAY: "Samedi",
+  SUNDAY: "Dimanche",
 };
+
+const hoursEntries = computed(() => {
+  const h = props.restaurant.hours_of_operation;
+  if (!h) return [];
+  return Object.entries(h).map(([day, slots]) => ({
+    day: DAY_LABELS[day] ?? day,
+    closed: slots.every((s) => s.closed),
+    slots: slots.filter((s) => !s.closed).map((s) => `${s.opens} – ${s.closes}`),
+  }));
+});
 </script>
 
 <template>
@@ -30,10 +79,19 @@ const restaurant = {
     <div
       class="grid w-full grid-cols-1 rounded-2xl border border-default bg-elevated p-1 lg:h-full lg:grid-cols-3"
     >
-      <NuxtImg
-        src="/images/hero.png"
-        class="aspect-video w-full rounded-xl object-cover lg:col-span-2 lg:aspect-auto lg:size-full"
-      />
+      <div
+        class="relative aspect-video w-full overflow-hidden rounded-xl lg:col-span-2 lg:aspect-auto lg:h-full"
+      >
+        <NuxtImg
+          v-if="restaurant.image"
+          :src="restaurant.image"
+          :alt="restaurant.name"
+          class="h-full w-full object-cover"
+        />
+        <div v-else class="flex h-full min-h-96 items-center justify-center bg-muted">
+          <UIcon name="lucide:utensils" class="size-16 text-muted" />
+        </div>
+      </div>
 
       <aside class="flex min-h-0 w-full flex-col gap-4 p-4 lg:size-full">
         <!-- Tab switcher -->
@@ -49,12 +107,12 @@ const restaurant = {
             @click="activeTab = 'etablissement'"
           />
           <UButton
-            label="Personnelles"
+            label="Détails"
             color="neutral"
-            :variant="activeTab === 'personnelles' ? 'solid' : 'ghost'"
+            :variant="activeTab === 'details' ? 'solid' : 'ghost'"
             block
             class="rounded-lg"
-            @click="activeTab = 'personnelles'"
+            @click="activeTab = 'details'"
           />
         </div>
 
@@ -62,12 +120,12 @@ const restaurant = {
         <template v-if="activeTab === 'etablissement'">
           <div class="flex flex-col gap-2">
             <div class="flex items-start justify-between gap-2">
-              <h1 class="line-clamp-1 flex-1 text-xl leading-tight font-semibold">
+              <h1 class="line-clamp-2 flex-1 text-xl leading-tight font-semibold">
                 {{ restaurant.name }}
               </h1>
-              <div class="flex shrink-0 items-center gap-1">
+              <div v-if="stars > 0" class="flex shrink-0 items-center gap-1">
                 <NuxtImg
-                  v-for="i in restaurant.stars"
+                  v-for="i in stars"
                   :key="i"
                   src="/images/logo.png"
                   alt="étoile Michelin"
@@ -76,70 +134,127 @@ const restaurant = {
               </div>
             </div>
 
-            <p class="leading-snug">{{ restaurant.description }}</p>
+            <div v-if="restaurant.distinction" class="flex items-center gap-1.5">
+              <UBadge
+                :label="restaurant.distinction.label"
+                color="primary"
+                variant="subtle"
+                size="sm"
+              />
+            </div>
+
+            <p class="line-clamp-4 text-sm leading-snug text-muted">
+              {{ restaurant.main_desc }}
+            </p>
           </div>
 
           <div
-            class="flex flex-col gap-3 rounded-xl border border-default bg-default/50 p-3 text-sm"
+            class="flex flex-1 flex-col gap-3 overflow-y-auto rounded-xl border border-default bg-default/50 p-3 text-sm"
           >
-            <div class="flex items-start gap-2.5">
+            <div v-if="address" class="flex items-start gap-2.5">
               <UIcon name="lucide:map-pin" class="mt-0.5 size-4 shrink-0 text-muted" />
-              <span>{{ restaurant.address }}</span>
+              <span>{{ address }}</span>
             </div>
 
-            <div class="flex items-center gap-2.5">
+            <div v-if="restaurant.phone" class="flex items-center gap-2.5">
               <UIcon name="lucide:phone" class="size-4 shrink-0 text-muted" />
               <a :href="`tel:${restaurant.phone}`" class="hover:underline">{{
                 restaurant.phone
               }}</a>
             </div>
 
-            <div class="flex items-start gap-2.5">
-              <UIcon name="lucide:clock" class="mt-0.5 size-4 shrink-0 text-muted" />
-              <div class="flex flex-col gap-1">
-                <div v-for="slot in restaurant.hours" :key="slot.day" class="flex flex-col">
-                  <span class="text-xs font-medium">{{ slot.day }}</span>
-                  <span class="text-xs text-muted">{{ slot.time }}</span>
-                </div>
-              </div>
+            <div v-if="restaurant.website" class="flex items-center gap-2.5">
+              <UIcon name="lucide:globe" class="size-4 shrink-0 text-muted" />
+              <a :href="restaurant.website" target="_blank" class="truncate hover:underline">{{
+                restaurant.website
+              }}</a>
+            </div>
+
+            <div v-if="priceRange" class="flex items-center gap-2.5">
+              <UIcon name="lucide:euro" class="size-4 shrink-0 text-muted" />
+              <span>{{ priceRange }}</span>
+            </div>
+
+            <div v-if="restaurant.meal_times?.length" class="flex items-center gap-2.5">
+              <UIcon name="lucide:clock" class="size-4 shrink-0 text-muted" />
+              <span>{{ restaurant.meal_times.join(" · ") }}</span>
             </div>
           </div>
         </template>
 
-        <!-- Tab: Personnelles -->
+        <!-- Tab: Détails -->
         <template v-else>
-          <div class="flex items-center gap-3">
-            <UAvatar :src="restaurant.chef.avatar" :alt="restaurant.chef.name" size="xl" />
-            <div>
-              <p class="leading-tight font-semibold">{{ restaurant.chef.name }}</p>
-              <p class="text-xs text-muted">{{ restaurant.chef.title }}</p>
+          <div class="flex-1 space-y-4 overflow-y-auto">
+            <div v-if="restaurant.chef" class="flex items-center gap-3">
+              <div
+                class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-muted"
+              >
+                <UIcon name="lucide:chef-hat" class="size-5 text-muted" />
+              </div>
+              <div>
+                <p class="leading-tight font-semibold">{{ restaurant.chef }}</p>
+                <p class="text-xs text-muted">Chef</p>
+              </div>
             </div>
-          </div>
 
-          <p class="flex-1 overflow-y-auto leading-relaxed">
-            {{ restaurant.chef.bio }}
-          </p>
-
-          <div class="shrink-0 rounded-xl border border-default bg-default/50 p-3">
-            <div class="flex gap-2">
-              <UIcon name="lucide:quote" class="mt-0.5 size-4 shrink-0 text-primary" />
-              <p class="text-sm leading-snug italic">{{ restaurant.chef.quote }}</p>
+            <div v-if="restaurant.cuisines?.length" class="space-y-2">
+              <p class="text-xs font-semibold tracking-wider text-muted uppercase">Cuisines</p>
+              <div class="flex flex-wrap gap-1.5">
+                <UBadge
+                  v-for="c in restaurant.cuisines"
+                  :key="c.code"
+                  :label="c.label"
+                  color="neutral"
+                  variant="subtle"
+                  size="sm"
+                />
+              </div>
             </div>
-            <p class="mt-2 text-right text-xs font-medium text-muted">
-              - {{ restaurant.chef.name }}
-            </p>
+
+            <div v-if="hoursEntries.length" class="space-y-2">
+              <p class="text-xs font-semibold tracking-wider text-muted uppercase">Horaires</p>
+              <div class="space-y-1">
+                <div
+                  v-for="entry in hoursEntries"
+                  :key="entry.day"
+                  class="flex items-center justify-between text-xs"
+                >
+                  <span class="font-medium">{{ entry.day }}</span>
+                  <span v-if="entry.closed" class="text-muted">Fermé</span>
+                  <span v-else class="text-muted">{{ entry.slots.join(", ") }}</span>
+                </div>
+              </div>
+            </div>
+
+            <div v-if="restaurant.region?.name" class="space-y-1">
+              <p class="text-xs font-semibold tracking-wider text-muted uppercase">Région</p>
+              <p class="text-sm">{{ restaurant.region.name }}</p>
+            </div>
           </div>
         </template>
 
         <!-- CTA -->
         <div class="mt-auto shrink-0">
           <UButton
+            v-if="restaurant.online_booking && restaurant.booking_url"
             label="Réserver une table"
             color="primary"
             variant="solid"
             class="rounded-lg"
             size="lg"
             block
+            :to="restaurant.booking_url"
+            target="_blank"
+          />
+          <UButton
+            v-else
+            label="Réserver une table"
+            color="primary"
+            variant="solid"
+            class="rounded-lg"
+            size="lg"
+            block
+            disabled
           />
         </div>
       </aside>

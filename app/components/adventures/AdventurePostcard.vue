@@ -1,11 +1,11 @@
 <script setup lang="ts">
 interface Adventure {
-  id: string;
-  name: string;
-  description: string;
-  image: string;
-  link: string;
-  svgPath: string;
+  slug: string;
+  label: string;
+  locationType: string;
+  countryName: string | null;
+  totalRestaurants: number;
+  image: string | null;
 }
 
 defineProps<{
@@ -19,7 +19,6 @@ const toggleFlip = () => {
   isFlipped.value = !isFlipped.value;
 };
 
-// Organic random helpers — initialized to 0 to match SSR, randomized after mount
 const rand = (min: number, max: number) => Math.random() * (max - min) + min;
 
 const rotateDeg = ref(0);
@@ -62,19 +61,27 @@ const cardStyle = computed(() =>
         <div class="h-full w-full border border-default bg-muted p-1 shadow-md">
           <div class="relative h-full w-full overflow-hidden">
             <NuxtImg
+              v-if="adventure.image"
               :src="adventure.image"
-              :alt="adventure.name"
+              :alt="adventure.label"
               class="h-full w-full object-cover"
             />
+            <div
+              v-else
+              class="flex h-full items-center justify-center bg-gradient-to-br from-neutral-100 to-neutral-200"
+            >
+              <UIcon name="lucide:map" class="size-16 text-neutral-400" />
+            </div>
 
-            <!-- Subtitle/title overlay like a vintage postcard -->
             <div
               class="absolute right-2 bottom-2 left-2 flex items-center justify-between px-4 py-2"
             >
               <h3 class="text-xl tracking-widest text-inverted uppercase">
-                {{ adventure.name }}
+                {{ adventure.label }}
               </h3>
-              <p class="font-mono text-sm text-inverted">FRANCE</p>
+              <p class="font-mono text-sm text-inverted">
+                {{ adventure.countryName ?? "FRANCE" }}
+              </p>
             </div>
           </div>
         </div>
@@ -89,10 +96,11 @@ const cardStyle = computed(() =>
             <!-- Left: Title / Message -->
             <div class="flex size-full flex-col gap-4">
               <h3 class="text-xl leading-snug font-semibold tracking-tight">
-                {{ adventure.name }}
+                {{ adventure.label }}
               </h3>
               <p class="line-clamp-4 font-serif text-lg leading-relaxed text-neutral-600 italic">
-                "{{ adventure.description }}"
+                "Découvrez les {{ adventure.totalRestaurants }} restaurants étoilés de cette
+                destination."
               </p>
             </div>
 
@@ -104,13 +112,13 @@ const cardStyle = computed(() =>
               <div
                 class="ml-auto flex h-24 w-20 items-center justify-center border-2 border-default bg-white"
               >
-                <UIcon name="lucide:stamp" class="size-8 text-neutral-400" />
+                <NuxtImg src="/images/logo.png" alt="Michelin" class="size-10 object-contain" />
               </div>
 
               <!-- Address Lines -->
               <div class="space-y-4">
                 <div class="border-elevated border-b border-dashed pb-1">
-                  <span class="text-sm text-muted">{{ adventure.name }}</span>
+                  <span class="text-sm text-muted">{{ adventure.label }}</span>
                 </div>
                 <div class="border-elevated border-b border-dashed pb-1">
                   <span class="text-sm text-muted">Guide MICHELIN</span>
@@ -121,7 +129,7 @@ const cardStyle = computed(() =>
               <div class="mt-auto self-end">
                 <UButton
                   label="Découvrir en détail"
-                  :to="adventure.link"
+                  :to="`/adventures/${adventure.slug}`"
                   color="neutral"
                   variant="ghost"
                   @click.stop
