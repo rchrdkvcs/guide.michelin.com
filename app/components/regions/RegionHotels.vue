@@ -1,15 +1,10 @@
-<script lang="ts" setup>
-const { regionName } = useRoute().params;
-const { data: adventure } = await useFetch("/api/adventure", {
-  query: { id: regionName },
-});
-</script>
+<script lang="ts" setup></script>
 
 <template>
-  <UContainer class="py-16 space-y-4">
+  <UContainer class="py-8 space-y-4">
     <div class="flex flex-col gap-2">
       <div class="w-full flex justify-between items-center">
-        <h2 class="text-2xl font-medium leading-snug text-elevated">Les restaurants</h2>
+        <h2 class="text-2xl font-medium leading-snug text-elevated">Les Hotels</h2>
         <UButton icon="lucide:filter" color="neutral" variant="ghost" />
       </div>
       <p class="text-sm text-muted leading-relaxed">

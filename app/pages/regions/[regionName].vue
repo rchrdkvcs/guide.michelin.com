@@ -4,6 +4,7 @@ const { regionName } = useRoute().params;
 
 <template>
   <RegionHero />
-  <RegionDescription class="pt-16" />
-  <RegionRestaurant />
+  <RegionDescription />
+  <RegionRestaurants />
+  <RegionHotels />
 </template>

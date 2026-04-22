@@ -44,12 +44,11 @@
 }
 
 :root {
-  --ui-bg: var(--color-linen-100);
   --ui-radius: 0.25rem;
 }
 
 body {
-  background-image: url('/images/bg_texture.png');
+  background-image: url("/images/bg_texture.png");
   background-repeat: repeat;
   background-attachment: fixed;
 }

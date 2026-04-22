@@ -1,7 +1,7 @@
 <script lang="ts" setup></script>
 
 <template>
-  <UContainer class="flex flex-col gap-6">
+  <UContainer class="flex flex-col gap-6 pt-16 py-8">
     <div class="relative flex flex-col gap-2">
       <span class="text-xs font-semibold tracking-[0.2em] uppercase text-muted">La région</span>
 
@@ -20,7 +20,6 @@
       </p>
     </div>
 
-    <!-- Badges -->
     <div class="flex gap-2 items-center justify-start overflow-x-auto no-scrollbar">
       <UBadge label="#Poisson" v-for="i in 10" :key="i" color="neutral" variant="subtle" />
     </div>
