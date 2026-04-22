@@ -6,6 +6,7 @@ export default defineEventHandler((event) => {
   const { page, limit } = parsePagination(query);
 
   const filtered = filterHotels({
+    name: query.name as string | undefined,
     sort: query.sort as string | undefined,
     order: query.order as string | undefined,
   });

@@ -174,6 +174,7 @@ export function getLiveRoomsForHotel(
 }
 
 export interface HotelFilters {
+  name?: string;
   sort?: string;
   order?: string;
 }
@@ -181,8 +182,17 @@ export interface HotelFilters {
 export function filterHotels(filters: HotelFilters): Hotel[] {
   let results = getHotels();
 
+  if (filters.name) {
+    const needle = filters.name.toLowerCase();
+    results = results.filter((h) => h.name.toLowerCase().includes(needle));
+  }
+
   const order = filters.order === "desc" ? -1 : 1;
-  results = [...results].sort((a, b) => order * a.name.localeCompare(b.name));
+  if (filters.sort === "rooms") {
+    results = [...results].sort((a, b) => order * (a.roomCount - b.roomCount));
+  } else {
+    results = [...results].sort((a, b) => order * a.name.localeCompare(b.name));
+  }
 
   return results;
 }
