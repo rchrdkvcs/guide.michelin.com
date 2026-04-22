@@ -15,8 +15,8 @@ export function useNavigation() {
       to: "/adventures",
     },
     {
-      label: "Magazine",
-      to: "#",
+      label: "L'échappée",
+      to: "/escape",
     },
   ]);
 
