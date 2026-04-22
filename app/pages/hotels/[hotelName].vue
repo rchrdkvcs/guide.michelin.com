@@ -8,18 +8,18 @@ const { data: hotel, error } = await useFetch("/api/hotel", {
 <template>
   <div v-if="hotel">
     <!-- Hero -->
-    <div class="relative w-full h-[50vh] overflow-hidden">
+    <div class="relative h-[50vh] w-full overflow-hidden">
       <NuxtImg
         :src="hotel.image"
         :alt="hotel.name"
-        class="absolute inset-0 w-full h-full object-cover"
+        class="absolute inset-0 h-full w-full object-cover"
       />
       <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-      <div class="absolute bottom-0 left-0 right-0 p-8">
+      <div class="absolute right-0 bottom-0 left-0 p-8">
         <UContainer>
           <div class="flex items-end justify-between gap-4">
             <div>
-              <div class="flex items-center gap-1 mb-2">
+              <div class="mb-2 flex items-center gap-1">
                 <NuxtImg
                   v-for="i in hotel.stars"
                   :key="i"
@@ -28,8 +28,8 @@ const { data: hotel, error } = await useFetch("/api/hotel", {
                   class="size-6 object-contain"
                 />
               </div>
-              <h1 class="text-4xl font-bold text-white leading-tight">{{ hotel.name }}</h1>
-              <p class="text-white/80 mt-1 flex items-center gap-1.5">
+              <h1 class="text-4xl leading-tight font-bold text-white">{{ hotel.name }}</h1>
+              <p class="mt-1 flex items-center gap-1.5 text-white/80">
                 <UIcon name="lucide:map-pin" class="size-4" />
                 {{ hotel.city }}
               </p>
@@ -49,20 +49,20 @@ const { data: hotel, error } = await useFetch("/api/hotel", {
       </div>
     </div>
 
-    <UContainer class="py-10 space-y-10">
+    <UContainer class="space-y-10 py-10">
       <!-- Description + Infos pratiques -->
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div class="lg:col-span-2 space-y-4">
+      <div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
+        <div class="space-y-4 lg:col-span-2">
           <h2 class="text-2xl font-semibold">À propos</h2>
-          <p class="text-muted leading-relaxed">{{ hotel.longDescription }}</p>
+          <p class="leading-relaxed text-muted">{{ hotel.longDescription }}</p>
         </div>
 
         <div class="space-y-4">
-          <div class="rounded-2xl border border-default bg-elevated p-5 space-y-4">
-            <h3 class="font-semibold text-lg">Informations pratiques</h3>
+          <div class="space-y-4 rounded-2xl border border-default bg-elevated p-5">
+            <h3 class="text-lg font-semibold">Informations pratiques</h3>
 
             <div class="flex items-start gap-2 text-sm">
-              <UIcon name="lucide:map-pin" class="size-4 shrink-0 mt-0.5 text-muted" />
+              <UIcon name="lucide:map-pin" class="mt-0.5 size-4 shrink-0 text-muted" />
               <span>{{ hotel.address }}</span>
             </div>
 
@@ -73,7 +73,7 @@ const { data: hotel, error } = await useFetch("/api/hotel", {
 
             <div class="flex items-center gap-2 text-sm">
               <UIcon name="lucide:globe" class="size-4 shrink-0 text-muted" />
-              <a :href="hotel.website" target="_blank" class="hover:underline truncate">{{
+              <a :href="hotel.website" target="_blank" class="truncate hover:underline">{{
                 hotel.website
               }}</a>
             </div>
@@ -87,7 +87,7 @@ const { data: hotel, error } = await useFetch("/api/hotel", {
               label="Réserver"
               icon="lucide:calendar"
               color="primary"
-              class="w-full justify-center mt-2"
+              class="mt-2 w-full justify-center"
               :to="hotel.website"
               target="_blank"
             />
@@ -113,16 +113,16 @@ const { data: hotel, error } = await useFetch("/api/hotel", {
       <!-- Galerie -->
       <div class="space-y-4" v-if="hotel.gallery?.length">
         <h2 class="text-2xl font-semibold">Galerie</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           <div
             v-for="(img, idx) in hotel.gallery"
             :key="idx"
-            class="aspect-video rounded-2xl overflow-hidden"
+            class="aspect-video overflow-hidden rounded-2xl"
           >
             <NuxtImg
               :src="img"
               :alt="`${hotel.name} - photo ${idx + 1}`"
-              class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+              class="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
             />
           </div>
         </div>
@@ -130,8 +130,8 @@ const { data: hotel, error } = await useFetch("/api/hotel", {
     </UContainer>
   </div>
 
-  <div v-else-if="error" class="flex items-center justify-center min-h-[50vh]">
-    <div class="text-center space-y-2">
+  <div v-else-if="error" class="flex min-h-[50vh] items-center justify-center">
+    <div class="space-y-2 text-center">
       <p class="text-xl font-semibold">Hôtel introuvable</p>
       <UButton to="/hotels" label="Voir tous les hôtels" variant="ghost" />
     </div>

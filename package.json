@@ -5,10 +5,10 @@
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare",
-    "lint": "oxlint --fix",
     "fmt": "oxfmt",
+    "lint": "oxlint --fix",
+    "postinstall": "nuxt prepare",
+    "preview": "nuxt preview",
     "typecheck": "nuxt typecheck"
   },
   "dependencies": {

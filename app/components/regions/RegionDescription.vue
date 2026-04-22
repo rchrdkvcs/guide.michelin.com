@@ -1,11 +1,11 @@
 <script lang="ts" setup></script>
 
 <template>
-  <UContainer class="flex flex-col gap-6 pt-16 py-8">
+  <UContainer class="flex flex-col gap-6 py-8 pt-16">
     <div class="relative flex flex-col gap-2">
-      <span class="text-xs font-semibold tracking-[0.2em] uppercase text-muted">La région</span>
+      <span class="text-xs font-semibold tracking-[0.2em] text-muted uppercase">La région</span>
 
-      <h2 class="text-2xl font-medium leading-snug text-elevated">
+      <h2 class="text-elevated text-2xl leading-snug font-medium">
         Une terre de contrastes entre mer sauvage, forêts profondes et gastronomie d'exception.
       </h2>
 
@@ -20,7 +20,7 @@
       </p>
     </div>
 
-    <div class="flex gap-2 items-center justify-start overflow-x-auto no-scrollbar">
+    <div class="no-scrollbar flex items-center justify-start gap-2 overflow-x-auto">
       <UBadge label="#Poisson" v-for="i in 10" :key="i" color="neutral" variant="subtle" />
     </div>
   </UContainer>

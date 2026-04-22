@@ -23,36 +23,36 @@ onUnmounted(() => window.removeEventListener("scroll", onScroll));
 <template>
   <UContainer>
     <div ref="containerRef" :style="{ height: `${(total + 1) * 100}vh` }">
-      <div class="sticky top-0 h-screen overflow-hidden flex">
+      <div class="sticky top-0 flex h-screen overflow-hidden">
         <!-- Titre vertical (fully sticky) -->
-        <div class="flex flex-col gap-8 items-center justify-center shrink-0 px-4">
+        <div class="flex shrink-0 flex-col items-center justify-center gap-8 px-4">
           <NuxtImg src="/images/logo.png" class="size-8 object-contain" />
-          <h3 class="text-4xl font-bold [writing-mode:vertical-rl] rotate-180 uppercase">
+          <h3 class="rotate-180 text-4xl font-bold uppercase [writing-mode:vertical-rl]">
             Nouvelles sélections
           </h3>
           <NuxtImg src="/images/logo.png" class="size-8 object-contain" />
         </div>
 
         <!-- Panneau principal -->
-        <div class="flex-1 flex gap-8 items-center px-4">
+        <div class="flex flex-1 items-center gap-8 px-4">
           <!-- Gauche: image de la ville (sticky) -->
-          <div class="w-1/2 h-[75vh] relative rounded-2xl overflow-hidden shadow-xl shrink-0">
+          <div class="relative h-[75vh] w-1/2 shrink-0 overflow-hidden rounded-2xl shadow-xl">
             <Transition name="fade" mode="out-in">
               <NuxtImg
                 :key="activeItem?.id"
                 :src="activeItem?.image"
                 :alt="activeItem?.imageAlt"
-                class="absolute inset-0 w-full h-full object-cover"
+                class="absolute inset-0 h-full w-full object-cover"
               />
             </Transition>
-            <div class="absolute inset-0 bg-muted pointer-events-none" />
+            <div class="pointer-events-none absolute inset-0 bg-muted" />
             <Transition name="slide-up" mode="out-in">
               <div :key="activeItem?.id" class="absolute bottom-6 left-6 text-white">
-                <p class="text-xs uppercase tracking-widest opacity-60 mb-1">
+                <p class="mb-1 text-xs tracking-widest uppercase opacity-60">
                   {{ activeItem?.country }}
                 </p>
                 <h2 class="text-4xl font-bold">{{ activeItem?.city }}</h2>
-                <p class="text-sm opacity-70 mt-1">
+                <p class="mt-1 text-sm opacity-70">
                   {{ activeItem?.totalStarred }} restaurants étoilés
                 </p>
               </div>
@@ -69,9 +69,9 @@ onUnmounted(() => window.removeEventListener("scroll", onScroll));
           </div>
 
           <!-- Droite: tous les restos de la destination active -->
-          <div class="flex-1 h-[75vh] overflow-hidden">
+          <div class="h-[75vh] flex-1 overflow-hidden">
             <Transition name="panel" mode="out-in">
-              <div :key="activeItem?.id" class="h-full flex flex-col gap-4 justify-center">
+              <div :key="activeItem?.id" class="flex h-full flex-col justify-center gap-4">
                 <RestaurantCard
                   v-for="restaurant in activeItem?.restaurants"
                   :key="restaurant.id"

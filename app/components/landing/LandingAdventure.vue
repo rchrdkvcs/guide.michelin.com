@@ -4,24 +4,24 @@ const { data: adventures } = await useFetch("/api/adventures");
 
 <template>
   <UPageSection
-    class="h-screen flex flex-col overflow-hidden"
+    class="flex h-screen flex-col overflow-hidden"
     title="Partez en aventure découvrir les specialiter"
     description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec suscipit auctor dui, sed efficitur enim efficitur a. Donec at nunc ac nisl efficitur convallis"
   >
-    <div class="relative w-full h-full min-w-0">
+    <div class="relative h-full w-full min-w-0">
       <div
-        class="flex gap-4 overflow-x-auto w-full h-[50vh] px-4 md:px-8 lg:px-12 no-scrollbar scroll-smooth snap-x snap-mandatory py-4"
+        class="no-scrollbar flex h-[50vh] w-full snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-4 py-4 md:px-8 lg:px-12"
       >
         <RegionPostcard
           v-for="adventure in adventures"
           :key="adventure.id"
           :adventure="adventure"
-          class="snap-center md:snap-start first:ml-0"
+          class="snap-center first:ml-0 md:snap-start"
         />
         <div class="w-10 shrink-0"></div>
       </div>
 
-      <div class="w-full flex justify-center mt-8">
+      <div class="mt-8 flex w-full justify-center">
         <UButton label="Voir toutes les regions" color="neutral" variant="subtle" to="/regions" />
       </div>
     </div>

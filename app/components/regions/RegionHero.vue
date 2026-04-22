@@ -2,14 +2,14 @@
 
 <template>
   <UContainer class="mt-20">
-    <div class="relative w-full aspect-video rounded-2xl overflow-hidden">
+    <div class="relative aspect-video w-full overflow-hidden rounded-2xl">
       <NuxtImg
         src="/images/regions/bretagne.png"
-        class="absolute inset-0 w-full h-full object-cover"
+        class="absolute inset-0 h-full w-full object-cover"
       />
       <div class="absolute inset-x-0 bottom-0 h-1/2 bg-linear-to-t from-black/75 to-transparent" />
-      <div class="absolute inset-0 flex items-end justify-center pb-8 z-10">
-        <h1 class="w-full text-center font-bold tracking-wide capitalize bordered-text">
+      <div class="absolute inset-0 z-10 flex items-end justify-center pb-8">
+        <h1 class="bordered-text w-full text-center font-bold tracking-wide capitalize">
           Bretagne
         </h1>
       </div>

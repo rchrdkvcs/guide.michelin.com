@@ -23,7 +23,7 @@ const { menuItems } = useNavigation();
     </template>
 
     <template #footer>
-      <div class="grid grid-cols-2 justify-center items-center w-full gap-4">
+      <div class="grid w-full grid-cols-2 items-center justify-center gap-4">
         <UButton label="Se connecter" color="primary" variant="solid" block />
         <UButton label="S'inscrire" color="primary" variant="outline" block />
       </div>

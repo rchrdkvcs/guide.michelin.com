@@ -47,51 +47,51 @@ const cardStyle = computed(() =>
 
 <template>
   <div
-    class="perspective-1000 h-full aspect-3/2 cursor-pointer group shrink-0"
+    class="perspective-1000 group aspect-3/2 h-full shrink-0 cursor-pointer"
     :style="cardStyle"
     @mouseenter="isHovered = true"
     @mouseleave="isHovered = false"
     @click="toggleFlip"
   >
     <div
-      class="relative w-full h-full transition-transform duration-500 preserve-3d"
+      class="preserve-3d relative h-full w-full transition-transform duration-500"
       :class="{ 'rotate-y-180': isFlipped }"
     >
       <!-- Front Side -->
       <div class="absolute inset-0 backface-hidden">
-        <div class="w-full h-full bg-muted p-1 shadow-md border border-default">
-          <div class="w-full h-full relative overflow-hidden">
+        <div class="h-full w-full border border-default bg-muted p-1 shadow-md">
+          <div class="relative h-full w-full overflow-hidden">
             <NuxtImg
               :src="adventure.image"
               :alt="adventure.name"
-              class="w-full h-full object-cover"
+              class="h-full w-full object-cover"
             />
 
             <!-- Subtitle/title overlay like a vintage postcard -->
             <div
-              class="absolute bottom-2 left-2 right-2 px-4 py-2 flex items-center justify-between"
+              class="absolute right-2 bottom-2 left-2 flex items-center justify-between px-4 py-2"
             >
-              <h3 class="text-inverted text-xl uppercase tracking-widest">
+              <h3 class="text-xl tracking-widest text-inverted uppercase">
                 {{ adventure.name }}
               </h3>
-              <p class="text-inverted text-sm font-mono">FRANCE</p>
+              <p class="font-mono text-sm text-inverted">FRANCE</p>
             </div>
           </div>
         </div>
       </div>
 
       <!-- Back Side -->
-      <div class="absolute inset-0 backface-hidden rotate-y-180">
+      <div class="absolute inset-0 rotate-y-180 backface-hidden">
         <div
-          class="size-full bg-muted p-2 shadow-md border border-default grid justify-center items-center"
+          class="grid size-full items-center justify-center border border-default bg-muted p-2 shadow-md"
         >
-          <div class="size-full border border-primary grid grid-cols-[1fr_1px_0.75fr] gap-4 p-3">
+          <div class="grid size-full grid-cols-[1fr_1px_0.75fr] gap-4 border border-primary p-3">
             <!-- Left: Title / Message -->
-            <div class="size-full flex flex-col gap-4">
-              <h3 class="text-xl font-semibold leading-snug tracking-tight">
+            <div class="flex size-full flex-col gap-4">
+              <h3 class="text-xl leading-snug font-semibold tracking-tight">
                 {{ adventure.name }}
               </h3>
-              <p class="text-neutral-600 font-serif italic text-lg leading-relaxed line-clamp-4">
+              <p class="line-clamp-4 font-serif text-lg leading-relaxed text-neutral-600 italic">
                 "{{ adventure.description }}"
               </p>
             </div>
@@ -99,21 +99,21 @@ const cardStyle = computed(() =>
             <USeparator orientation="vertical" class="bg-muted" />
 
             <!-- Right: Address / CTA -->
-            <div class="flex flex-col relative gap-8">
+            <div class="relative flex flex-col gap-8">
               <!-- Stamp Area -->
               <div
-                class="w-20 h-24 border-2 border-default flex items-center justify-center bg-white ml-auto"
+                class="ml-auto flex h-24 w-20 items-center justify-center border-2 border-default bg-white"
               >
                 <UIcon name="lucide:stamp" class="size-8 text-neutral-400" />
               </div>
 
               <!-- Address Lines -->
               <div class="space-y-4">
-                <div class="border-b border-elevated border-dashed pb-1">
-                  <span class="text-muted text-sm">{{ adventure.name }}</span>
+                <div class="border-elevated border-b border-dashed pb-1">
+                  <span class="text-sm text-muted">{{ adventure.name }}</span>
                 </div>
-                <div class="border-b border-elevated border-dashed pb-1">
-                  <span class="text-muted text-sm">Guide MICHELIN</span>
+                <div class="border-elevated border-b border-dashed pb-1">
+                  <span class="text-sm text-muted">Guide MICHELIN</span>
                 </div>
               </div>
 
@@ -132,7 +132,7 @@ const cardStyle = computed(() =>
               <div class="absolute bottom-0 left-0">
                 <UIcon
                   name="i-lucide-undo-2"
-                  class="size-5 text-neutral-400 hover:text-neutral-700 transition-colors"
+                  class="size-5 text-neutral-400 transition-colors hover:text-neutral-700"
                 />
               </div>
             </div>

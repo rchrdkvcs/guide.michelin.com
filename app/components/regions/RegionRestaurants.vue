@@ -6,22 +6,22 @@ const { data: adventure } = await useFetch("/api/adventure", {
 </script>
 
 <template>
-  <UContainer class="py-8 space-y-8">
+  <UContainer class="space-y-8 py-8">
     <div class="flex flex-col gap-2">
-      <div class="w-full flex justify-between items-center">
-        <h2 class="text-2xl font-medium leading-snug text-elevated">Les restaurants</h2>
+      <div class="flex w-full items-center justify-between">
+        <h2 class="text-elevated text-2xl leading-snug font-medium">Les restaurants</h2>
         <UButton icon="lucide:filter" color="neutral" variant="ghost" />
       </div>
-      <p class="text-sm text-muted leading-relaxed">
+      <p class="text-sm leading-relaxed text-muted">
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, aperiam aspernatur
         blanditiis deserunt dignissimos ea esse est facere fuga illo ipsum laborum minima natus
         quibusdam quidem quis quo sapiente. Minima.
       </p>
     </div>
 
-    <div class="flex flex-row gap-4 overflow-x-auto pb-2 h-96">
+    <div class="flex h-96 flex-row gap-4 overflow-x-auto pb-2">
       <RestaurantCard
-        class="shrink-0 w-[85vw] sm:w-80 lg:w-96 h-full"
+        class="h-full w-[85vw] shrink-0 sm:w-80 lg:w-96"
         v-for="restaurant in adventure?.restaurants"
         :key="restaurant.id"
         :name="restaurant.name"
@@ -33,7 +33,7 @@ const { data: adventure } = await useFetch("/api/adventure", {
       />
     </div>
 
-    <div class="w-full flex justify-center items-center">
+    <div class="flex w-full items-center justify-center">
       <UButton
         color="neutral"
         variant="ghost"
