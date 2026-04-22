@@ -1,4 +1,9 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+const { regionName } = useRoute().params;
+const { data: adventure } = await useFetch("/api/adventure", {
+  query: { id: regionName },
+});
+</script>
 
 <template>
   <UContainer class="py-8 space-y-4">
@@ -14,17 +19,18 @@
       </p>
     </div>
 
-    <div class="flex flex-row gap-6 overflow-x-auto pb-4 h-96">
-      <RestaurantCard
-        class="shrink-0 w-1/3 h-full"
-        v-for="restaurant in adventure?.restaurants"
-        :key="restaurant.id"
-        :name="restaurant.name"
-        :description="restaurant.description"
-        :city="restaurant.city"
-        :stars="restaurant.stars"
-        :image="restaurant.image"
-        :tags="restaurant.tags"
+    <div class="flex flex-row gap-4 overflow-x-auto pb-2 -mx-4 px-4 snap-x snap-mandatory">
+      <HotelCard
+        v-for="hotel in adventure?.hotels"
+        :key="hotel.id"
+        class="shrink-0 w-120 snap-start"
+        :name="hotel.name"
+        :description="hotel.description"
+        :city="hotel.city"
+        :stars="hotel.stars"
+        :image="hotel.image"
+        :tags="hotel.tags"
+        :slug="hotel.slug"
       />
     </div>
   </UContainer>

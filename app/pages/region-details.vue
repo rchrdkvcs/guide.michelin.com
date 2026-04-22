@@ -92,7 +92,7 @@ const hotels = computed(() => adventure.value?.hotels || [])
       <div class="text-brand-500 text-6xl">⚠️</div>
       <h2 class="text-2xl font-bold text-linen-900">Oups !</h2>
       <p class="text-linen-600">Impossible de charger la région "{{ adventureId }}".</p>
-      <UButton to="/" color="brand" variant="solid" size="lg" block>Retour à l'accueil</UButton>
+      <UButton to="/" color="primary" variant="solid" size="lg" block>Retour à l'accueil</UButton>
     </div>
   </div>
 </template>

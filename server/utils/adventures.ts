@@ -9,12 +9,23 @@ export interface AdventureRestaurant {
   tags: string[]
 }
 
+export interface AdventureHotel {
+  id: string
+  name: string
+  description: string
+  image: string
+  slug?: string
+  city: string
+  stars: number
+  tags?: string[]
+}
+
 export interface Adventure {
   image: { src: string; alt: string };
   discover: { title: string; content: string };
   attractions: { title: string; content: string };
   restaurants: AdventureRestaurant[];
-  hotels: any[];
+  hotels: AdventureHotel[];
 }
 
 export const adventures: Record<string, Adventure> = {
@@ -36,7 +47,7 @@ export const adventures: Record<string, Adventure> = {
       { "id": "b2", "name": "La Table de Breizh", "description": "Le meilleur des produits locaux bretons sublimés par une cuisine précise et sincère.", "image": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4", "link": "#", "stars": 1, "city": "Cancale", "tags": ["Terroir", "Végétarien"] }
     ],
     "hotels": [
-      { "id": "h1", "name": "Castelbrac", "description": "Un écrin de luxe suspendu sur les rochers.", "image": "https://images.unsplash.com/photo-1566073771259-6a8506099945" }
+      { "id": "h1", "slug": "castelbrac", "name": "Castelbrac", "description": "Un écrin de luxe suspendu sur les rochers de Dinard, face à la mer d'Émeraude.", "image": "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2070", "city": "Dinard", "stars": 2, "tags": ["Vue mer", "Spa", "Gastronomie"] }
     ]
   },
   "pays-basque": {
@@ -56,7 +67,7 @@ export const adventures: Record<string, Adventure> = {
       { "id": "pb1", "name": "L'Impertinent", "description": "Une table audacieuse à Biarritz, où la créativité rencontre les produits basques d'exception.", "image": "https://images.unsplash.com/photo-1550966842-286e5b829816", "link": "#", "stars": 1, "city": "Biarritz", "tags": ["Créatif", "Terroir"] }
     ],
     "hotels": [
-      { "id": "h2", "name": "Hôtel du Palais", "description": "Le luxe impérial face à la mer.", "image": "https://images.unsplash.com/photo-1582719478250-c89cae4df85b" }
+      { "id": "h2", "slug": "hotel-du-palais", "name": "Hôtel du Palais", "description": "Le luxe impérial face à l'Atlantique, là où Napoléon III bâtit sa villa pour Eugénie.", "image": "https://images.unsplash.com/photo-1582719478250-c89cae4df85b?q=80&w=2070", "city": "Biarritz", "stars": 2, "tags": ["Palace", "Vue océan", "Thalasso"] }
     ]
   },
   "qatar": {

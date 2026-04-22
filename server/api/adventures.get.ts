@@ -7,7 +7,7 @@ export default defineEventHandler(() => {
     name: data.discover.title,
     description: data.discover.content,
     image: data.image.src,
-    link: `/region-details?id=${id}`,
+    link: `/regions/${id}`,
     svgPath: regionSvgs[id] || ''
   }))
 })

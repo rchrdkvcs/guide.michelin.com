@@ -4,15 +4,15 @@ export function useNavigation() {
   const headerItems = ref<NavigationMenuItem[]>([
     {
       label: "Restaurants",
-      to: "#",
+      to: "/restaurants",
     },
     {
       label: "Hébergements",
-      to: "#",
+      to: "/hotels",
     },
     {
       label: "Guides de voyage",
-      to: "#",
+      to: "/regions",
     },
     {
       label: "Magazine",
@@ -27,11 +27,11 @@ export function useNavigation() {
     },
     {
       label: "Restaurants",
-      to: "#",
+      to: "/restaurants",
     },
     {
       label: "Hébergements",
-      to: "#",
+      to: "/hotels",
     },
     {
       label: "Guide MICHELIN Plus",
@@ -39,7 +39,7 @@ export function useNavigation() {
     },
     {
       label: "Guides de voyage",
-      to: "#",
+      to: "/regions",
     },
     {
       label: "Guides Best-of",
