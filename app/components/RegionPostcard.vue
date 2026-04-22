@@ -19,12 +19,18 @@ const toggleFlip = () => {
   isFlipped.value = !isFlipped.value;
 };
 
-// Organic random helpers
+// Organic random helpers — initialized to 0 to match SSR, randomized after mount
 const rand = (min: number, max: number) => Math.random() * (max - min) + min;
 
-const rotateDeg = rand(-3.5, 3.5);
-const translateX = rand(-4, 4);
-const translateY = rand(-3, 3);
+const rotateDeg = ref(0);
+const translateX = ref(0);
+const translateY = ref(0);
+
+onMounted(() => {
+  rotateDeg.value = rand(-3.5, 3.5);
+  translateX.value = rand(-4, 4);
+  translateY.value = rand(-3, 3);
+});
 
 const cardStyle = computed(() =>
   isHovered.value
@@ -33,7 +39,7 @@ const cardStyle = computed(() =>
         transition: "transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)",
       }
     : {
-        transform: `rotate(${rotateDeg}deg) translate(${translateX}px, ${translateY}px)`,
+        transform: `rotate(${rotateDeg.value}deg) translate(${translateX.value}px, ${translateY.value}px)`,
         transition: "transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)",
       },
 );

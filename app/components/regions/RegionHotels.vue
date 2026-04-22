@@ -6,7 +6,7 @@ const { data: adventure } = await useFetch("/api/adventure", {
 </script>
 
 <template>
-  <UContainer class="py-8 space-y-4">
+  <UContainer class="py-8 space-y-8">
     <div class="flex flex-col gap-2">
       <div class="w-full flex justify-between items-center">
         <h2 class="text-2xl font-medium leading-snug text-elevated">Les Hotels</h2>
@@ -31,6 +31,15 @@ const { data: adventure } = await useFetch("/api/adventure", {
         :image="hotel.image"
         :tags="hotel.tags"
         :slug="hotel.slug"
+      />
+    </div>
+
+    <div class="w-full flex justify-center items-center">
+      <UButton
+        color="neutral"
+        variant="ghost"
+        label="Voir plus d'hotels"
+        trailing-icon="lucide:arrow-right"
       />
     </div>
   </UContainer>
