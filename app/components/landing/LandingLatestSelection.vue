@@ -72,28 +72,15 @@ onUnmounted(() => window.removeEventListener("scroll", onScroll));
           <div class="flex-1 h-[75vh] overflow-hidden">
             <Transition name="panel" mode="out-in">
               <div :key="activeItem?.id" class="h-full flex flex-col gap-4 justify-center">
-                <div
+                <RestaurantCard
                   v-for="restaurant in activeItem?.restaurants"
                   :key="restaurant.id"
-                  class="flex flex-col gap-4 rounded-xl overflow-hidden bg-elevated"
-                >
-                  <NuxtImg
-                    :src="restaurant.image"
-                    :alt="restaurant.name"
-                    class="w-full aspect-video object-cover shrink-0"
-                  />
-                  <div class="py-3 pr-4 flex flex-col justify-center">
-                    <div class="flex items-center gap-2 mb-1">
-                      <h4 class="font-semibold text-base">{{ restaurant.name }}</h4>
-                      <span class="text-yellow-500 text-sm">{{
-                        "★".repeat(restaurant.stars)
-                      }}</span>
-                    </div>
-                    <p class="text-sm text-neutral-500 leading-snug">
-                      {{ restaurant.description }}
-                    </p>
-                  </div>
-                </div>
+                  :name="restaurant.name"
+                  :description="restaurant.description"
+                  :city="activeItem?.city ?? ''"
+                  :stars="restaurant.stars"
+                  :image="restaurant.image"
+                />
               </div>
             </Transition>
           </div>
