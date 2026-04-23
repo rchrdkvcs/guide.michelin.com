@@ -4,5 +4,7 @@
   <LandingHero />
   <PartnerMarquee class="pt-20" />
   <LandingAdventure />
-  <!--  <LandingLatestSelection />-->
+  <LandingFeaturedRestaurants />
+  <LandingArticles />
+  <LandingAbout />
 </template>
