@@ -14,7 +14,7 @@ const stepCardItems = [
   {
     title: "Cumulez des XP",
     description:
-      "Cumulez des XP vous permettra de gagner des niveaux. Chaque réservation d’un restaurant vous rapporte 40XP et un hôtel 100XP. Pour évoluer d’un palier, il vous suffit d’obtenir 50XP.",
+      "Cumuler des XP vous permettra de gagner des niveaux. Chaque réservation d’un restaurant vous rapporte 40 XP et un hôtel 100 XP. Pour évoluer d’un palier, il vous suffit d’obtenir 50 XP.",
     icon: "lucide:award",
   },
   {
@@ -66,7 +66,7 @@ const stepCardItems = [
     </template>
   </UPageSection>
 
-  <UPageSection title="Recompense disponibles">
+  <UPageSection title="Récompenses disponibles">
     <template #body> </template>
   </UPageSection>
 
