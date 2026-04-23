@@ -168,7 +168,7 @@ const currentPage = computed({
       </div>
 
       <!-- Filter strip -->
-      <div class="flex flex-wrap items-center justify-between gap-y-4 gap-x-8 pb-5 border-b border-linen-200/60">
+      <div class="flex flex-wrap items-center justify-between gap-y-4 gap-x-6 pb-5 border-b border-linen-200/60">
         <!-- Stars -->
         <div class="flex items-center">
           <button
@@ -187,7 +187,7 @@ const currentPage = computed({
         </div>
 
         <!-- Dropdowns -->
-        <div class="flex items-center gap-6 text-sm">
+        <div class="flex flex-wrap items-center gap-3 sm:gap-6 text-sm">
           <USelectMenu
             v-model="selectedCuisineLabel"
             :items="cuisineLabels"

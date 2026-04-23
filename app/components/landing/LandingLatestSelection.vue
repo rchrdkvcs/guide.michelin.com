@@ -7,6 +7,10 @@ const total = computed(() => selections.value?.length ?? 0);
 
 const containerRef = ref<HTMLElement | null>(null);
 
+// Mobile-specific active index (controlled by tapping city cards)
+const mobileActiveIndex = ref(0);
+const mobileActiveItem = computed(() => selections.value?.[mobileActiveIndex.value]);
+
 function onScroll() {
   if (!containerRef.value || total.value === 0) return;
   const { top, height } = containerRef.value.getBoundingClientRect();
@@ -22,7 +26,61 @@ onUnmounted(() => window.removeEventListener("scroll", onScroll));
 
 <template>
   <UContainer>
-    <div ref="containerRef" :style="{ height: `${(total + 1) * 100}vh` }">
+    <!-- ─── Mobile layout (< lg) ─────────────────────────── -->
+    <div class="lg:hidden py-12 space-y-8">
+      <div class="flex items-center gap-3">
+        <NuxtImg src="/images/logo.png" class="size-6 object-contain" />
+        <h3 class="text-2xl font-bold uppercase">Nouvelles sélections</h3>
+      </div>
+
+      <!-- Horizontal swipeable city cards -->
+      <div class="no-scrollbar -mx-4 flex snap-x snap-mandatory overflow-x-auto px-4 gap-4 pb-2">
+        <button
+          v-for="(item, i) in selections"
+          :key="item.id"
+          class="relative h-56 w-[80vw] shrink-0 snap-start overflow-hidden rounded-2xl shadow-lg focus:outline-none"
+          :class="i === mobileActiveIndex ? 'ring-2 ring-white ring-offset-2' : ''"
+          @click="mobileActiveIndex = i"
+        >
+          <NuxtImg
+            :src="item.image"
+            :alt="item.imageAlt"
+            class="h-full w-full object-cover transition-transform duration-300"
+            :class="i === mobileActiveIndex ? 'scale-105' : 'scale-100'"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+          <div class="absolute bottom-4 left-4 text-left text-white">
+            <p class="text-xs tracking-widest uppercase opacity-60">{{ item.country }}</p>
+            <h4 class="text-xl font-bold">{{ item.city }}</h4>
+            <p class="text-sm opacity-70">{{ item.totalStarred }} restaurants étoilés</p>
+          </div>
+          <!-- Active dot -->
+          <div
+            v-if="i === mobileActiveIndex"
+            class="absolute top-3 right-3 size-2.5 rounded-full bg-white shadow"
+          />
+        </button>
+      </div>
+
+      <!-- Restaurant cards for active city -->
+      <Transition name="panel" mode="out-in">
+        <div :key="mobileActiveItem?.id" class="space-y-3">
+          <RestaurantCard
+            v-for="restaurant in mobileActiveItem?.restaurants?.slice(0, 3)"
+            :key="restaurant.id"
+            :name="restaurant.name"
+            :description="restaurant.description"
+            :city="mobileActiveItem?.city ?? ''"
+            :stars="restaurant.stars"
+            :image="restaurant.image"
+            :slug="restaurant.slug ?? ''"
+          />
+        </div>
+      </Transition>
+    </div>
+
+    <!-- ─── Desktop layout (≥ lg): sticky-scroll ─────────── -->
+    <div ref="containerRef" class="hidden lg:block" :style="{ height: `${(total + 1) * 100}vh` }">
       <div class="sticky top-0 flex h-screen overflow-hidden">
         <!-- Titre vertical (fully sticky) -->
         <div class="flex shrink-0 flex-col items-center justify-center gap-8 px-4">
@@ -80,6 +138,7 @@ onUnmounted(() => window.removeEventListener("scroll", onScroll));
                   :city="activeItem?.city ?? ''"
                   :stars="restaurant.stars"
                   :image="restaurant.image"
+                  :slug="restaurant.slug ?? ''"
                 />
               </div>
             </Transition>

@@ -27,6 +27,7 @@ const { headerItems } = useNavigation();
     </template>
 
     <UNavigationMenu
+      class="hidden md:flex"
       :ui="
         useCustomStyle
           ? {
@@ -52,6 +53,7 @@ const { headerItems } = useNavigation();
         icon="lucide:search"
       />
       <UButton
+        class="hidden md:inline-flex"
         color="neutral"
         variant="link"
         :ui="{
@@ -61,6 +63,7 @@ const { headerItems } = useNavigation();
         icon="lucide:heart"
       />
       <UButton
+        class="hidden md:inline-flex"
         color="neutral"
         variant="link"
         :ui="{

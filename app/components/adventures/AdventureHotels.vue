@@ -19,12 +19,12 @@ defineProps<{
 
     <div
       v-if="hotels.length"
-      class="-mx-4 flex snap-x snap-mandatory flex-row gap-4 overflow-x-auto px-4 pb-2"
+      class="no-scrollbar -mx-4 flex snap-x snap-mandatory flex-row gap-4 overflow-x-auto px-4 pb-2"
     >
       <HotelCard
         v-for="hotel in hotels"
         :key="hotel.id"
-        class="w-72 shrink-0 snap-start"
+        class="w-[85vw] shrink-0 snap-start sm:w-72"
         :id="hotel.id"
         :name="hotel.name"
         :room-count="hotel.roomCount"

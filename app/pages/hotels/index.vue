@@ -114,7 +114,7 @@ const currentPage = computed({
           </template>
           <USkeleton v-else class="h-4 w-20 inline-block" />
         </p>
-        <div class="flex items-center gap-6">
+        <div class="flex flex-wrap items-center gap-3 sm:gap-6">
           <button
             v-if="hasActiveFilters"
             class="text-xs text-brand-600 hover:text-brand-700 font-medium transition-colors"

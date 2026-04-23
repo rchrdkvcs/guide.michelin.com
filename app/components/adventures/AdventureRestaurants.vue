@@ -41,12 +41,12 @@ const emit = defineEmits<{
 
     <div
       v-if="restaurants.length"
-      class="flex h-96 flex-row gap-4 overflow-x-auto pb-2"
+      class="no-scrollbar -mx-4 flex h-96 snap-x snap-mandatory flex-row gap-4 overflow-x-auto px-4 pb-2"
     >
       <RestaurantCard
         v-for="restaurant in restaurants"
         :key="restaurant.id"
-        class="h-full w-[85vw] shrink-0 sm:w-80 lg:w-96"
+        class="h-full w-[85vw] shrink-0 snap-start sm:w-80 lg:w-96"
         :slug="restaurant.slug"
         :name="restaurant.name"
         :description="restaurant.main_desc ?? ''"
