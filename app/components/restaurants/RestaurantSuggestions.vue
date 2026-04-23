@@ -34,7 +34,7 @@ const suggestions = computed(() =>
         :city="r.city?.name ?? ''"
         :stars="starCount(r.michelin_star)"
         :image="r.image"
-        :tags="r.cuisines?.slice(0, 2).map((c) => c.label)"
+        :tags="r.cuisines?.slice(0, 2).map((c: { label: any; }) => c.label)"
         :slug="r.slug"
       />
     </div>

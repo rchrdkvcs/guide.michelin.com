@@ -53,7 +53,7 @@ const emit = defineEmits<{
         :city="restaurant.city?.name ?? ''"
         :stars="starCount(restaurant.michelin_star)"
         :image="restaurant.image ?? ''"
-        :tags="restaurant.cuisines.slice(0, 2).map((c) => c.label)"
+        :tags="restaurant.cuisines.slice(0, 2).map((c: { label: any; }) => c.label)"
       />
     </div>
 
