@@ -107,7 +107,7 @@ const hoursEntries = computed(() => {
             @click="activeTab = 'etablissement'"
           />
           <UButton
-            label="Personnelles"
+            label="Personnel"
             color="neutral"
             :variant="activeTab === 'details' ? 'solid' : 'ghost'"
             block
@@ -230,8 +230,7 @@ const hoursEntries = computed(() => {
 
         <!-- Tab: Personnelles -->
         <template v-else>
-          <div class="flex min-h-0 flex-1 flex-col overflow-y-auto">
-          </div>
+          <div class="flex min-h-0 flex-1 flex-col overflow-y-auto"></div>
         </template>
 
         <!-- CTA -->
