@@ -48,6 +48,10 @@
   --ui-container: 90rem;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background-image: url("/images/bg_texture.png");
   background-repeat: repeat;
