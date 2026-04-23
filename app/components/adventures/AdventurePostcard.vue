@@ -46,7 +46,7 @@ const cardStyle = computed(() =>
 
 <template>
   <div
-    class="perspective-1000 group aspect-3/2 h-full shrink-0 cursor-pointer"
+    class="perspective-1000 group aspect-3/2 w-[80vw] shrink-0 cursor-pointer md:h-full md:w-auto"
     :style="cardStyle"
     @mouseenter="isHovered = true"
     @mouseleave="isHovered = false"

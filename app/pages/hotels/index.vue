@@ -13,8 +13,8 @@ const { data, pending } = await useFetch("/api/hotels", {
     page: page.value,
     limit: LIMIT,
     name: q.value || undefined,
-    sort: sort.value !== "name" ? sort.value : undefined,
-    order: order.value !== "asc" ? order.value : undefined,
+    sort: sort.value === "name" ? undefined : sort.value,
+    order: order.value === "asc" ? undefined : order.value,
   })),
 });
 
@@ -40,7 +40,7 @@ const sortOptions = [
 const selectedSort = ref(`${sort.value}-${order.value}`);
 watch(selectedSort, (val) => {
   const i = val.lastIndexOf("-");
-  updateQuery({ sort: val.slice(0, i) !== "name" ? val.slice(0, i) : undefined, order: val.slice(i + 1) !== "asc" ? val.slice(i + 1) : undefined, page: undefined });
+  updateQuery({ sort: val.slice(0, i) === "name" ? undefined : val.slice(0, i), order: val.slice(i + 1) === "asc" ? undefined : val.slice(i + 1), page: undefined });
 });
 
 function updateQuery(updates: Record<string, string | number | undefined>) {
@@ -114,7 +114,7 @@ const currentPage = computed({
           </template>
           <USkeleton v-else class="h-4 w-20 inline-block" />
         </p>
-        <div class="flex items-center gap-6">
+        <div class="flex flex-wrap items-center gap-3 sm:gap-6">
           <button
             v-if="hasActiveFilters"
             class="text-xs text-brand-600 hover:text-brand-700 font-medium transition-colors"
@@ -131,7 +131,7 @@ const currentPage = computed({
             :ui="{ base: 'font-normal text-muted hover:text-default' }"
           >
             <template #default="{ modelValue }">
-              {{ sortOptions.find(s => s.value === modelValue)?.label ?? 'Trier' }}
+              {{ sortOptions.find((s: { value: any; }) => s.value === modelValue)?.label ?? 'Trier' }}
             </template>
           </USelectMenu>
         </div>
