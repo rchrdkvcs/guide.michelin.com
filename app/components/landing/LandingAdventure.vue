@@ -12,7 +12,7 @@ const { data: adventures } = await useFetch("/api/adventures", {
   >
     <div class="relative w-full min-w-0 md:h-full">
       <div
-        class="no-scrollbar flex h-[50vh] w-full snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-4 py-4 md:px-8 lg:px-12"
+        class="no-scrollbar flex w-full snap-x snap-mandatory gap-4 overflow-x-auto overflow-y-hidden scroll-smooth px-4 py-4 md:h-[50vh] md:px-8 lg:px-12"
       >
         <AdventurePostcard
           v-for="adventure in adventures?.data"
