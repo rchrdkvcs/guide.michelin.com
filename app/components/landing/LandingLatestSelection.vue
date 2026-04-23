@@ -48,14 +48,14 @@ onUnmounted(() => window.removeEventListener("scroll", onScroll));
             class="h-full w-full object-cover transition-transform duration-300"
             :class="i === mobileActiveIndex ? 'scale-105' : 'scale-100'"
           />
-          <span class="absolute inset-0 bg-linear-to-t from-black/70 via-black/10 to-transparent" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
           <div class="absolute bottom-4 left-4 text-left text-white">
             <p class="text-xs tracking-widest uppercase opacity-60">{{ item.country }}</p>
             <h4 class="text-xl font-bold">{{ item.city }}</h4>
             <p class="text-sm opacity-70">{{ item.totalStarred }} restaurants étoilés</p>
           </div>
           <!-- Active dot -->
-          <span
+          <div
             v-if="i === mobileActiveIndex"
             class="absolute top-3 right-3 size-2.5 rounded-full bg-white shadow"
           />
