@@ -1,9 +1,21 @@
 <script lang="ts" setup>
 const { menuItems } = useNavigation();
+const route = useRoute();
+const emit = defineEmits<{ close: [] }>();
+const open = ref(true);
+
+watch(
+  () => route.fullPath,
+  () => emit("close"),
+);
+
+watch(open, (value) => {
+  if (!value) emit("close");
+});
 </script>
 
 <template>
-  <USlideover side="left">
+  <USlideover side="left" v-model:open="open">
     <template #title>
       <div class="flex items-center justify-center gap-2">
         <NuxtImg src="/images/logo.png" class="size-6" />
