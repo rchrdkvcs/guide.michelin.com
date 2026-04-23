@@ -22,9 +22,19 @@ defineProps<{
         :alt="name"
         class="absolute inset-0 h-full w-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105"
       />
+
       <div v-else class="absolute inset-0 flex items-center justify-center bg-muted">
         <UIcon name="lucide:utensils" class="size-12 text-muted" />
       </div>
+
+      <UButton
+        icon="lucide:arrow-right"
+        color="neutral"
+        variant="subtle"
+        size="xs"
+        class="absolute top-2 right-2 shrink-0 translate-x-1 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100"
+        aria-label="Voir le restaurant"
+      />
     </div>
 
     <div class="flex flex-1 flex-col gap-2 p-2">
@@ -59,15 +69,6 @@ defineProps<{
             color="neutral"
             variant="subtle"
             size="sm"
-          />
-
-          <UButton
-            icon="lucide:arrow-right"
-            color="neutral"
-            variant="ghost"
-            size="xs"
-            class="shrink-0 translate-x-1 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100"
-            aria-label="Voir le restaurant"
           />
         </div>
       </div>
