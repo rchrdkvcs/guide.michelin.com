@@ -19,7 +19,7 @@ const { headerItems } = useNavigation();
   <UHeader
     :toggle="false"
     :ui="{
-      root: `${isScrolled ? 'after:opacity-100' : 'after:opacity-0'} after:transition-opacity after:duration-300 after:content-[''] after:absolute after:inset-x-0 after:top-0 after:h-48 after:bg-gradient-to-b after:from-linen-100 after:to-transparent after:-z-10 after:pointer-events-none relative bg-transparent fixed top-0 w-full z-50 backdrop-blur-none! border-none`,
+      root: `${isScrolled || !isHome ? 'after:opacity-100' : 'after:opacity-0'} after:transition-opacity after:duration-300 after:content-[''] after:absolute after:inset-x-0 after:top-0 after:h-32 after:bg-linear-to-b after:from-linen-100 after:to-transparent after:-z-10 after:pointer-events-none bg-transparent fixed top-0 w-full z-50 backdrop-blur-none! border-none`,
     }"
   >
     <template #title>
