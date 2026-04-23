@@ -46,7 +46,7 @@ const cardStyle = computed(() =>
 
 <template>
   <div
-    class="perspective-1000 group aspect-3/2 w-[80vw] shrink-0 cursor-pointer md:h-full md:w-auto"
+    class="perspective-1000 group aspect-3/2 cursor-pointer"
     :style="cardStyle"
     @mouseenter="isHovered = true"
     @mouseleave="isHovered = false"
@@ -74,12 +74,12 @@ const cardStyle = computed(() =>
             </div>
 
             <div
-              class="absolute right-2 bottom-2 left-2 flex items-center justify-between px-4 py-2"
+              class="absolute right-2 bottom-2 left-2 flex min-w-0 items-end justify-between gap-2 px-3 py-1.5"
             >
-              <h3 class="text-xl tracking-widest text-inverted uppercase">
+              <h3 class="min-w-0 truncate text-sm tracking-widest text-inverted uppercase md:text-base">
                 {{ adventure.label }}
               </h3>
-              <p class="font-mono text-sm text-inverted">
+              <p class="shrink-0 font-mono text-xs text-inverted">
                 {{ adventure.countryName ?? "FRANCE" }}
               </p>
             </div>
@@ -89,58 +89,59 @@ const cardStyle = computed(() =>
 
       <!-- Back Side -->
       <div class="absolute inset-0 rotate-y-180 backface-hidden">
-        <div
-          class="grid size-full items-center justify-center border border-default bg-muted p-2 shadow-md"
-        >
-          <div class="grid size-full grid-cols-[1fr_1px_0.75fr] gap-4 border border-primary p-3">
+        <div class="size-full border border-default bg-muted p-2 shadow-md">
+          <div
+            class="grid h-full min-h-0 grid-cols-[1fr_1px_0.75fr] gap-3 overflow-hidden border border-primary p-2"
+          >
             <!-- Left: Title / Message -->
-            <div class="flex size-full flex-col gap-4">
-              <h3 class="text-xl leading-snug font-semibold tracking-tight">
+            <div class="flex min-h-0 min-w-0 flex-col gap-2 overflow-hidden">
+              <h3
+                class="line-clamp-2 text-sm font-semibold leading-snug tracking-tight md:text-base"
+              >
                 {{ adventure.label }}
               </h3>
-              <p class="line-clamp-4 font-serif text-lg leading-relaxed text-neutral-600 italic">
+              <p
+                class="line-clamp-4 font-serif text-xs leading-relaxed text-neutral-600 italic md:text-sm"
+              >
                 "Découvrez les {{ adventure.totalRestaurants }} restaurants étoilés de cette
                 destination."
               </p>
             </div>
 
-            <USeparator orientation="vertical" class="bg-muted" />
+            <USeparator orientation="vertical" />
 
             <!-- Right: Address / CTA -->
-            <div class="relative flex flex-col gap-8">
+            <div class="flex min-h-0 min-w-0 flex-col justify-between overflow-hidden">
               <!-- Stamp Area -->
               <div
-                class="ml-auto flex h-24 w-20 items-center justify-center border-2 border-default bg-white"
+                class="ml-auto flex h-14 w-12 shrink-0 items-center justify-center border-2 border-default bg-white"
               >
-                <NuxtImg src="/images/logo.png" alt="Michelin" class="size-10 object-contain" />
+                <NuxtImg src="/images/logo.png" alt="Michelin" class="size-7 object-contain" />
               </div>
 
               <!-- Address Lines -->
-              <div class="space-y-4">
-                <div class="border-elevated border-b border-dashed pb-1">
-                  <span class="text-sm text-muted">{{ adventure.label }}</span>
+              <div class="min-w-0 space-y-1">
+                <div class="border-b border-dashed pb-0.5">
+                  <span class="block truncate text-xs text-muted">{{ adventure.label }}</span>
                 </div>
-                <div class="border-elevated border-b border-dashed pb-1">
-                  <span class="text-sm text-muted">Guide MICHELIN</span>
+                <div class="border-b border-dashed pb-0.5">
+                  <span class="text-xs text-muted">Guide MICHELIN</span>
                 </div>
               </div>
 
-              <!-- CTA -->
-              <div class="mt-auto self-end">
+              <!-- CTA + Close -->
+              <div class="flex min-w-0 items-center justify-between gap-1">
+                <UIcon
+                  name="i-lucide-undo-2"
+                  class="size-4 shrink-0 text-neutral-400 transition-colors hover:text-neutral-700"
+                />
                 <UButton
-                  label="Découvrir en détail"
+                  label="Découvrir"
                   :to="`/adventures/${adventure.slug}`"
                   color="neutral"
                   variant="ghost"
+                  size="xs"
                   @click.stop
-                />
-              </div>
-
-              <!-- Close icon -->
-              <div class="absolute bottom-0 left-0">
-                <UIcon
-                  name="i-lucide-undo-2"
-                  class="size-5 text-neutral-400 transition-colors hover:text-neutral-700"
                 />
               </div>
             </div>

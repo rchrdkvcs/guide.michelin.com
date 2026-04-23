@@ -18,7 +18,7 @@ const { data: adventures } = await useFetch("/api/adventures", {
           v-for="adventure in adventures?.data"
           :key="adventure.slug"
           :adventure="adventure"
-          class="snap-center first:ml-0 md:snap-start"
+          class="w-[80vw] shrink-0 snap-center first:ml-0 md:h-full md:w-auto md:snap-start"
         />
         <div class="w-10 shrink-0"></div>
       </div>

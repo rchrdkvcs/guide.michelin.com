@@ -16,6 +16,7 @@ const adventures = computed(() => data.value?.data ?? []);
           v-for="adventure in adventures"
           :key="adventure.slug"
           :adventure="adventure"
+          class="w-full"
         />
       </UPageGrid>
 
