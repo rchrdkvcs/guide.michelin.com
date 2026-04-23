@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-const { data } = await useFetch("/api/adventures", { query: { limit: 100 } });
+const { data } = await useFetch("/api/adventures", { query: { limit: 10 } });
 const adventures = computed(() => data.value?.data ?? []);
 </script>
 
@@ -10,18 +10,15 @@ const adventures = computed(() => data.value?.data ?? []);
       description="Explorez les destinations gastronomiques du Guide Michelin à travers le monde."
     />
 
-    <UContainer class="py-12">
-      <div
-        v-if="adventures.length"
-        class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-        style="grid-auto-rows: 280px"
-      >
+    <UContainer>
+      <UPageGrid v-if="adventures.length">
         <AdventurePostcard
           v-for="adventure in adventures"
           :key="adventure.slug"
           :adventure="adventure"
         />
-      </div>
+      </UPageGrid>
+
       <div v-else class="py-24 text-center text-muted">Aucune aventure disponible.</div>
     </UContainer>
   </div>
