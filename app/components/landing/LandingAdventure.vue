@@ -24,7 +24,7 @@ const { data: adventures } = await useFetch("/api/adventures", {
       </div>
 
       <div class="mt-8 flex w-full justify-center">
-        <UButton label="Voir toutes les régions" color="neutral" variant="subtle" to="/adventures" />
+        <UButton label="Voir toutes les régions" color="neutral" variant="ghost" to="/adventures" />
       </div>
     </div>
   </UPageSection>
