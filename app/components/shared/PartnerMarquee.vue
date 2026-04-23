@@ -10,7 +10,7 @@ const partnerLogos = [
 <template>
   <UContainer class="relative w-full overflow-hidden py-8">
     <p class="mb-8 text-center text-sm font-semibold tracking-[0.25em] text-muted uppercase">
-      Nos Partenaires Officiels
+      Nos partenaires officiels
     </p>
 
     <UMarquee :pauseOnHover="true" class="w-full" :overlay="false">

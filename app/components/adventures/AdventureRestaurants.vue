@@ -33,7 +33,7 @@ const emit = defineEmits<{
     <div class="flex flex-col gap-2">
       <div class="flex w-full items-center justify-between">
         <h2 class="text-elevated text-2xl leading-snug font-medium">
-          Nos suggestions de Restaurants
+          Nos suggestions de restaurants
         </h2>
         <UBadge :label="`${meta.total} restaurants`" color="neutral" variant="subtle" />
       </div>
