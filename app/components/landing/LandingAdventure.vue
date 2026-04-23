@@ -6,13 +6,13 @@ const { data: adventures } = await useFetch("/api/adventures", {
 
 <template>
   <UPageSection
-    class="flex flex-col md:h-screen md:overflow-hidden"
-    title="Partez en aventure découvrir les spécialités"
+    class="flex h-screen flex-col overflow-hidden"
+    title="Partez en aventure pour découvrir les spécialités"
     description="Explorez les destinations gastronomiques du Guide Michelin à travers le monde."
   >
-    <div class="relative w-full min-w-0 md:h-full">
+    <div class="relative h-full w-full min-w-0">
       <div
-        class="no-scrollbar flex w-full snap-x snap-mandatory gap-4 overflow-x-auto overflow-y-hidden scroll-smooth px-4 py-4 md:h-[50vh] md:px-8 lg:px-12"
+        class="no-scrollbar flex h-[50vh] w-full snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-4 py-4 md:px-8 lg:px-12"
       >
         <AdventurePostcard
           v-for="adventure in adventures?.data"
@@ -29,3 +29,13 @@ const { data: adventures } = await useFetch("/api/adventures", {
     </div>
   </UPageSection>
 </template>
+
+<style scoped>
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+</style>
