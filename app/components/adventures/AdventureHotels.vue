@@ -4,6 +4,12 @@ interface Hotel {
   name: string;
   roomCount: number;
   previewImage: string | null;
+  city?: string | null;
+  distinctionScore?: number;
+  criteriaStyle?: string | null;
+  minPricePerNight?: number | null;
+  maxPricePerNight?: number | null;
+  isPlusEligible?: boolean;
 }
 
 defineProps<{
@@ -29,6 +35,12 @@ defineProps<{
         :name="hotel.name"
         :room-count="hotel.roomCount"
         :preview-image="hotel.previewImage"
+        :city="hotel.city"
+        :distinction-score="hotel.distinctionScore"
+        :criteria-style="hotel.criteriaStyle"
+        :min-price-per-night="hotel.minPricePerNight"
+        :max-price-per-night="hotel.maxPricePerNight"
+        :is-plus-eligible="hotel.isPlusEligible"
       />
     </div>
 

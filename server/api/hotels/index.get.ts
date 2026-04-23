@@ -12,12 +12,21 @@ export default defineEventHandler((event) => {
   });
 
   // Return hotels without the full rooms list for the index
-  const lightweight = filtered.map(({ id, name, roomCount, previewImage }) => ({
-    id,
-    name,
-    roomCount,
-    previewImage,
-  }));
+  const lightweight = filtered.map(
+    ({ id, name, roomCount, previewImage, city, citySlug, distinctionScore, criteriaStyle, minPricePerNight, maxPricePerNight, isPlusEligible }) => ({
+      id,
+      name,
+      roomCount,
+      previewImage,
+      city,
+      citySlug,
+      distinctionScore,
+      criteriaStyle,
+      minPricePerNight,
+      maxPricePerNight,
+      isPlusEligible,
+    }),
+  );
 
   return paginate(lightweight, page, limit);
 });

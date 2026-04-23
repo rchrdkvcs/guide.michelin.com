@@ -152,6 +152,12 @@ const currentPage = computed({
             :name="hotel.name"
             :room-count="hotel.roomCount"
             :preview-image="hotel.previewImage"
+            :city="hotel.city"
+            :distinction-score="hotel.distinctionScore"
+            :criteria-style="hotel.criteriaStyle"
+            :min-price-per-night="hotel.minPricePerNight"
+            :max-price-per-night="hotel.maxPricePerNight"
+            :is-plus-eligible="hotel.isPlusEligible"
           />
         </template>
       </div>

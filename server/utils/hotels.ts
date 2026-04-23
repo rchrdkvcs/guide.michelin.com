@@ -1,4 +1,5 @@
 import { loadJsonl } from "./load-data";
+import { getRestaurants } from "./restaurants";
 
 export interface RoomAmenity {
   amenity: string;
@@ -87,12 +88,41 @@ export interface Hotel {
   roomCount: number;
   previewImage: string | null;
   rooms: RoomStatic[];
+  city: string | null;
+  citySlug: string | null;
+  distinctionScore: number;
+  criteriaStyle: string | null;
+  minPricePerNight: number | null;
+  maxPricePerNight: number | null;
+  isPlusEligible: boolean;
+}
+
+interface HotelEnrichment {
+  citySlug: string | null;
+  city: string | null;
+  distinctionScore: number;
+  criteriaStyle: string | null;
+}
+
+interface HotelLiveData {
+  minPricePerNight: number | null;
+  maxPricePerNight: number | null;
+  isPlusEligible: boolean;
+}
+
+function formatCitySlug(slug: string): string {
+  return slug
+    .split("-")
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(" ");
 }
 
 let _roomsStatic: RoomStatic[] | null = null;
 let _hotelMap: Map<string, Hotel> | null = null;
 let _roomsLive: RoomLive[] | null = null;
 let _liveByHotelId: Map<string, RoomLive[]> | null = null;
+let _hotelEnrichmentMap: Map<string, HotelEnrichment> | null = null;
+let _hotelLiveMap: Map<string, HotelLiveData> | null = null;
 
 function normalizeImageUrl(url: string | null | undefined): string | null {
   if (!url) return null;
@@ -130,9 +160,35 @@ export function getHotels(): Hotel[] {
           roomCount: 1,
           previewImage: room.room.images?.[0] ?? null,
           rooms: [room],
+          city: null,
+          citySlug: null,
+          distinctionScore: 0,
+          criteriaStyle: null,
+          minPricePerNight: null,
+          maxPricePerNight: null,
+          isPlusEligible: false,
         });
       }
     }
+
+    const enrichMap = buildHotelEnrichmentMap();
+    const liveMap = buildHotelLiveMap();
+    for (const [id, hotel] of map) {
+      const enrich = enrichMap.get(id);
+      const live = liveMap.get(id);
+      if (enrich) {
+        hotel.citySlug = enrich.citySlug;
+        hotel.city = enrich.city;
+        hotel.distinctionScore = enrich.distinctionScore;
+        hotel.criteriaStyle = enrich.criteriaStyle;
+      }
+      if (live) {
+        hotel.minPricePerNight = live.minPricePerNight;
+        hotel.maxPricePerNight = live.maxPricePerNight;
+        hotel.isPlusEligible = live.isPlusEligible;
+      }
+    }
+
     _hotelMap = map;
   }
   return Array.from(_hotelMap.values());
@@ -177,6 +233,51 @@ export interface HotelFilters {
   name?: string;
   sort?: string;
   order?: string;
+}
+
+function buildHotelEnrichmentMap(): Map<string, HotelEnrichment> {
+  if (!_hotelEnrichmentMap) {
+    _hotelEnrichmentMap = new Map();
+    for (const r of getRestaurants()) {
+      const sel = r.hotel_selection;
+      if (!sel) continue;
+      const id = String(sel.id);
+      if (_hotelEnrichmentMap.has(id)) continue;
+      const citySlug = sel.city_slug ?? null;
+      _hotelEnrichmentMap.set(id, {
+        citySlug,
+        city: citySlug ? formatCitySlug(citySlug) : null,
+        distinctionScore: sel.distinction_score ?? 0,
+        criteriaStyle: sel.criteria_style ?? null,
+      });
+    }
+  }
+  return _hotelEnrichmentMap;
+}
+
+function buildHotelLiveMap(): Map<string, HotelLiveData> {
+  if (!_hotelLiveMap) {
+    _hotelLiveMap = new Map();
+    const byHotel = new Map<string, { prices: number[]; plusEligible: boolean }>();
+    for (const room of getRoomsLive()) {
+      const entry = byHotel.get(room.hotel_id) ?? { prices: [], plusEligible: false };
+      for (const rate of room.room.rates) {
+        if (rate.is_available && rate.display_average_per_night > 0) {
+          entry.prices.push(rate.display_average_per_night);
+        }
+        if (rate.plus_eligible) entry.plusEligible = true;
+      }
+      byHotel.set(room.hotel_id, entry);
+    }
+    for (const [hotelId, data] of byHotel) {
+      _hotelLiveMap.set(hotelId, {
+        minPricePerNight: data.prices.length > 0 ? Math.min(...data.prices) : null,
+        maxPricePerNight: data.prices.length > 0 ? Math.max(...data.prices) : null,
+        isPlusEligible: data.plusEligible,
+      });
+    }
+  }
+  return _hotelLiveMap;
 }
 
 export function filterHotels(filters: HotelFilters): Hotel[] {
