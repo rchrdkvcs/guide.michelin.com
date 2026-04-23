@@ -69,7 +69,7 @@ const { headerItems } = useNavigation();
         :ui="{
           base: useCustomStyle ? 'text-white/75 hover:text-white' : '',
         }"
-        to="#"
+        to="/compte"
         icon="lucide:user"
       />
       <UButton
