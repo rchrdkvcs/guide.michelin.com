@@ -66,17 +66,24 @@ const cardStyle = computed(() =>
               :alt="adventure.label"
               class="h-full w-full object-cover"
             />
+
             <div
               v-else
-              class="flex h-full items-center justify-center bg-gradient-to-br from-neutral-100 to-neutral-200"
+              class="flex h-full items-center justify-center bg-linear-to-br from-neutral-100 to-neutral-200"
             >
               <UIcon name="lucide:map" class="size-16 text-neutral-400" />
             </div>
 
             <div
+              class="absolute inset-x-0 bottom-0 h-32 bg-linear-to-t from-black/50 to-transparent"
+            />
+
+            <div
               class="absolute right-2 bottom-2 left-2 flex min-w-0 items-end justify-between gap-2 px-3 py-1.5"
             >
-              <h3 class="min-w-0 truncate text-sm tracking-widest text-inverted uppercase md:text-base">
+              <h3
+                class="min-w-0 truncate text-sm tracking-widest text-inverted uppercase md:text-base"
+              >
                 {{ adventure.label }}
               </h3>
               <p class="shrink-0 font-mono text-xs text-inverted">
@@ -96,7 +103,7 @@ const cardStyle = computed(() =>
             <!-- Left: Title / Message -->
             <div class="flex min-h-0 min-w-0 flex-col gap-2 overflow-hidden">
               <h3
-                class="line-clamp-2 text-sm font-semibold leading-snug tracking-tight md:text-base"
+                class="line-clamp-2 text-sm leading-snug font-semibold tracking-tight md:text-base"
               >
                 {{ adventure.label }}
               </h3>

@@ -7,8 +7,8 @@ const { data: adventures } = await useFetch("/api/adventures", {
 <template>
   <UPageSection
     class="flex h-screen flex-col overflow-hidden"
-    title="Partez en aventure pour découvrir les spécialités"
-    description="Explorez les destinations gastronomiques du Guide Michelin à travers le monde."
+    title="Partez à l’aventure"
+    description="Explorez les destinations gastronomiques du Guide Michelin à travers nos cartes"
   >
     <div class="relative h-full w-full min-w-0">
       <div
