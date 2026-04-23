@@ -32,48 +32,50 @@ const footerLinks = ref([
 </script>
 
 <template>
-  <div
-    class="grid grid-cols-1 gap-4 border-t border-default bg-muted px-4 py-8 md:px-12 lg:grid-cols-2 lg:px-16"
-  >
-    <div class="flex flex-col gap-2">
-      <p class="font-medium">Recevez en avant-première les nouveautés du Guide MICHELIN</p>
+  <div class="border-t border-default bg-muted py-6 lg:py-12">
+    <UContainer class="grid grid-cols-1 gap-4 lg:grid-cols-2">
+      <div class="flex flex-col gap-2">
+        <p class="font-medium">Recevez en avant-première les nouveautés du Guide MICHELIN</p>
 
-      <UFieldGroup class="max-w-md">
-        <UInput placeholder="Enter your email" class="w-full" />
-        <UButton label="S'inscrire" color="primary" variant="solid" />
-      </UFieldGroup>
+        <UFieldGroup class="max-w-md">
+          <UInput placeholder="Enter your email" class="w-full" />
+          <UButton label="S'inscrire" color="primary" variant="solid" />
+        </UFieldGroup>
 
-      <p class="text-[10px] text-muted">
-        Michelin traitera vos données afin de gérer votre inscription mesurer la performance de nos
-        campagnes et analyser vos interactions avec nos communications. Vos données pourront être
-        partagées avec les sociétés affiliées à Michelin (TabletHotels et Robert Parker) afin de
-        mieux vous connaître et avec votre accord vous adresser des communications marketing. Vous
-        pourrez à tout moment gérer vos préférences de communication ou vous désabonner. Vous pouvez
-        exercer vos droits en nous contactant. En savoir plus sur la gestion de vos données par
-        Michelin ici.
-      </p>
-    </div>
-
-    <div class="flex flex-col items-center justify-center gap-4">
-      <p class="font-medium">Les meilleurs restaurants et hôtels vous suivent partout sur l'app</p>
-
-      <div class="flex items-center justify-center gap-4">
-        <ULink to="#">
-          <NuxtImg
-            src="/images/download/apple.png"
-            alt="Download on the App Store"
-            class="h-10 object-contain"
-          />
-        </ULink>
-        <ULink to="#">
-          <NuxtImg
-            src="/images/download/android.png"
-            alt="Get it on Google Play"
-            class="h-10 object-contain"
-          />
-        </ULink>
+        <p class="text-[10px] text-muted">
+          Michelin traitera vos données afin de gérer votre inscription mesurer la performance de
+          nos campagnes et analyser vos interactions avec nos communications. Vos données pourront
+          être partagées avec les sociétés affiliées à Michelin (TabletHotels et Robert Parker) afin
+          de mieux vous connaître et avec votre accord vous adresser des communications marketing.
+          Vous pourrez à tout moment gérer vos préférences de communication ou vous désabonner. Vous
+          pouvez exercer vos droits en nous contactant. En savoir plus sur la gestion de vos données
+          par Michelin ici.
+        </p>
       </div>
-    </div>
+
+      <div class="flex flex-col items-center justify-center gap-4">
+        <p class="font-medium">
+          Les meilleurs restaurants et hôtels vous suivent partout sur l'app
+        </p>
+
+        <div class="flex items-center justify-center gap-4">
+          <ULink to="#">
+            <NuxtImg
+              src="/images/download/apple.png"
+              alt="Download on the App Store"
+              class="h-10 object-contain"
+            />
+          </ULink>
+          <ULink to="#">
+            <NuxtImg
+              src="/images/download/android.png"
+              alt="Get it on Google Play"
+              class="h-10 object-contain"
+            />
+          </ULink>
+        </div>
+      </div>
+    </UContainer>
   </div>
 
   <USeparator />
