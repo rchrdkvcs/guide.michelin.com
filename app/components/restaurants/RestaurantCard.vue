@@ -51,7 +51,7 @@ defineProps<{
         </div>
       </div>
 
-      <p class="line-clamp-3 flex-1 text-sm leading-snug text-muted">
+      <p class="line-clamp-3 text-sm leading-snug text-muted">
         {{ description }}
       </p>
 
