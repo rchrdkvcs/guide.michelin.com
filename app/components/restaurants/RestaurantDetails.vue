@@ -34,6 +34,40 @@ const props = defineProps<{ restaurant: Restaurant }>();
 type Tab = "etablissement" | "details";
 const activeTab = ref<Tab>("etablissement");
 
+const chefProfile = {
+  name: "Xavier Pincemin",
+  title: "Chef Exécutif & Propriétaire",
+  age: 44,
+  nationality: "Français",
+  photo: "/images/pincemin.png",
+  quote:
+    "« La cuisine, c'est l'expression sincère d'un terroir, d'une mémoire et d'un instant partagé. »",
+  bio: "Originaire de Bourgogne, Xavier Pincemin a grandi entre les vignes et les marchés. Passionné dès l'enfance par les produits du terroir, il intègre à 18 ans l'École Ferrandi à Paris avant de se forger chez les plus grandes maisons françaises. Sa cuisine, à la fois précise et généreuse, fait dialoguer la tradition classique et les influences contemporaines.",
+  parcours: [
+    { year: "2016", place: "Maison Pincemin · Paris", role: "Chef Exécutif" },
+    { year: "2011", place: "L'Astrance · Paris", role: "Second de cuisine" },
+    { year: "2007", place: "Arpège · Paris", role: "Chef de partie" },
+    { year: "2004", place: "Louis XV · Monaco", role: "Commis puis demi-chef" },
+  ],
+  specialites: [
+    "Pigeon rôti aux épices douces",
+    "Saint-Jacques snackées, beurre blanc",
+    "Soufflé au Grand Marnier",
+    "Joue de bœuf braisée 48h",
+  ],
+  distinctions: [
+    { label: "1 étoile Michelin", year: "2019", icon: "lucide:star" },
+    { label: "Meilleur Ouvrier de France", year: "2011", icon: "lucide:award" },
+    { label: "Révélation de l'année – Gault & Millau", year: "2017", icon: "lucide:trophy" },
+  ],
+  equipe: [
+    { name: "Sophie Renard", role: "Sous-Chef", icon: "lucide:chef-hat" },
+    { name: "Marc Delacour", role: "Sommelier", icon: "lucide:wine" },
+    { name: "Claire Morin", role: "Maître d'hôtel", icon: "lucide:user-check" },
+    { name: "Thomas Leroi", role: "Chef Pâtissier", icon: "lucide:cake" },
+  ],
+};
+
 const stars = computed(() => starCount(props.restaurant.michelin_star));
 
 const priceRange = computed(() => {
@@ -228,9 +262,109 @@ const hoursEntries = computed(() => {
           </div>
         </template>
 
-        <!-- Tab: Personnelles -->
+        <!-- Tab: Personnel -->
         <template v-else>
-          <div class="flex min-h-0 flex-1 flex-col overflow-y-auto"></div>
+          <div class="no-scrollbar flex min-h-0 flex-1 flex-col gap-5 overflow-y-auto pb-2">
+            <!-- Chef hero -->
+            <div class="relative aspect-video w-full shrink-0 overflow-hidden rounded-xl bg-muted">
+              <NuxtImg
+                :src="chefProfile.photo"
+                :alt="chefProfile.name"
+                class="size-full object-cover"
+              />
+              <div
+                class="absolute inset-x-0 bottom-0 bg-linear-to-t from-black/75 to-transparent px-4 py-3"
+              >
+                <p class="text-lg leading-tight font-semibold text-inverted">
+                  {{ chefProfile.name }}
+                </p>
+                <p class="mt-0.5 text-inverted/75">{{ chefProfile.title }}</p>
+              </div>
+            </div>
+
+            <!-- Quote -->
+            <blockquote class="text-center text-lg leading-relaxed font-medium italic">
+              {{ chefProfile.quote }}
+            </blockquote>
+
+            <!-- Distinctions -->
+            <div class="space-y-2">
+              <p class="text-xs font-semibold tracking-wider text-muted uppercase">Distinctions</p>
+              <div class="flex flex-col gap-2">
+                <div
+                  v-for="d in chefProfile.distinctions"
+                  :key="d.label"
+                  class="flex items-center gap-2.5 rounded-lg border border-default bg-default/25 px-3 py-2 text-sm"
+                >
+                  <UIcon :name="d.icon" class="size-4 shrink-0 text-primary" />
+                  <span class="flex-1 leading-tight font-medium">{{ d.label }}</span>
+                  <span class="text-xs text-muted">{{ d.year }}</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Parcours -->
+            <div class="space-y-2">
+              <p class="text-xs font-semibold tracking-wider text-muted uppercase">Parcours</p>
+              <div class="relative flex flex-col gap-0">
+                <div v-for="(step, i) in chefProfile.parcours" :key="step.year" class="flex gap-3">
+                  <div class="flex flex-col items-center">
+                    <div
+                      class="mt-1 size-2.5 shrink-0 rounded-full border-2 border-primary bg-elevated"
+                    />
+                    <div
+                      v-if="i < chefProfile.parcours.length - 1"
+                      class="my-1 w-px flex-1 bg-default"
+                    />
+                  </div>
+                  <div class="pb-3">
+                    <p class="text-xs font-semibold text-primary">{{ step.year }}</p>
+                    <p class="text-sm leading-tight font-medium">{{ step.place }}</p>
+                    <p class="text-xs text-muted">{{ step.role }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Spécialités -->
+            <div class="space-y-2">
+              <p class="text-xs font-semibold tracking-wider text-muted uppercase">
+                Spécialités signature
+              </p>
+              <div class="flex flex-wrap gap-1.5">
+                <UBadge
+                  v-for="s in chefProfile.specialites"
+                  :key="s"
+                  :label="s"
+                  color="neutral"
+                  variant="subtle"
+                  size="sm"
+                />
+              </div>
+            </div>
+
+            <!-- Équipe -->
+            <div class="space-y-2">
+              <p class="text-xs font-semibold tracking-wider text-muted uppercase">L'équipe</p>
+              <div class="grid grid-cols-2 gap-2">
+                <div
+                  v-for="member in chefProfile.equipe"
+                  :key="member.name"
+                  class="flex items-center gap-2.5 rounded-xl border border-default bg-default/25 px-3 py-2.5"
+                >
+                  <div
+                    class="flex size-8 shrink-0 items-center justify-center rounded-full bg-muted"
+                  >
+                    <UIcon :name="member.icon" class="size-4 text-muted" />
+                  </div>
+                  <div class="min-w-0">
+                    <p class="truncate text-xs leading-tight font-semibold">{{ member.name }}</p>
+                    <p class="truncate text-xs text-muted">{{ member.role }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </template>
 
         <!-- CTA -->
