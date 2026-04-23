@@ -29,7 +29,7 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <UContainer class="space-y-8 py-8">
+  <UContainer class="space-y-4 py-8">
     <div class="flex flex-col gap-2">
       <div class="flex w-full items-center justify-between">
         <h2 class="text-elevated text-2xl leading-snug font-medium">
@@ -53,7 +53,7 @@ const emit = defineEmits<{
         :city="restaurant.city?.name ?? ''"
         :stars="starCount(restaurant.michelin_star)"
         :image="restaurant.image ?? ''"
-        :tags="restaurant.cuisines.slice(0, 2).map((c: { label: any; }) => c.label)"
+        :tags="restaurant.cuisines.slice(0, 2).map((c: { label: any }) => c.label)"
       />
     </div>
 

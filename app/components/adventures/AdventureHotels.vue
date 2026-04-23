@@ -12,7 +12,7 @@ defineProps<{
 </script>
 
 <template>
-  <UContainer class="space-y-8 py-8">
+  <UContainer class="space-y-4 py-8">
     <div class="flex flex-col gap-2">
       <h2 class="text-elevated text-2xl leading-snug font-medium">Les Hôtels</h2>
     </div>
@@ -24,7 +24,7 @@ defineProps<{
       <HotelCard
         v-for="hotel in hotels"
         :key="hotel.id"
-        class="w-[85vw] shrink-0 snap-start sm:w-72"
+        class="h-full w-[85vw] shrink-0 snap-start sm:w-80 lg:w-96"
         :id="hotel.id"
         :name="hotel.name"
         :room-count="hotel.roomCount"

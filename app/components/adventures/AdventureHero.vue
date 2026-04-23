@@ -22,7 +22,7 @@ defineProps<{ adventure: Adventure }>();
       />
       <div
         v-else
-        class="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-neutral-200 to-neutral-300"
+        class="absolute inset-0 flex items-center justify-center bg-linear-to-br from-neutral-200 to-neutral-300"
       >
         <UIcon name="lucide:map" class="size-24 text-neutral-400" />
       </div>
@@ -38,9 +38,8 @@ defineProps<{ adventure: Adventure }>();
 
 <style scoped>
 .bordered-text {
-  font-size: clamp(3rem, 10vw, 8rem);
+  font-size: 6rem;
   color: transparent;
-  -webkit-text-stroke: 2px white;
+  -webkit-text-stroke: 1px white;
 }
 </style>
-
