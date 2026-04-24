@@ -141,6 +141,17 @@ const footerLinks = ref([
           ]"
           orientation="horizontal"
           variant="link"
+          class="hidden lg:flex"
+        />
+        <UNavigationMenu
+          :items="[
+            { label: 'Mentions légales', to: '/legal' },
+            { label: 'Politique de confidentialité', to: '/privacy' },
+            { label: 'Conditions d\'utilisation', to: '/terms' },
+          ]"
+          variant="link"
+          orientation="vertical"
+          class="flex lg:hidden"
         />
       </div>
     </template>
