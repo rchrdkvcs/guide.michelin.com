@@ -34,44 +34,12 @@ export function useNavigation() {
       to: "/hotels",
     },
     {
-      label: "Guide MICHELIN Plus",
-      to: "#",
-    },
-    {
       label: "Aventures",
       to: "/adventures",
     },
     {
       label: "L'échappée",
       to: "/escape",
-    },
-    {
-      label: "Guides de voyage",
-      to: "/#",
-    },
-    {
-      label: "Guides Best-of",
-      to: "#",
-    },
-    {
-      label: "Magazine",
-      to: "#",
-    },
-    {
-      label: "Nous contacter",
-      to: "#",
-    },
-    {
-      label: "S'inscrire à la newsletter",
-      to: "#",
-    },
-    {
-      label: "Partenariat privilégié TheFork",
-      to: "#",
-    },
-    {
-      label: "Restaurants partenaires TheFork",
-      to: "#",
     },
     {
       label: "Mon compte",
