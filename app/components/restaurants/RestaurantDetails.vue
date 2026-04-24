@@ -141,7 +141,7 @@ const hoursEntries = computed(() => {
             @click="activeTab = 'etablissement'"
           />
           <UButton
-            label="Personnel"
+            label="L'équipe"
             color="neutral"
             :variant="activeTab === 'details' ? 'solid' : 'ghost'"
             block
