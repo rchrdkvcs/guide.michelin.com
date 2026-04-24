@@ -21,7 +21,7 @@ useSeoMeta({
       ? restaurant.value.main_desc.slice(0, 160)
       : `Découvrez ${restaurant.value?.name ?? "ce restaurant"} sélectionné par le Guide MICHELIN.`,
   ogImage: () => restaurant.value?.image || "/images/hero.png",
-  ogType: "restaurant",
+  ogType: "website",
 });
 
 useHead({

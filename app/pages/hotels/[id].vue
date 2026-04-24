@@ -12,13 +12,13 @@ useSeoMeta({
   title: () => hotel.value?.name ?? "Hôtel",
   description: () =>
     hotel.value
-      ? `Découvrez ${hotel.value.name}, hôtel d'exception sélectionné par le Guide MICHELIN avec ${hotel.value.roomCount} chambre${hotel.value.roomCount > 1 ? "s" : ""}.`
+      ? `Découvrez ${hotel.value.name}, hôtel d'exception sélectionné par le Guide MICHELIN avec ${hotel.value.roomCount} chambre${hotel.value.roomCount > 1 || hotel.value.roomCount === 0 ? "s" : ""}.`
       : "Hôtel d'exception sélectionné par le Guide MICHELIN.",
   ogTitle: () =>
     hotel.value ? `${hotel.value.name} · Guide MICHELIN` : "Hôtel · Guide MICHELIN",
   ogDescription: () =>
     hotel.value
-      ? `Découvrez ${hotel.value.name}, hôtel d'exception sélectionné par le Guide MICHELIN avec ${hotel.value.roomCount} chambre${hotel.value.roomCount > 1 ? "s" : ""}.`
+      ? `Découvrez ${hotel.value.name}, hôtel d'exception sélectionné par le Guide MICHELIN avec ${hotel.value.roomCount} chambre${hotel.value.roomCount > 1 || hotel.value.roomCount === 0 ? "s" : ""}.`
       : "Hôtel d'exception sélectionné par le Guide MICHELIN.",
   ogImage: () => hotel.value?.rooms?.[0]?.room?.images?.[0] || "/images/hero.png",
 });

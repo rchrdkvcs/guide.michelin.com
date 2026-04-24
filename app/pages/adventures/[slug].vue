@@ -19,7 +19,7 @@ useSeoMeta({
   title: () => adventure.value?.label ?? "Aventure",
   description: () =>
     adventure.value
-      ? `Découvrez ${adventure.value.label}${adventure.value.countryName ? `, ${adventure.value.countryName}` : ""} : ${adventure.value.totalRestaurants} restaurant${adventure.value.totalRestaurants > 1 ? "s" : ""} sélectionné${adventure.value.totalRestaurants > 1 ? "s" : ""} par le Guide MICHELIN.`
+      ? `Découvrez ${adventure.value.label}${adventure.value.countryName ? `, ${adventure.value.countryName}` : ""} : ${adventure.value.totalRestaurants} restaurant${adventure.value.totalRestaurants > 1 || adventure.value.totalRestaurants === 0 ? "s" : ""} sélectionné${adventure.value.totalRestaurants > 1 || adventure.value.totalRestaurants === 0 ? "s" : ""} par le Guide MICHELIN.`
       : "Destination gastronomique sélectionnée par le Guide MICHELIN.",
   ogTitle: () =>
     adventure.value
@@ -27,7 +27,7 @@ useSeoMeta({
       : "Aventure · Guide MICHELIN",
   ogDescription: () =>
     adventure.value
-      ? `Découvrez ${adventure.value.label}${adventure.value.countryName ? `, ${adventure.value.countryName}` : ""} : ${adventure.value.totalRestaurants} restaurant${adventure.value.totalRestaurants > 1 ? "s" : ""} sélectionné${adventure.value.totalRestaurants > 1 ? "s" : ""} par le Guide MICHELIN.`
+      ? `Découvrez ${adventure.value.label}${adventure.value.countryName ? `, ${adventure.value.countryName}` : ""} : ${adventure.value.totalRestaurants} restaurant${adventure.value.totalRestaurants > 1 || adventure.value.totalRestaurants === 0 ? "s" : ""} sélectionné${adventure.value.totalRestaurants > 1 || adventure.value.totalRestaurants === 0 ? "s" : ""} par le Guide MICHELIN.`
       : "Destination gastronomique sélectionnée par le Guide MICHELIN.",
   ogImage: () => adventure.value?.image || "/images/hero.png",
 });
