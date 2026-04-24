@@ -42,6 +42,10 @@ export function useNavigation() {
       to: "/adventures",
     },
     {
+      label: "L'échappée",
+      to: "/escape",
+    },
+    {
       label: "Guides de voyage",
       to: "/#",
     },
@@ -68,6 +72,10 @@ export function useNavigation() {
     {
       label: "Restaurants partenaires TheFork",
       to: "#",
+    },
+    {
+      label: "Mon compte",
+      to: "/compte",
     },
   ]);
 
