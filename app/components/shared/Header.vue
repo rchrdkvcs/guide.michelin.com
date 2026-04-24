@@ -23,7 +23,7 @@ const { headerItems } = useNavigation();
     }"
   >
     <template #title>
-      <NuxtImg src="/images/logo.png" class="size-8" />
+      <NuxtImg src="/images/logo.png" alt="Guide MICHELIN" class="size-8" />
     </template>
 
     <UNavigationMenu
@@ -51,6 +51,7 @@ const { headerItems } = useNavigation();
         }"
         to="#"
         icon="lucide:search"
+        aria-label="Rechercher"
       />
       <UButton
         class="hidden md:inline-flex"
@@ -61,6 +62,7 @@ const { headerItems } = useNavigation();
         }"
         to="#"
         icon="lucide:heart"
+        aria-label="Mes favoris"
       />
       <UButton
         class="hidden md:inline-flex"
@@ -71,6 +73,7 @@ const { headerItems } = useNavigation();
         }"
         to="/compte"
         icon="lucide:user"
+        aria-label="Mon compte"
       />
       <UButton
         color="neutral"
@@ -79,6 +82,7 @@ const { headerItems } = useNavigation();
           base: useCustomStyle ? 'text-white/75 hover:text-white' : '',
         }"
         icon="lucide:menu"
+        aria-label="Menu de navigation"
         @click="navigationMenu.open()"
       />
     </template>

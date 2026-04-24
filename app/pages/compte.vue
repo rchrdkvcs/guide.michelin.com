@@ -1,5 +1,9 @@
 <script lang="ts" setup>
-useSeoMeta({ title: "Mon compte · L’Échappée" });
+useSeoMeta({
+  title: "Mon compte",
+  description: "Gérez votre compte L'Échappée et suivez vos récompenses sur le Guide MICHELIN.",
+  robots: "noindex, nofollow",
+});
 </script>
 
 <template>

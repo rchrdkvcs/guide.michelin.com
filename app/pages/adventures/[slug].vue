@@ -14,6 +14,24 @@ if (error.value) {
 }
 
 const adventure = computed(() => data.value?.adventure);
+
+useSeoMeta({
+  title: () => adventure.value?.label ?? "Aventure",
+  description: () =>
+    adventure.value
+      ? `Découvrez ${adventure.value.label}${adventure.value.countryName ? `, ${adventure.value.countryName}` : ""} : ${adventure.value.totalRestaurants} restaurant${adventure.value.totalRestaurants > 1 || adventure.value.totalRestaurants === 0 ? "s" : ""} sélectionné${adventure.value.totalRestaurants > 1 || adventure.value.totalRestaurants === 0 ? "s" : ""} par le Guide MICHELIN.`
+      : "Destination gastronomique sélectionnée par le Guide MICHELIN.",
+  ogTitle: () =>
+    adventure.value
+      ? `${adventure.value.label} · Guide MICHELIN`
+      : "Aventure · Guide MICHELIN",
+  ogDescription: () =>
+    adventure.value
+      ? `Découvrez ${adventure.value.label}${adventure.value.countryName ? `, ${adventure.value.countryName}` : ""} : ${adventure.value.totalRestaurants} restaurant${adventure.value.totalRestaurants > 1 || adventure.value.totalRestaurants === 0 ? "s" : ""} sélectionné${adventure.value.totalRestaurants > 1 || adventure.value.totalRestaurants === 0 ? "s" : ""} par le Guide MICHELIN.`
+      : "Destination gastronomique sélectionnée par le Guide MICHELIN.",
+  ogImage: () => adventure.value?.image || "/images/hero.png",
+});
+
 const restaurants = computed(() => data.value?.restaurants?.data ?? []);
 const restaurantsMeta = computed(() => data.value?.restaurants?.meta ?? { page: 1, limit: 12, total: 0, totalPages: 1 });
 const hotels = computed(() => data.value?.hotels?.data ?? []);

@@ -1,4 +1,14 @@
 <script lang="ts" setup>
+useSeoMeta({
+  title: "Aventures",
+  description:
+    "Partez à la découverte des destinations gastronomiques du Guide MICHELIN à travers le monde : régions, villes et pays à explorer.",
+  ogTitle: "Aventures · Guide MICHELIN",
+  ogDescription:
+    "Partez à la découverte des destinations gastronomiques du Guide MICHELIN à travers le monde : régions, villes et pays à explorer.",
+  ogImage: "/images/hero.png",
+});
+
 const { data } = await useFetch("/api/adventures", { query: { limit: 10 } });
 const adventures = computed(() => data.value?.data ?? []);
 </script>
