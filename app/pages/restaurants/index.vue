@@ -1,4 +1,14 @@
 <script lang="ts" setup>
+useSeoMeta({
+  title: "Restaurants",
+  description:
+    "Explorez la sélection complète du Guide MICHELIN : restaurants étoilés, Bib Gourmand et tables d'exception dans le monde entier.",
+  ogTitle: "Restaurants · Guide MICHELIN",
+  ogDescription:
+    "Explorez la sélection complète du Guide MICHELIN : restaurants étoilés, Bib Gourmand et tables d'exception dans le monde entier.",
+  ogImage: "/images/hero.png",
+});
+
 const route = useRoute();
 const router = useRouter();
 const LIMIT = 24;

@@ -1,4 +1,14 @@
 <script lang="ts" setup>
+useSeoMeta({
+  title: "Hébergements",
+  description:
+    "Découvrez les hôtels d'exception sélectionnés par le Guide MICHELIN pour des séjours inoubliables à travers le monde.",
+  ogTitle: "Hébergements · Guide MICHELIN",
+  ogDescription:
+    "Découvrez les hôtels d'exception sélectionnés par le Guide MICHELIN pour des séjours inoubliables à travers le monde.",
+  ogImage: "/images/hero.png",
+});
+
 const route = useRoute();
 const router = useRouter();
 const LIMIT = 24;

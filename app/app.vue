@@ -1,4 +1,9 @@
-<script setup></script>
+<script setup>
+useSeoMeta({
+  ogType: "website",
+  ogImage: "/images/hero.png",
+});
+</script>
 
 <template>
   <UApp>

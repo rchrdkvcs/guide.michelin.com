@@ -13,8 +13,29 @@ export default defineNuxtConfig({
 
   css: ["~/assets/css/main.css"],
 
+  app: {
+    head: {
+      htmlAttrs: { lang: "fr" },
+      titleTemplate: "%s · Guide MICHELIN",
+      meta: [
+        { charset: "utf-8" },
+        { name: "viewport", content: "width=device-width, initial-scale=1" },
+        { property: "og:site_name", content: "Guide MICHELIN" },
+        { property: "og:locale", content: "fr_FR" },
+        { name: "twitter:card", content: "summary_large_image" },
+        { name: "twitter:site", content: "@michelin_fr" },
+      ],
+      link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
+    },
+  },
+
   routeRules: {
     "/": { prerender: true },
+    "/restaurants": { prerender: true },
+    "/hotels": { prerender: true },
+    "/adventures": { prerender: true },
+    "/escape": { prerender: true },
+    "/compte": { robots: false },
   },
 
   compatibilityDate: "2025-01-15",
@@ -28,6 +49,9 @@ export default defineNuxtConfig({
 
   nitro: {
     scanDirs: ["../server"],
+    prerender: {
+      failOnError: false,
+    },
   },
 
   components: [
