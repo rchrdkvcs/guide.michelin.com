@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Disallow: /compte
+Disallow: /api/
+
+Sitemap: https://guide.michelin.com/sitemap.xml

@@ -1,18 +1,72 @@
+@import url(https://fonts.bunny.net/css?family=figtree:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i);
+
 @import "tailwindcss";
 @import "@nuxt/ui";
 
 @theme static {
-  --font-sans: 'Public Sans', sans-serif;
+  --font-sans: "Figtree", sans-serif;
 
-  --color-green-50: #EFFDF5;
-  --color-green-100: #D9FBE8;
-  --color-green-200: #B3F5D1;
-  --color-green-300: #75EDAE;
-  --color-green-400: #00DC82;
-  --color-green-500: #00C16A;
-  --color-green-600: #00A155;
-  --color-green-700: #007F45;
-  --color-green-800: #016538;
-  --color-green-900: #0A5331;
-  --color-green-950: #052E16;
+  --color-brand-50: #fff0f2;
+  --color-brand-100: #ffe2e6;
+  --color-brand-200: #ffcace;
+  --color-brand-300: #ffa3ac;
+  --color-brand-400: #ff6f7e;
+  --color-brand-500: #d3072b;
+  --color-brand-600: #b30422;
+  --color-brand-700: #900118;
+  --color-brand-800: #780618;
+  --color-brand-900: #650918;
+  --color-brand-950: #37020a;
+
+  --color-gold-50: #fdfcef;
+  --color-gold-100: #fbf7d5;
+  --color-gold-200: #f5edaa;
+  --color-gold-300: #eedd75;
+  --color-gold-400: #e6c844;
+  --color-gold-500: #d8af24;
+  --color-gold-600: #bb8c1a;
+  --color-gold-700: #956518;
+  --color-gold-800: #7c511b;
+  --color-gold-900: #68421d;
+  --color-gold-950: #3d220e;
+
+  --color-linen-50: #f3efe9;
+  --color-linen-100: #e8e1d7;
+  --color-linen-200: #d8cebe;
+  --color-linen-300: #c7b7a2;
+  --color-linen-400: #b59f86;
+  --color-linen-500: #a3886b;
+  --color-linen-600: #8e7358;
+  --color-linen-700: #76604b;
+  --color-linen-800: #614f3f;
+  --color-linen-900: #4e4034;
+  --color-linen-950: #2a221c;
+}
+
+:root {
+  --ui-radius: 0.375rem;
+  --ui-container: 90rem;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-image: url("/images/bg_texture.png");
+  background-repeat: repeat;
+}
+
+@media (min-width: 768px) {
+  body {
+    background-attachment: fixed;
+  }
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

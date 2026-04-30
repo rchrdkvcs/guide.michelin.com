@@ -1,64 +1,57 @@
-# Nuxt Starter Template
+# Guide Michelin 2026 — Digitalisation & Recommandation
 
-[![Nuxt UI](https://img.shields.io/badge/Made%20with-Nuxt%20UI-00DC82?logo=nuxt&labelColor=020420)](https://ui.nuxt.com)
+Ce projet a été réalisé dans le cadre d'un **hackathon étudiant d'une semaine**. L'objectif était de repenser l'expérience numérique du Guide Michelin pour l'horizon 2026, en s'alignant sur les nouvelles ambitions stratégiques de la marque.
 
-Use this template to get started with [Nuxt UI](https://ui.nuxt.com) quickly.
+## 🎯 La Mission
 
-- [Live demo](https://starter-template.nuxt.dev/)
-- [Documentation](https://ui.nuxt.com/docs/getting-started/installation/nuxt)
+Le Guide Michelin 2026 se réinvente pour devenir un véritable **outil de recommandation au quotidien**. Au-delà de la simple sélection gastronomique, le projet vise à valoriser le rayonnement des territoires à travers leurs bistrots, auberges et restaurants.
 
-<a href="https://starter-template.nuxt.dev/" target="_blank">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://ui.nuxt.com/assets/templates/nuxt/starter-dark.png">
-    <source media="(prefers-color-scheme: light)" srcset="https://ui.nuxt.com/assets/templates/nuxt/starter-light.png">
-    <img alt="Nuxt Starter Template" src="https://ui.nuxt.com/assets/templates/nuxt/starter-light.png" width="830" height="466">
-  </picture>
-</a>
+Cette nouvelle vision repose sur deux piliers majeurs :
 
-> The starter template for Vue is on https://github.com/nuxt-ui-templates/starter-vue.
+1.  **L'Internationalisation** : Une présence mondiale accrue avec un objectif de 100 destinations d'ici 2030.
+2.  **La Digitalisation** : Une plateforme mise à jour en temps réel proposant des services complets (réservation de table, assistance au voyage).
 
-## Quick Start
+## 📊 Chiffres clés (Édition 2026)
 
-```bash [Terminal]
-npm create nuxt@latest -- -t ui
-```
+Le Guide Michelin France & Monaco 2026 recense **668 tables étoilées** :
 
-## Deploy your own
+- 31 établissements 3 étoiles
+- 84 établissements 2 étoiles
+- 553 établissements 1 étoile
+- 430 établissements "Bib Gourmand" (dont 75 nouvelles adresses), distingués pour leur excellent rapport qualité-prix.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-name=starter&repository-url=https%3A%2F%2Fgithub.com%2Fnuxt-ui-templates%2Fstarter&demo-image=https%3A%2F%2Fui.nuxt.com%2Fassets%2Ftemplates%2Fnuxt%2Fstarter-dark.png&demo-url=https%3A%2F%2Fstarter-template.nuxt.dev%2F&demo-title=Nuxt%20Starter%20Template&demo-description=A%20minimal%20template%20to%20get%20started%20with%20Nuxt%20UI.)
+## ✨ Fonctionnalités clés
 
-## Setup
+- **Recommandation en temps réel** : Une sélection gastronomique et hôtelière toujours à jour.
+- **Services intégrés** : Réservation de tables et aide à la planification de voyage.
+- **Nouvelle Identité Visuelle** : Une interface moderne et dynamique reflétant le renouveau du Guide.
+- **Focus Territoires** : Mise en avant des établissements qui font vivre le lien social et le goût juste.
 
-Make sure to install the dependencies:
+## 🛠️ Stack Technique
+
+Le projet exploite les dernières technologies du web moderne pour garantir performance et flexibilité :
+
+- **Framework** : [Nuxt 4](https://nuxt.com/) (Vue.js)
+- **Interface** : [Nuxt UI](https://ui.nuxt.com/) & Tailwind CSS
+- **Icônes** : Iconify (Lucide & Simple Icons)
+- **Gestionnaire de paquets** : pnpm
+- **Outils de Qualité** : Oxlint & Oxfmt pour un code propre et performant.
+
+## 🚀 Installation et Lancement
+
+Assurez-vous d'avoir [Node.js](https://nodejs.org/) et [pnpm](https://pnpm.io/) installés sur votre machine.
 
 ```bash
+# Installation des dépendances
 pnpm install
-```
 
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
+# Lancement du serveur de développement
 pnpm dev
-```
 
-## Production
-
-Build the application for production:
-
-```bash
+# Build pour la production
 pnpm build
 ```
 
-Locally preview production build:
+---
 
-```bash
-pnpm preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
-
-## Renovate integration
-
-Install [Renovate GitHub app](https://github.com/apps/renovate/installations/select_target) on your repository and you are good to go.
+_Projet réalisé à des fins pédagogiques dans le cadre d'un hackathon._
