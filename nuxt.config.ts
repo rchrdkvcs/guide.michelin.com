@@ -35,7 +35,7 @@ export default defineNuxtConfig({
     "/hotels": { prerender: true },
     "/adventures": { prerender: true },
     "/escape": { prerender: true },
-    "/compte": { robots: false },
+    "/compte": { headers: { "X-Robots-Tag": "noindex" } },
   },
 
   compatibilityDate: "2025-01-15",

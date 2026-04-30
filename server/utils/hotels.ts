@@ -62,6 +62,7 @@ export interface RoomRate {
   parking_included: number;
   internet_included: number;
   currency?: string;
+  plus_eligible?: boolean;
 }
 
 export interface RoomLive {
@@ -219,12 +220,9 @@ export function getLiveRoomsForHotel(
   getRoomsLive();
   let rooms = _liveByHotelId!.get(hotelId) ?? [];
 
-  if (filters?.arrival)
-    rooms = rooms.filter((r) => r.arrival === filters.arrival);
-  if (filters?.los)
-    rooms = rooms.filter((r) => r.los === filters.los);
-  if (filters?.adults)
-    rooms = rooms.filter((r) => r.adults === filters.adults);
+  if (filters?.arrival) rooms = rooms.filter((r) => r.arrival === filters.arrival);
+  if (filters?.los) rooms = rooms.filter((r) => r.los === filters.los);
+  if (filters?.adults) rooms = rooms.filter((r) => r.adults === filters.adults);
 
   return rooms;
 }

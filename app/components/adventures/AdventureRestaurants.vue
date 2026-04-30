@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 interface Restaurant {
-  id: string;
+  objectID: string;
   name: string;
   slug: string;
   main_desc: string | null;
@@ -45,7 +45,7 @@ const emit = defineEmits<{
     >
       <RestaurantCard
         v-for="restaurant in restaurants"
-        :key="restaurant.id"
+        :key="restaurant.objectID"
         class="h-full w-[85vw] shrink-0 snap-start sm:w-80 lg:w-96"
         :slug="restaurant.slug"
         :name="restaurant.name"

@@ -80,7 +80,7 @@ const footerLinks = ref([
 
   <USeparator />
 
-  <UFooter class="bg-muted" :ui="{ bottom: 'border-t border-default', default: 'h-full' }">
+  <UFooter class="bg-muted" :ui="{ bottom: 'border-t border-default' }">
     <template #left>
       <UNavigationMenu :items="footerLinks" orientation="vertical" variant="link" />
     </template>

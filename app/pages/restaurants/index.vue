@@ -53,17 +53,17 @@ function onSearch(val: string) {
 // Selects
 const cuisineLabels = computed(() => (filtersData.value?.cuisines ?? []).map((c) => c.label));
 const countryNames = computed(() => (filtersData.value?.countries ?? []).map((c) => c.name));
-const selectedCuisineLabel = ref<string | null>(null);
-const selectedCountryName = ref<string | null>(null);
+const selectedCuisineLabel = ref<string | undefined>(undefined);
+const selectedCountryName = ref<string | undefined>(undefined);
 
 watchEffect(() => {
   if (filtersData.value) {
     selectedCuisineLabel.value = cuisine.value
-      ? (filtersData.value.cuisines.find((c) => c.slug === cuisine.value)?.label ?? null)
-      : null;
+      ? (filtersData.value.cuisines.find((c) => c.slug === cuisine.value)?.label ?? undefined)
+      : undefined;
     selectedCountryName.value = country.value
-      ? (filtersData.value.countries.find((c) => c.slug === country.value)?.name ?? null)
-      : null;
+      ? (filtersData.value.countries.find((c) => c.slug === country.value)?.name ?? undefined)
+      : undefined;
   }
 });
 
@@ -126,14 +126,14 @@ const activeFilters = computed(() => {
 const hasActiveFilters = computed(() => !!q.value || activeFilters.value.length > 0);
 
 function removeFilter(key: string) {
-  if (key === "cuisine") selectedCuisineLabel.value = null;
-  if (key === "country") selectedCountryName.value = null;
+  if (key === "cuisine") selectedCuisineLabel.value = undefined;
+  if (key === "country") selectedCountryName.value = undefined;
   updateQuery({ [key]: undefined, page: undefined });
 }
 function clearAll() {
   searchInput.value = "";
-  selectedCuisineLabel.value = null;
-  selectedCountryName.value = null;
+  selectedCuisineLabel.value = undefined;
+  selectedCountryName.value = undefined;
   router.replace({ query: {} });
 }
 

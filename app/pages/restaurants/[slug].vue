@@ -1,8 +1,33 @@
 <script lang="ts" setup>
+interface Restaurant {
+  slug: string;
+  name: string;
+  main_desc: string;
+  image: string;
+  michelin_star: string | null;
+  distinction: { label: string; slug: string } | null;
+  cuisines: { code: string; label: string; slug: string }[];
+  city: { name: string; slug: string };
+  region: { name: string; slug: string };
+  street: string;
+  postcode: string;
+  phone: string;
+  website: string;
+  chef: string;
+  price: { high: number | null; low: number | null };
+  currency_symbol: string;
+  hours_of_operation: Record<string, { closed: boolean; opens: string; closes: string }[]>;
+  days_open: string[];
+  meal_times: string[];
+  online_booking: number;
+  booking_url: string;
+  hotel_selection: { id: string; name: string; slug: string; city_slug: string; picture: string; distinction_score: number } | null;
+}
+
 const route = useRoute();
 const slug = route.params.slug as string;
 
-const { data: restaurant, error } = await useFetch(`/api/restaurants/${slug}`);
+const { data: restaurant, error } = await useFetch<Restaurant>(`/api/restaurants/${slug}`);
 
 if (error.value) {
   throw createError({ statusCode: 404, message: "Restaurant introuvable" });
