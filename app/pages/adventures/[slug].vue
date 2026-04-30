@@ -22,9 +22,7 @@ useSeoMeta({
       ? `Découvrez ${adventure.value.label}${adventure.value.countryName ? `, ${adventure.value.countryName}` : ""} : ${adventure.value.totalRestaurants} restaurant${adventure.value.totalRestaurants > 1 || adventure.value.totalRestaurants === 0 ? "s" : ""} sélectionné${adventure.value.totalRestaurants > 1 || adventure.value.totalRestaurants === 0 ? "s" : ""} par le Guide MICHELIN.`
       : "Destination gastronomique sélectionnée par le Guide MICHELIN.",
   ogTitle: () =>
-    adventure.value
-      ? `${adventure.value.label} · Guide MICHELIN`
-      : "Aventure · Guide MICHELIN",
+    adventure.value ? `${adventure.value.label} · Guide MICHELIN` : "Aventure · Guide MICHELIN",
   ogDescription: () =>
     adventure.value
       ? `Découvrez ${adventure.value.label}${adventure.value.countryName ? `, ${adventure.value.countryName}` : ""} : ${adventure.value.totalRestaurants} restaurant${adventure.value.totalRestaurants > 1 || adventure.value.totalRestaurants === 0 ? "s" : ""} sélectionné${adventure.value.totalRestaurants > 1 || adventure.value.totalRestaurants === 0 ? "s" : ""} par le Guide MICHELIN.`
@@ -33,14 +31,16 @@ useSeoMeta({
 });
 
 const restaurants = computed(() => data.value?.restaurants?.data ?? []);
-const restaurantsMeta = computed(() => data.value?.restaurants?.meta ?? { page: 1, limit: 12, total: 0, totalPages: 1 });
+const restaurantsMeta = computed(
+  () => data.value?.restaurants?.meta ?? { page: 1, limit: 12, total: 0, totalPages: 1 },
+);
 const hotels = computed(() => data.value?.hotels?.data ?? []);
 
 const cuisines = computed(() => {
   const seen = new Set<string>();
   const result: string[] = [];
   for (const r of restaurants.value) {
-    for (const c of (r.cuisines ?? [])) {
+    for (const c of r.cuisines ?? []) {
       if (!seen.has(c.label)) {
         seen.add(c.label);
         result.push(c.label);

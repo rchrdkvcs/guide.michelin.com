@@ -63,12 +63,9 @@ export interface LocationFilters {
 export function filterLocations(filters: LocationFilters): Location[] {
   let results = getLocations();
 
-  if (filters.type)
-    results = results.filter((l) => l.location_type === filters.type);
-  if (filters.country)
-    results = results.filter((l) => l.country?.slug === filters.country);
-  if (filters.language)
-    results = results.filter((l) => l.language === filters.language);
+  if (filters.type) results = results.filter((l) => l.location_type === filters.type);
+  if (filters.country) results = results.filter((l) => l.country?.slug === filters.country);
+  if (filters.language) results = results.filter((l) => l.language === filters.language);
 
   return results;
 }

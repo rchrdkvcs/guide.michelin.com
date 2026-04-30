@@ -1,18 +1,34 @@
 <script lang="ts" setup>
 const battleFree = [
-  { name: "Timbre virtuel",  img: "/images/escape/timbres/ile-de-france.png", desc: "Collectez les régions" },
-  { name: "Carte postale",   img: "/images/escape/timbres/bretagne.png",      desc: "Souvenir numérique" },
-  { name: "Chaussettes",     img: "/images/escape/goodies/chaussettes.png",   desc: "Brandées Michelin" },
-  { name: "Tote bag",        img: "/images/escape/goodies/bag.png",           desc: "L’essentiel du voyageur" },
-  { name: "Tee-shirt",       img: "/images/escape/goodies/t-shirt.png",       desc: "Collection exclusive" },
+  {
+    name: "Timbre virtuel",
+    img: "/images/escape/timbres/ile-de-france.png",
+    desc: "Collectez les régions",
+  },
+  { name: "Carte postale", img: "/images/escape/timbres/bretagne.png", desc: "Souvenir numérique" },
+  { name: "Chaussettes", img: "/images/escape/goodies/chaussettes.png", desc: "Brandées Michelin" },
+  { name: "Tote bag", img: "/images/escape/goodies/bag.png", desc: "L’essentiel du voyageur" },
+  { name: "Tee-shirt", img: "/images/escape/goodies/t-shirt.png", desc: "Collection exclusive" },
 ];
 
 const battlePremium = [
-  { name: "Passeport",        img: "/images/escape/carnet.png",                     desc: "Cuir vegan, embossé" },
-  { name: "Pull",             img: "/images/escape/goodies/bob1.png",               desc: "Collection hiver" },
-  { name: "Timbres physiques",img: "/images/escape/timbres/bourgogne.png",          desc: "Envoi par courrier" },
-  { name: "Magnet",           img: "/images/escape/goodies/pins_chaussettes.png",   desc: "Collector’s edition" },
-  { name: "Pack anniversaire",img: "/images/escape/goodies/sac.png",               desc: "Carnet + carte exclusive" },
+  { name: "Passeport", img: "/images/escape/carnet.png", desc: "Cuir vegan, embossé" },
+  { name: "Pull", img: "/images/escape/goodies/bob1.png", desc: "Collection hiver" },
+  {
+    name: "Timbres physiques",
+    img: "/images/escape/timbres/bourgogne.png",
+    desc: "Envoi par courrier",
+  },
+  {
+    name: "Magnet",
+    img: "/images/escape/goodies/pins_chaussettes.png",
+    desc: "Collector’s edition",
+  },
+  {
+    name: "Pack anniversaire",
+    img: "/images/escape/goodies/sac.png",
+    desc: "Carnet + carte exclusive",
+  },
 ];
 </script>
 

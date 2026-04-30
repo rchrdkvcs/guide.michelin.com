@@ -24,9 +24,7 @@ export function getRestaurantBookings(): RestaurantBooking[] {
   return _bookings;
 }
 
-export function getRestaurantBookingById(
-  id: string,
-): RestaurantBooking | undefined {
+export function getRestaurantBookingById(id: string): RestaurantBooking | undefined {
   getRestaurantBookings();
   return _byObjectId!.get(id);
 }

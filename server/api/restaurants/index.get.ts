@@ -1,5 +1,5 @@
-import { filterRestaurants } from "../../utils/restaurants";
 import { paginate, parsePagination } from "../../utils/paginate";
+import { filterRestaurants } from "../../utils/restaurants";
 
 export default defineEventHandler((event) => {
   const query = getQuery(event);

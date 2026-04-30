@@ -19,10 +19,7 @@ export function getAdventures(): AdventureSummary[] {
   const restaurants = getRestaurants();
 
   // Build a map of region/city slug → restaurant count + cover image
-  const regionStats = new Map<
-    string,
-    { count: number; image: string | null }
-  >();
+  const regionStats = new Map<string, { count: number; image: string | null }>();
   const cityStats = new Map<string, { count: number; image: string | null }>();
 
   for (const r of restaurants) {
@@ -60,8 +57,7 @@ export function getAdventures(): AdventureSummary[] {
       return false;
     })
     .filter((l: Location) => {
-      const slug =
-        l.location_type === "REGION" ? l.region_slug! : l.city_slug!;
+      const slug = l.location_type === "REGION" ? l.region_slug! : l.city_slug!;
       if (seen.has(slug)) return false;
       seen.add(slug);
       return true;
@@ -69,9 +65,7 @@ export function getAdventures(): AdventureSummary[] {
     .map((l: Location): AdventureSummary => {
       const isRegion = l.location_type === "REGION";
       const slug = isRegion ? l.region_slug! : l.city_slug!;
-      const stats = isRegion
-        ? regionStats.get(slug)!
-        : cityStats.get(slug)!;
+      const stats = isRegion ? regionStats.get(slug)! : cityStats.get(slug)!;
 
       return {
         slug,

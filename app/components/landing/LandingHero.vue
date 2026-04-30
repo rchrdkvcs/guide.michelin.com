@@ -18,7 +18,11 @@ const { heroStyle } = useHeroScroll();
     <UContainer
       class="absolute bottom-8 left-1/2 z-20 flex w-full -translate-x-1/2 flex-col items-center gap-4 px-6 md:bottom-12 md:gap-6 md:px-4"
     >
-      <NuxtImg src="/images/logo_vertical.png" alt="Guide MICHELIN" class="w-20 object-contain md:w-36" />
+      <NuxtImg
+        src="/images/logo_vertical.png"
+        alt="Guide MICHELIN"
+        class="w-20 object-contain md:w-36"
+      />
       <h1
         class="text-center text-3xl leading-snug font-semibold tracking-wide text-inverted drop-shadow-lg sm:text-4xl md:text-7xl"
       >

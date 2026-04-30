@@ -58,21 +58,95 @@ export function useAccountData() {
   };
 
   const milestones: Milestone[] = [
-    { level: 1, xp: 500,  reward: "Timbre virtuel · Île-de-France", img: "/images/escape/timbres/ile-de-france.png", status: "completed", premium: false },
-    { level: 2, xp: 1000, reward: "Chaussettes brandées",                 img: "/images/escape/goodies/chaussettes.png",   status: "completed", premium: false },
-    { level: 3, xp: 1500, reward: "Tote bag L'Échappée",              img: "/images/escape/goodies/bag.png",           status: "current",   premium: false },
-    { level: 4, xp: 2000, reward: "Tee-shirt",                                  img: "/images/escape/goodies/t-shirt.png",      status: "locked",    premium: false },
-    { level: 5, xp: 2500, reward: "Timbre virtuel · Bretagne",             img: "/images/escape/timbres/bretagne.png",     status: "locked",    premium: false },
-    { level: 6, xp: 3000, reward: "Pull · Exclusif Premium",               img: null,                                      status: "locked",    premium: true  },
-    { level: 7, xp: 3500, reward: "Carnet de bord · Premium",              img: "/images/escape/carnet.png",               status: "locked",    premium: true  },
+    {
+      level: 1,
+      xp: 500,
+      reward: "Timbre virtuel · Île-de-France",
+      img: "/images/escape/timbres/ile-de-france.png",
+      status: "completed",
+      premium: false,
+    },
+    {
+      level: 2,
+      xp: 1000,
+      reward: "Chaussettes brandées",
+      img: "/images/escape/goodies/chaussettes.png",
+      status: "completed",
+      premium: false,
+    },
+    {
+      level: 3,
+      xp: 1500,
+      reward: "Tote bag L'Échappée",
+      img: "/images/escape/goodies/bag.png",
+      status: "current",
+      premium: false,
+    },
+    {
+      level: 4,
+      xp: 2000,
+      reward: "Tee-shirt",
+      img: "/images/escape/goodies/t-shirt.png",
+      status: "locked",
+      premium: false,
+    },
+    {
+      level: 5,
+      xp: 2500,
+      reward: "Timbre virtuel · Bretagne",
+      img: "/images/escape/timbres/bretagne.png",
+      status: "locked",
+      premium: false,
+    },
+    {
+      level: 6,
+      xp: 3000,
+      reward: "Pull · Exclusif Premium",
+      img: null,
+      status: "locked",
+      premium: true,
+    },
+    {
+      level: 7,
+      xp: 3500,
+      reward: "Carnet de bord · Premium",
+      img: "/images/escape/carnet.png",
+      status: "locked",
+      premium: true,
+    },
   ];
 
   const collections: CollectionItem[] = [
-    { name: "Timbre · Île-de-France", img: "/images/escape/timbres/ile-de-france.png", date: "12 jan. 2026",  type: "Timbre"  },
-    { name: "Timbre · Auvergne",           img: "/images/escape/timbres/auvergne.png",      date: "3 fév. 2026",   type: "Timbre"  },
-    { name: "Timbre · Bretagne",           img: "/images/escape/timbres/bretagne.png",      date: "14 fév. 2026",  type: "Timbre"  },
-    { name: "Chaussettes brandées",        img: "/images/escape/goodies/chaussettes.png",   date: "28 jan. 2026",  type: "Goodie"  },
-    { name: "Tote bag",                         img: "/images/escape/goodies/bag.png",           date: "3 mars 2026",   type: "Goodie"  },
+    {
+      name: "Timbre · Île-de-France",
+      img: "/images/escape/timbres/ile-de-france.png",
+      date: "12 jan. 2026",
+      type: "Timbre",
+    },
+    {
+      name: "Timbre · Auvergne",
+      img: "/images/escape/timbres/auvergne.png",
+      date: "3 fév. 2026",
+      type: "Timbre",
+    },
+    {
+      name: "Timbre · Bretagne",
+      img: "/images/escape/timbres/bretagne.png",
+      date: "14 fév. 2026",
+      type: "Timbre",
+    },
+    {
+      name: "Chaussettes brandées",
+      img: "/images/escape/goodies/chaussettes.png",
+      date: "28 jan. 2026",
+      type: "Goodie",
+    },
+    {
+      name: "Tote bag",
+      img: "/images/escape/goodies/bag.png",
+      date: "3 mars 2026",
+      type: "Goodie",
+    },
   ];
 
   const vouchers: Voucher[] = [

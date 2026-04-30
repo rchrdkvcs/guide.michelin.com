@@ -35,8 +35,8 @@ const props = defineProps<{
       </h2>
 
       <p class="leading-relaxed">
-        Découvrez les saveurs et les tables d'exception de {{ props.adventure.label }}.
-        Cette destination compte
+        Découvrez les saveurs et les tables d'exception de {{ props.adventure.label }}. Cette
+        destination compte
         <strong>{{ props.adventure.totalRestaurants }}</strong>
         restaurant{{ props.adventure.totalRestaurants > 1 ? "s" : "" }} sélectionnés par le Guide
         Michelin.

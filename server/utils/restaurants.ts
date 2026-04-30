@@ -181,12 +181,9 @@ export function filterRestaurants(filters: RestaurantFilters): Restaurant[] {
     const needle = filters.name.toLowerCase();
     results = results.filter((r) => r.name.toLowerCase().includes(needle));
   }
-  if (filters.country)
-    results = results.filter((r) => r.country?.slug === filters.country);
-  if (filters.city)
-    results = results.filter((r) => r.city?.slug === filters.city);
-  if (filters.region)
-    results = results.filter((r) => r.region?.slug === filters.region);
+  if (filters.country) results = results.filter((r) => r.country?.slug === filters.country);
+  if (filters.city) results = results.filter((r) => r.city?.slug === filters.city);
+  if (filters.region) results = results.filter((r) => r.region?.slug === filters.region);
   if (filters.stars) {
     const starValue = STAR_MAP[filters.stars];
     if (starValue) results = results.filter((r) => r.michelin_star === starValue);
@@ -194,32 +191,21 @@ export function filterRestaurants(filters: RestaurantFilters): Restaurant[] {
   if (filters.distinction)
     results = results.filter((r) => r.distinction?.slug === filters.distinction);
   if (filters.cuisine)
-    results = results.filter((r) =>
-      r.cuisines?.some((c) => c.slug === filters.cuisine),
-    );
+    results = results.filter((r) => r.cuisines?.some((c) => c.slug === filters.cuisine));
   if (filters.diet)
-    results = results.filter((r) =>
-      r.special_diets?.some((d) => d.slug === filters.diet),
-    );
-  if (filters.language)
-    results = results.filter((r) => r.language === filters.language);
+    results = results.filter((r) => r.special_diets?.some((d) => d.slug === filters.diet));
+  if (filters.language) results = results.filter((r) => r.language === filters.language);
 
   const order = filters.order === "desc" ? -1 : 1;
   switch (filters.sort) {
     case "stars":
-      results = [...results].sort(
-        (a, b) => order * (b.distinction_score - a.distinction_score),
-      );
+      results = [...results].sort((a, b) => order * (b.distinction_score - a.distinction_score));
       break;
     case "published_date":
-      results = [...results].sort(
-        (a, b) => order * (b.published_date - a.published_date),
-      );
+      results = [...results].sort((a, b) => order * (b.published_date - a.published_date));
       break;
     default:
-      results = [...results].sort((a, b) =>
-        order * a.name.localeCompare(b.name),
-      );
+      results = [...results].sort((a, b) => order * a.name.localeCompare(b.name));
   }
 
   return results;

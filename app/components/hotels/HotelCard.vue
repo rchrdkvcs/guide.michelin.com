@@ -67,13 +67,13 @@ function formatPrice(amount: number): string {
       </div>
 
       <p class="line-clamp-3 text-sm leading-snug text-muted">
-        {{ criteriaStyle ?? `${roomCount} chambre${roomCount > 1 ? 's' : ''}` }}
+        {{ criteriaStyle ?? `${roomCount} chambre${roomCount > 1 ? "s" : ""}` }}
       </p>
 
       <div class="mt-auto flex items-center justify-between gap-2 border-t border-default pt-2">
         <span class="flex shrink-0 items-center gap-1 text-xs text-muted">
           <UIcon name="lucide:map-pin" class="size-3 shrink-0" />
-          {{ city ?? '—' }}
+          {{ city ?? "—" }}
         </span>
 
         <div class="flex flex-wrap items-center justify-end gap-1.5">

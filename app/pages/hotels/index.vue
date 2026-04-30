@@ -34,7 +34,9 @@ const meta = computed(() => data.value?.meta ?? { page: 1, limit: LIMIT, total: 
 // Search
 const searchInput = ref(q.value);
 let searchTimer: ReturnType<typeof setTimeout>;
-watch(q, (val) => { searchInput.value = val; });
+watch(q, (val) => {
+  searchInput.value = val;
+});
 function onSearch(val: string) {
   clearTimeout(searchTimer);
   searchTimer = setTimeout(() => updateQuery({ q: val || undefined, page: undefined }), 300);
@@ -50,7 +52,11 @@ const sortOptions = [
 const selectedSort = ref(`${sort.value}-${order.value}`);
 watch(selectedSort, (val) => {
   const i = val.lastIndexOf("-");
-  updateQuery({ sort: val.slice(0, i) === "name" ? undefined : val.slice(0, i), order: val.slice(i + 1) === "asc" ? undefined : val.slice(i + 1), page: undefined });
+  updateQuery({
+    sort: val.slice(0, i) === "name" ? undefined : val.slice(0, i),
+    order: val.slice(i + 1) === "asc" ? undefined : val.slice(i + 1),
+    page: undefined,
+  });
 });
 
 function updateQuery(updates: Record<string, string | number | undefined>) {
@@ -77,39 +83,41 @@ const currentPage = computed({
 <template>
   <div>
     <!-- Editorial header -->
-    <section class="pt-28 pb-14 border-b border-linen-200/60">
+    <section class="border-b border-linen-200/60 pt-28 pb-14">
       <UContainer>
-        <p class="text-xs font-semibold tracking-[0.25em] uppercase text-linen-500 mb-4">
+        <p class="mb-4 text-xs font-semibold tracking-[0.25em] text-linen-500 uppercase">
           Guide Michelin
         </p>
-        <h1 class="text-5xl md:text-6xl font-semibold tracking-tight text-default">
-          Hébergements
-        </h1>
-        <p class="mt-3 text-base text-muted max-w-xl">
-          Découvrez les hôtels d'exception sélectionnés par le Guide Michelin, pour des séjours inoubliables.
+        <h1 class="text-5xl font-semibold tracking-tight text-default md:text-6xl">Hébergements</h1>
+        <p class="mt-3 max-w-xl text-base text-muted">
+          Découvrez les hôtels d'exception sélectionnés par le Guide Michelin, pour des séjours
+          inoubliables.
         </p>
       </UContainer>
     </section>
 
-    <UContainer class="py-10 space-y-8">
+    <UContainer class="space-y-8 py-10">
       <!-- Search -->
-      <div class="relative group">
+      <div class="group relative">
         <UIcon
           name="i-lucide-search"
-          class="absolute left-0 top-1/2 -translate-y-1/2 size-5 text-linen-400 group-focus-within:text-brand-500 transition-colors pointer-events-none"
+          class="pointer-events-none absolute top-1/2 left-0 size-5 -translate-y-1/2 text-linen-400 transition-colors group-focus-within:text-brand-500"
         />
         <input
           v-model="searchInput"
           type="text"
           placeholder="Rechercher un hôtel, une destination…"
-          class="w-full pl-8 pr-10 py-3 bg-transparent border-0 border-b border-linen-300 focus:border-brand-500 focus:outline-none text-base placeholder:text-linen-400 transition-colors duration-200"
+          class="w-full border-0 border-b border-linen-300 bg-transparent py-3 pr-10 pl-8 text-base transition-colors duration-200 placeholder:text-linen-400 focus:border-brand-500 focus:outline-none"
           @input="onSearch(($event.target as HTMLInputElement).value)"
         />
         <Transition name="fade">
           <button
             v-if="searchInput"
-            class="absolute right-0 top-1/2 -translate-y-1/2 text-linen-400 hover:text-default transition-colors"
-            @click="searchInput = ''; onSearch('')"
+            class="absolute top-1/2 right-0 -translate-y-1/2 text-linen-400 transition-colors hover:text-default"
+            @click="
+              searchInput = '';
+              onSearch('');
+            "
           >
             <UIcon name="i-lucide-x" class="size-4" />
           </button>
@@ -117,17 +125,19 @@ const currentPage = computed({
       </div>
 
       <!-- Filter strip -->
-      <div class="flex flex-wrap items-center justify-between gap-4 pb-5 border-b border-linen-200/60">
+      <div
+        class="flex flex-wrap items-center justify-between gap-4 border-b border-linen-200/60 pb-5"
+      >
         <p class="text-sm text-muted">
           <template v-if="!pending">
             {{ meta.total.toLocaleString("fr-FR") }} hôtel{{ meta.total > 1 ? "s" : "" }}
           </template>
-          <USkeleton v-else class="h-4 w-20 inline-block" />
+          <USkeleton v-else class="inline-block h-4 w-20" />
         </p>
         <div class="flex flex-wrap items-center gap-3 sm:gap-6">
           <button
             v-if="hasActiveFilters"
-            class="text-xs text-brand-600 hover:text-brand-700 font-medium transition-colors"
+            class="text-xs font-medium text-brand-600 transition-colors hover:text-brand-700"
             @click="clearAll"
           >
             Effacer la recherche
@@ -141,7 +151,9 @@ const currentPage = computed({
             :ui="{ base: 'font-normal text-muted hover:text-default' }"
           >
             <template #default="{ modelValue }">
-              {{ sortOptions.find((s: { value: any; }) => s.value === modelValue)?.label ?? 'Trier' }}
+              {{
+                sortOptions.find((s: { value: any }) => s.value === modelValue)?.label ?? "Trier"
+              }}
             </template>
           </USelectMenu>
         </div>
@@ -178,7 +190,7 @@ const currentPage = computed({
         <p class="text-lg font-semibold text-default">Aucun hôtel trouvé</p>
         <p class="mt-2 text-sm text-muted">Essayez de modifier votre recherche.</p>
         <button
-          class="mt-6 text-sm text-brand-600 hover:text-brand-700 font-medium transition-colors"
+          class="mt-6 text-sm font-medium text-brand-600 transition-colors hover:text-brand-700"
           @click="clearAll"
         >
           Réinitialiser
@@ -187,11 +199,7 @@ const currentPage = computed({
 
       <!-- Pagination -->
       <div v-if="meta.totalPages > 1" class="flex justify-center pt-4">
-        <UPagination
-          v-model:page="currentPage"
-          :total="meta.total"
-          :items-per-page="LIMIT"
-        />
+        <UPagination v-model:page="currentPage" :total="meta.total" :items-per-page="LIMIT" />
       </div>
     </UContainer>
   </div>

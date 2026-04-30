@@ -1,7 +1,7 @@
 import { getAdventures } from "../../utils/adventures";
-import { filterRestaurants } from "../../utils/restaurants";
 import { filterHotels } from "../../utils/hotels";
 import { paginate, parsePagination } from "../../utils/paginate";
+import { filterRestaurants } from "../../utils/restaurants";
 
 export default defineEventHandler((event) => {
   const slug = getRouterParam(event, "slug");
@@ -21,20 +21,14 @@ export default defineEventHandler((event) => {
 
   // Filter restaurants by region or city slug
   const isRegion = adventure.locationType === "REGION";
-  const restaurants = filterRestaurants(
-    isRegion ? { region: slug } : { city: slug },
-  );
+  const restaurants = filterRestaurants(isRegion ? { region: slug } : { city: slug });
 
   // Filter hotels: match hotels whose name appears in restaurant hotel_selection
   const restaurantHotelIds = new Set(
-    restaurants
-      .map((r) => r.hotel_selection?.id)
-      .filter(Boolean) as string[],
+    restaurants.map((r) => r.hotel_selection?.id).filter(Boolean) as string[],
   );
 
-  const hotels = filterHotels({}).filter((h) =>
-    restaurantHotelIds.has(h.id),
-  );
+  const hotels = filterHotels({}).filter((h) => restaurantHotelIds.has(h.id));
 
   return {
     adventure,

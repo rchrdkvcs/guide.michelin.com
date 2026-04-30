@@ -1,12 +1,12 @@
 <script lang="ts" setup>
 const stamps = [
-  { name: "Auvergne",      src: "/images/escape/timbres/auvergne.png" },
-  { name: "Bourgogne",     src: "/images/escape/timbres/bourgogne.png" },
-  { name: "Bretagne",      src: "/images/escape/timbres/bretagne.png" },
-  { name: "Corse",         src: "/images/escape/timbres/corse.png" },
+  { name: "Auvergne", src: "/images/escape/timbres/auvergne.png" },
+  { name: "Bourgogne", src: "/images/escape/timbres/bourgogne.png" },
+  { name: "Bretagne", src: "/images/escape/timbres/bretagne.png" },
+  { name: "Corse", src: "/images/escape/timbres/corse.png" },
   { name: "Île-de-France", src: "/images/escape/timbres/ile-de-france.png" },
-  { name: "Loire",         src: "/images/escape/timbres/loire.png" },
-  { name: "Normandie",     src: "/images/escape/timbres/normandie.png" },
+  { name: "Loire", src: "/images/escape/timbres/loire.png" },
+  { name: "Normandie", src: "/images/escape/timbres/normandie.png" },
 ];
 </script>
 

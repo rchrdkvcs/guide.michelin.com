@@ -53,7 +53,7 @@ function formatDate(ts: number): string {
             />
           </div>
 
-          <h3 class="line-clamp-2 text-base font-semibold leading-snug">
+          <h3 class="line-clamp-2 text-base leading-snug font-semibold">
             {{ article.title }}
           </h3>
 
@@ -61,7 +61,9 @@ function formatDate(ts: number): string {
             {{ article.excerpt }}
           </p>
 
-          <div class="mt-auto flex items-center justify-between border-t border-default pt-3 text-xs text-muted">
+          <div
+            class="mt-auto flex items-center justify-between border-t border-default pt-3 text-xs text-muted"
+          >
             <span>{{ formatDate(article.published_date) }}</span>
             <span class="flex items-center gap-1">
               <UIcon name="lucide:clock" class="size-3" />

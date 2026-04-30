@@ -35,9 +35,7 @@ let _bySlug: Map<string, Article> | null = null;
 
 export function getArticles(): Article[] {
   if (!_articles) {
-    _articles = loadJsonl<Article>("all_articles.jsonl").filter(
-      (a) => a.status === "Published",
-    );
+    _articles = loadJsonl<Article>("all_articles.jsonl").filter((a) => a.status === "Published");
     _bySlug = new Map(_articles.map((a) => [a.slug, a]));
   }
   return _articles;
@@ -59,24 +57,17 @@ export interface ArticleFilters {
 export function filterArticles(filters: ArticleFilters): Article[] {
   let results = getArticles();
 
-  if (filters.language)
-    results = results.filter((a) => a.language === filters.language);
-  if (filters.tag)
-    results = results.filter((a) => a.tags?.includes(filters.tag!));
-  if (filters.site)
-    results = results.filter((a) => a.sites?.includes(filters.site!));
+  if (filters.language) results = results.filter((a) => a.language === filters.language);
+  if (filters.tag) results = results.filter((a) => a.tags?.includes(filters.tag!));
+  if (filters.site) results = results.filter((a) => a.sites?.includes(filters.site!));
 
   const order = filters.order === "asc" ? 1 : -1;
   switch (filters.sort) {
     case "title":
-      results = [...results].sort((a, b) =>
-        order * a.title.localeCompare(b.title),
-      );
+      results = [...results].sort((a, b) => order * a.title.localeCompare(b.title));
       break;
     default:
-      results = [...results].sort(
-        (a, b) => order * (b.published_date - a.published_date),
-      );
+      results = [...results].sort((a, b) => order * (b.published_date - a.published_date));
   }
 
   return results;

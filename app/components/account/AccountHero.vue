@@ -11,12 +11,7 @@ const { user, fullName, progressPercent, collections } = useAccountData();
           <!-- Nom -->
           <div class="mb-1 flex flex-wrap items-center gap-3">
             <h1 class="text-3xl font-bold tracking-tight text-highlighted">{{ fullName }}</h1>
-            <UBadge
-              v-if="user.plan === 'free'"
-              label="Gratuit"
-              color="neutral"
-              variant="subtle"
-            />
+            <UBadge v-if="user.plan === 'free'" label="Gratuit" color="neutral" variant="subtle" />
           </div>
 
           <!-- Email + ancienneté -->

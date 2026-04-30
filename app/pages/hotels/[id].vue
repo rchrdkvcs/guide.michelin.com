@@ -14,8 +14,7 @@ useSeoMeta({
     hotel.value
       ? `Découvrez ${hotel.value.name}, hôtel d'exception sélectionné par le Guide MICHELIN avec ${hotel.value.roomCount} chambre${hotel.value.roomCount > 1 || hotel.value.roomCount === 0 ? "s" : ""}.`
       : "Hôtel d'exception sélectionné par le Guide MICHELIN.",
-  ogTitle: () =>
-    hotel.value ? `${hotel.value.name} · Guide MICHELIN` : "Hôtel · Guide MICHELIN",
+  ogTitle: () => (hotel.value ? `${hotel.value.name} · Guide MICHELIN` : "Hôtel · Guide MICHELIN"),
   ogDescription: () =>
     hotel.value
       ? `Découvrez ${hotel.value.name}, hôtel d'exception sélectionné par le Guide MICHELIN avec ${hotel.value.roomCount} chambre${hotel.value.roomCount > 1 || hotel.value.roomCount === 0 ? "s" : ""}.`
@@ -102,7 +101,7 @@ const heroImage = computed(() => hotel.value?.rooms?.[0]?.room?.images?.[0] ?? n
             </div>
 
             <div class="space-y-3 p-4">
-              <h3 class="font-semibold leading-tight">
+              <h3 class="leading-tight font-semibold">
                 {{ roomEntry.room?.room_title ?? `Chambre ${idx + 1}` }}
               </h3>
 
@@ -126,10 +125,7 @@ const heroImage = computed(() => hotel.value?.rooms?.[0]?.room?.images?.[0] ?? n
               </div>
 
               <!-- Amenities -->
-              <div
-                v-if="roomEntry.room?.amenities?.length"
-                class="flex flex-wrap gap-1"
-              >
+              <div v-if="roomEntry.room?.amenities?.length" class="flex flex-wrap gap-1">
                 <UBadge
                   v-for="amenity in roomEntry.room.amenities.slice(0, 4)"
                   :key="amenity.id"

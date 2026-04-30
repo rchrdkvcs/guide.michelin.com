@@ -21,7 +21,14 @@ interface Restaurant {
   meal_times: string[];
   online_booking: number;
   booking_url: string;
-  hotel_selection: { id: string; name: string; slug: string; city_slug: string; picture: string; distinction_score: number } | null;
+  hotel_selection: {
+    id: string;
+    name: string;
+    slug: string;
+    city_slug: string;
+    picture: string;
+    distinction_score: number;
+  } | null;
 }
 
 const route = useRoute();

@@ -19,9 +19,7 @@ const { vouchers } = useAccountData();
       >
         <template #header>
           <div class="flex items-start justify-between gap-3">
-            <div
-              class="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary/10"
-            >
+            <div class="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
               <UIcon name="lucide:ticket" class="size-5 text-primary" />
             </div>
             <UBadge
@@ -43,10 +41,9 @@ const { vouchers } = useAccountData();
             class="mt-3 flex items-center gap-2 rounded-lg border border-dashed border-default bg-muted/20 px-3 py-2"
           >
             <UIcon name="lucide:tag" class="size-4 shrink-0 text-muted" />
-            <span
-              class="flex-1 font-mono text-sm font-semibold tracking-widest text-highlighted"
-              >{{ voucher.code }}</span
-            >
+            <span class="flex-1 font-mono text-sm font-semibold tracking-widest text-highlighted">{{
+              voucher.code
+            }}</span>
             <UButton
               icon="lucide:copy"
               size="xs"

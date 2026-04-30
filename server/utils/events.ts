@@ -55,22 +55,16 @@ export interface EventFilters {
 export function filterEvents(filters: EventFilters): MichelinEvent[] {
   let results = getEvents();
 
-  if (filters.status)
-    results = results.filter((e) => e.status === filters.status);
-  if (filters.site)
-    results = results.filter((e) => e.sites?.includes(filters.site!));
+  if (filters.status) results = results.filter((e) => e.status === filters.status);
+  if (filters.site) results = results.filter((e) => e.sites?.includes(filters.site!));
 
   const order = filters.order === "desc" ? -1 : 1;
   switch (filters.sort) {
     case "published_date":
-      results = [...results].sort(
-        (a, b) => order * (b.published_date - a.published_date),
-      );
+      results = [...results].sort((a, b) => order * (b.published_date - a.published_date));
       break;
     default:
-      results = [...results].sort(
-        (a, b) => order * (b.start_date - a.start_date),
-      );
+      results = [...results].sort((a, b) => order * (b.start_date - a.start_date));
   }
 
   return results;
